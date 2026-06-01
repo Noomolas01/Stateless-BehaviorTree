@@ -1,0 +1,27 @@
+# Build results
+bin/
+obj/
+
+
+# Visual Studio / Rider / VS Code
+.vs/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# .NET
+*.dll
+*.exe
+*.pdb
+*.cache
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# NuGet
+*.nupkg
+.nuget/
