@@ -8,16 +8,12 @@ public class Tests
     {
     }
 
-    [Test]
-    public void Test1()
-    {
-        Assert.Pass();
-    }
 
     [Test]
-    public void Addition_Test()
+    public void ActionNode_Creation()
     {
-        Test test = new Test();
-        Assert.That(test.Add(2,1), Is.EqualTo(3));
+        ActionNode node = new ActionNode();
+        node.Tick();
+        Assert.Pass();
     }
 }
