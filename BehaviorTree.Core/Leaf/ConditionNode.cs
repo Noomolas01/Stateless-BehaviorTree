@@ -4,7 +4,7 @@ public class ConditionNode : ANode
 {
     private readonly Result _debugResult;
 
-    public ConditionNode(Result pResult, string pName) : base(pName)
+    public ConditionNode(Result pResult, string pName = "") : base(pName)
     {
         _debugResult = pResult;
         Name = pName;

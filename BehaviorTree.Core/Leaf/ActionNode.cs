@@ -4,7 +4,7 @@ namespace BehaviorTree.Core.Leaf
     {
         private readonly Result _debugResult;
 
-        public ActionNode(Result pResult, string pName) : base(pName)
+        public ActionNode(Result pResult, string pName = "") : base(pName)
         {
             _debugResult = pResult;
             Name = pName;
