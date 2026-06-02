@@ -1,8 +1,10 @@
-using BehaviorTree.Core.Interfaces;
+using System.ComponentModel;
+using BehaviorTree.Core.Node.Abstract;
+using BehaviorTree.Core.Node.Interfaces;
 
-namespace BehaviorTree.Core.Composite;
+namespace BehaviorTree.Core.Node.Composite;
 
-public class Selector : ANode, IComposite
+public class Sequence : ANode, IComposite
 {
     public List<ANode> Children { get; } = [];
     private int _LastChildrenIndex = 0;
@@ -13,10 +15,10 @@ public class Selector : ANode, IComposite
         {
             Result lCurrentChildResult = Children[i].Tick();
 
-            if (lCurrentChildResult == Result.SUCCESS)
+            if (lCurrentChildResult == Result.FAILURE)
             {
                 _LastChildrenIndex = 0;
-                return Result.SUCCESS;
+                return Result.FAILURE;
             }
 
             else if (lCurrentChildResult == Result.RUNNING)
@@ -27,7 +29,7 @@ public class Selector : ANode, IComposite
         }
 
         _LastChildrenIndex = 0;
-        return Result.FAILURE;
+        return Result.SUCCESS;
     }
 
     public void Add(ANode pNode) => Children.Add(pNode);
@@ -35,6 +37,4 @@ public class Selector : ANode, IComposite
     {
         return ProcessChildren();
     }
-
-
 }

@@ -1,4 +1,7 @@
-namespace BehaviorTree.Core.Interfaces;
+
+using BehaviorTree.Core.Node.Abstract;
+
+namespace BehaviorTree.Core.Node.Interfaces;
 
 public interface IComposite
 {
