@@ -3,7 +3,7 @@ using BehaviorTree.Core.Node.Abstract;
 
 namespace BehaviorTree.Core.Node.Leaf
 {
-    public class DebugActionNode : ANode
+    public class DebugActionNode : AActionNode
     {
         private readonly Result _debugResult;
 
@@ -13,12 +13,7 @@ namespace BehaviorTree.Core.Node.Leaf
             name = pName;
         }
 
-        private Result Do()
-        {
-            return _debugResult;
-        }
-
-        public override Result Tick()
+        protected override Result Do()
         {
             Console.WriteLine($"(ACTION){name}: {_debugResult}");
             return _debugResult;
