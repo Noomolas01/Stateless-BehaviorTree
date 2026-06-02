@@ -7,11 +7,11 @@ public class ConditionNode : ANode
     public ConditionNode(Result pResult, string pName = "") : base(pName)
     {
         _debugResult = pResult;
-        Name = pName;
+        name = pName;
     }
     public override Result Tick()
     {
-        Console.WriteLine("Do Condition");
+        Console.WriteLine($"(COND){name}: {_debugResult}");
         return _debugResult;
     }
 }

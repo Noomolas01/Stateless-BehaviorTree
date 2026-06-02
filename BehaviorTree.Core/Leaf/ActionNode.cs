@@ -7,13 +7,13 @@ namespace BehaviorTree.Core.Leaf
         public ActionNode(Result pResult, string pName = "") : base(pName)
         {
             _debugResult = pResult;
-            Name = pName;
+            name = pName;
         }
 
 
         public override Result Tick()
         {
-            Console.WriteLine("Do Action Node");
+            Console.WriteLine($"(ACTION){name}: {_debugResult}");
             return _debugResult;
         }
     }
