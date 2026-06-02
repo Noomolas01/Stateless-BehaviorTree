@@ -32,7 +32,22 @@ public class Sequence : ANode, IComposite
         return Result.SUCCESS;
     }
 
-    public void Add(ANode pNode) => Children.Add(pNode);
+    public void Add(ANode pNode)
+    {
+        if (pNode == null)
+        {
+            Console.Write($"{name} cannot add a null node.");
+            return;
+        }
+
+        if (pNode == this)
+        {
+            Console.Write($"{name} cannot add itself.");
+            return;
+        }
+
+        Children.Add(pNode);
+    }
     public override Result Tick()
     {
         return ProcessChildren();

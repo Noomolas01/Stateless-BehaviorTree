@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using BehaviorTree.Core.Node.Abstract;
 using BehaviorTree.Core.Node.Interfaces;
 
@@ -31,7 +32,23 @@ public class Selector : ANode, IComposite
         return Result.FAILURE;
     }
 
-    public void Add(ANode pNode) => Children.Add(pNode);
+    public void Add(ANode pNode)
+    {
+        if (pNode == null)
+        {
+            Console.Write($"{name} cannot add a null node.");
+            return;
+        }
+
+        if (pNode == this)
+        {
+            Console.Write($"{name} cannot add itself.");
+            return;
+        }
+
+        Children.Add(pNode);
+    }
+
     public override Result Tick()
     {
         return ProcessChildren();
