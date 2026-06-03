@@ -4,10 +4,10 @@ using BehaviorTree.Core.Node.Interfaces;
 
 namespace BehaviorTree.Core.Tree
 {
-    public sealed class AIBrain : ANode
+    public sealed class BehaviorTree : ANode
     {
         private readonly Selector root = new();
-        //private AIBrain() { }
+        private BehaviorTree() { }
 
         public override Result Tick()
         {
@@ -16,11 +16,11 @@ namespace BehaviorTree.Core.Tree
 
         public class Builder
         {
-            private readonly AIBrain _brain = new();
+            private readonly BehaviorTree _brain = new();
             private readonly Stack<IComposite> _nodes = new();
 
 
-            public AIBrain.Builder Selector()
+            public BehaviorTree.Builder Selector()
             {
                 IComposite lParent = GetParent();
                 Selector lNewSelector = new();
@@ -30,7 +30,7 @@ namespace BehaviorTree.Core.Tree
                 return this;
             }
 
-            public AIBrain.Builder Sequence()
+            public BehaviorTree.Builder Sequence()
             {
                 IComposite lParent = GetParent();
                 Sequence lNewSequence = new();
@@ -40,13 +40,15 @@ namespace BehaviorTree.Core.Tree
                 return this;
             }
 
-            public AIBrain.Builder End()
+            public BehaviorTree.Builder End()
             {
-                _nodes.Pop();
+                if (_nodes.Count > 0)
+                    _nodes.Pop();
+
                 return this;
             }
 
-            public AIBrain.Builder Action(AActionNode pActionNode)
+            public BehaviorTree.Builder Action(AActionNode pActionNode)
             {
                 IComposite lParent = GetParent();
                 lParent.Add(pActionNode);
@@ -54,7 +56,7 @@ namespace BehaviorTree.Core.Tree
                 return this;
             }
 
-                public AIBrain.Builder Condition(AConditionNode pConditionNode)
+            public BehaviorTree.Builder Condition(AConditionNode pConditionNode)
             {
                 IComposite lParent = GetParent();
                 lParent.Add(pConditionNode);
@@ -72,7 +74,7 @@ namespace BehaviorTree.Core.Tree
                 return lParent ??= _brain.root;
             }
 
-            public AIBrain Build()
+            public BehaviorTree Build()
             {
                 return _brain;
             }
