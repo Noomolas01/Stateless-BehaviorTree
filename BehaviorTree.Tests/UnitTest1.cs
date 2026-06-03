@@ -1,6 +1,7 @@
 using BehaviorTree.Core;
 using BehaviorTree.Core.Node.Composite;
 using BehaviorTree.Core.Node.Leaf;
+using BehaviorTree.Core.Node.Leaf.Debug;
 namespace BehaviorTree.Tests;
 
 public class Tests
@@ -17,7 +18,7 @@ public class Tests
         Selector selector = new();
         selector.Add(new DebugConditionNode(false));
         selector.Add(new DebugConditionNode(true));
-        Assert.That(selector.Tick(), Is.EqualTo(Result.SUCCESS));
+        Assert.That(selector.Tick().status, Is.EqualTo(NodeStatus.SUCCESS));
     }
 
     [Test]
@@ -26,7 +27,7 @@ public class Tests
         Selector selector = new();
         selector.Add(new DebugConditionNode(false));
         selector.Add(new DebugConditionNode(false));
-        Assert.That(selector.Tick(), Is.EqualTo(Result.FAILURE));
+        Assert.That(selector.Tick().status, Is.EqualTo(NodeStatus.FAILURE));
     }
 
     [Test]
@@ -34,8 +35,8 @@ public class Tests
     {
         Selector selector = new();
         selector.Add(new DebugConditionNode(false));
-        selector.Add(new DebugActionNode(Result.RUNNING));
-        Assert.That(selector.Tick(), Is.EqualTo(Result.RUNNING));
+        selector.Add(new DebugActionNode(NodeStatus.RUNNING));
+        Assert.That(selector.Tick().status, Is.EqualTo(NodeStatus.RUNNING));
     }
 
 
@@ -46,7 +47,7 @@ public class Tests
         lSequence.Add(new DebugConditionNode(true));
         lSequence.Add(new DebugConditionNode(true));
 
-        Assert.That(lSequence.Tick(), Is.EqualTo(Result.SUCCESS));
+        Assert.That(lSequence.Tick().status, Is.EqualTo(NodeStatus.SUCCESS));
     }
 
     [Test]
@@ -58,7 +59,7 @@ public class Tests
         lSequence.Add(new DebugConditionNode(false));
         lSequence.Add(new DebugConditionNode(true));
 
-        Assert.That(lSequence.Tick(), Is.EqualTo(Result.FAILURE));
+        Assert.That(lSequence.Tick().status, Is.EqualTo(NodeStatus.FAILURE));
     }
 
     [Test]
@@ -68,16 +69,16 @@ public class Tests
         lSequence.Add(new DebugConditionNode(false));
         lSequence.Add(new DebugConditionNode(false));
 
-        Assert.That(lSequence.Tick(), Is.EqualTo(Result.FAILURE));
+        Assert.That(lSequence.Tick().status, Is.EqualTo(NodeStatus.FAILURE));
     }
 
     [Test]
     public void Sequence_Any_Child_Running_Should_Return_Running()
     {
         Sequence lSequence = new();
-        lSequence.Add(new DebugActionNode(Result.SUCCESS));
-        lSequence.Add(new DebugActionNode(Result.RUNNING));
+        lSequence.Add(new DebugActionNode(NodeStatus.SUCCESS));
+        lSequence.Add(new DebugActionNode(NodeStatus.RUNNING));
 
-        Assert.That(lSequence.Tick(), Is.EqualTo(Result.RUNNING));
+        Assert.That(lSequence.Tick().status, Is.EqualTo(NodeStatus.RUNNING));
     }
 }

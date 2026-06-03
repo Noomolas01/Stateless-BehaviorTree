@@ -4,10 +4,10 @@ public abstract class AConditionNode(string pName = "") : ANode(pName)
 {
     protected abstract bool Evaluate();
 
-    public override Result Tick()
+    public override TickResult Tick()
     {
         bool lConditionMet = Evaluate();
 
-        return lConditionMet ? Result.SUCCESS : Result.FAILURE;
+        return lConditionMet ? new TickResult(NodeStatus.SUCCESS, null)  : new TickResult(NodeStatus.FAILURE, null);
     }
 }

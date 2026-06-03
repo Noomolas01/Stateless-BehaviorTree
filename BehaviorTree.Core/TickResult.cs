@@ -1,7 +1,7 @@
 namespace BehaviorTree.Core;
 
-public class TickResult(Result pResult)
+public class TickResult(NodeStatus pResult, IAIDecision? pAIDecision)
 {
-    // Decision
-    public Result result = pResult;
+    public IAIDecision? decision = pAIDecision;
+    public NodeStatus status = pResult;
 }

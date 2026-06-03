@@ -1,7 +1,7 @@
 
 using BehaviorTree.Core.Node.Abstract;
 
-namespace BehaviorTree.Core.Node.Leaf;
+namespace BehaviorTree.Core.Node.Leaf.Debug;
 
 public class DebugConditionNode : AConditionNode
 {

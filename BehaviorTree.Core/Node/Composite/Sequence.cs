@@ -9,27 +9,27 @@ public class Sequence : ANode, IComposite
     public List<ANode> Children { get; } = [];
     private int _LastChildrenIndex = 0;
 
-    public Result ProcessChildren()
+    public TickResult ProcessChildren()
     {
         for (int i = _LastChildrenIndex; i < Children.Count; i++)
         {
-            Result lCurrentChildResult = Children[i].Tick();
+            TickResult lCurrentChildResult = Children[i].Tick();
 
-            if (lCurrentChildResult == Result.FAILURE)
+            if (lCurrentChildResult.status == NodeStatus.FAILURE)
             {
                 _LastChildrenIndex = 0;
-                return Result.FAILURE;
+                return lCurrentChildResult;
             }
 
-            else if (lCurrentChildResult == Result.RUNNING)
+            else if (lCurrentChildResult.status == NodeStatus.RUNNING)
             {
                 _LastChildrenIndex = i;
-                return Result.RUNNING;
+                return lCurrentChildResult;
             }
         }
 
         _LastChildrenIndex = 0;
-        return Result.SUCCESS;
+        return new TickResult(NodeStatus.SUCCESS, null);
     }
 
     public void Add(ANode pNode)
@@ -48,7 +48,7 @@ public class Sequence : ANode, IComposite
 
         Children.Add(pNode);
     }
-    public override Result Tick()
+    public override TickResult Tick()
     {
         return ProcessChildren();
     }

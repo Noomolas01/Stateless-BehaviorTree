@@ -2,9 +2,10 @@ namespace BehaviorTree.Core.Node.Abstract;
 
 public abstract class AActionNode (string pName = "") : ANode(pName)
 {
-    protected abstract Result Do();
+    public bool HasStarted {get; protected set;}
+    protected abstract TickResult Do();
 
-    public override Result Tick()
+    public override TickResult Tick()
     {
         return Do();
     }

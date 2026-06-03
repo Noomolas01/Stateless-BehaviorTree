@@ -9,7 +9,7 @@ namespace BehaviorTree.Core.Tree
         private readonly Selector root = new();
         private BehaviorTree() { }
 
-        public override Result Tick()
+        public override TickResult Tick()
         {
             return root.Tick();
         }

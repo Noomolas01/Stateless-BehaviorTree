@@ -1,7 +1,5 @@
 using BehaviorTree.Core;
-using BehaviorTree.Core.Node.Composite;
-using BehaviorTree.Core.Node.Leaf;
-using BehaviorTree.Core.Tree;
+using BehaviorTree.Core.Node.Leaf.Debug;
 
 using BT = BehaviorTree.Core.Tree.BehaviorTree;
 namespace BehaviorTree.Tests;
@@ -18,7 +16,7 @@ public class UnitTestBuilder
                               .End()
                           .Build();
 
-        Assert.That(lBrain.Tick(), Is.EqualTo(Result.SUCCESS));
+        Assert.That(lBrain.Tick().status, Is.EqualTo(NodeStatus.SUCCESS));
 
     }
 
@@ -32,7 +30,7 @@ public class UnitTestBuilder
                               .End()
                           .Build();
 
-        Assert.That(lBrain.Tick(), Is.EqualTo(Result.SUCCESS));
+        Assert.That(lBrain.Tick().status, Is.EqualTo(NodeStatus.SUCCESS));
 
     }
 }

@@ -1,6 +1,6 @@
 namespace BehaviorTree.Core;
 
-public enum Result
+public enum NodeStatus
 {
     //INACTIVE ?
     SUCCESS,
