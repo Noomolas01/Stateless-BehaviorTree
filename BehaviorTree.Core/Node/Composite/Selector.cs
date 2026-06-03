@@ -53,6 +53,4 @@ public class Selector : ANode, IComposite
     {
         return ProcessChildren();
     }
-
-
 }
