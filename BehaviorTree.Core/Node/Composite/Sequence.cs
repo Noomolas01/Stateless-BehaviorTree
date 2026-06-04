@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using BehaviorTree.Core.Node.Abstract;
 using BehaviorTree.Core.Node.Interfaces;
+using BehaviorTree.Core.Tree;
 
 namespace BehaviorTree.Core.Node.Composite;
 
@@ -9,11 +10,11 @@ public class Sequence : ANode, IComposite
     public List<ANode> Children { get; } = [];
     private int _LastChildrenIndex = 0;
 
-    public TickResult ProcessChildren()
+    public TickResult ProcessChildren(WorldState pWorldState, Blackboard pBlackboard)
     {
         for (int i = _LastChildrenIndex; i < Children.Count; i++)
         {
-            TickResult lCurrentChildResult = Children[i].Tick();
+            TickResult lCurrentChildResult = Children[i].Tick(pWorldState, pBlackboard);
 
             if (lCurrentChildResult.status == NodeStatus.FAILURE)
             {
@@ -48,8 +49,8 @@ public class Sequence : ANode, IComposite
 
         Children.Add(pNode);
     }
-    public override TickResult Tick()
+    public override TickResult Tick(WorldState pWorldState, Blackboard pBlackboard)
     {
-        return ProcessChildren();
+        return ProcessChildren(pWorldState, pBlackboard);
     }
 }

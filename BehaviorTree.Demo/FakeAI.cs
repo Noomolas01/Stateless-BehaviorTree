@@ -2,6 +2,7 @@ using BehaviorTree.Core;
 using BehaviorTree.Core.Node.Interfaces;
 using BehaviorTree.Core.Node.Leaf;
 using BehaviorTree.Core.Struct;
+using BehaviorTree.Core.Tree;
 using BT = BehaviorTree.Core.Tree.BehaviorTree;
 
 namespace BehaviorTree.Demo;
@@ -13,11 +14,14 @@ public class FakeAI
 
     public FakeAI()
     {
+        Blackboard blackboard = new();
+        WorldState worldState = new();
+        
         _Brain = new BT.Builder()
                     .Action(new MoveAction())
                     .Build();
 
-        TickResult tickResult = _Brain.Tick();
+        TickResult tickResult = _Brain.Tick(worldState, blackboard);
 
         if (tickResult.decision is MoveDecision moveDecision)
         {

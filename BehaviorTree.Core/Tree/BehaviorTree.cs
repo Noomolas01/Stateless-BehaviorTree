@@ -6,12 +6,12 @@ namespace BehaviorTree.Core.Tree
 {
     public sealed class BehaviorTree : ANode
     {
-        private readonly Selector root = new();
+        private readonly Selector _root = new();
         private BehaviorTree() { }
 
-        public override TickResult Tick()
+        public override TickResult Tick(WorldState pWorldState, Blackboard pBlackboard)
         {
-            return root.Tick();
+            return _root.Tick(pWorldState, pBlackboard);
         }
 
         public class Builder
@@ -67,11 +67,11 @@ namespace BehaviorTree.Core.Tree
             private IComposite GetParent()
             {
                 if (_nodes.Count == 0)
-                    return _brain.root;
+                    return _brain._root;
 
                 IComposite lParent = _nodes.Peek();
 
-                return lParent ??= _brain.root;
+                return lParent ??= _brain._root;
             }
 
             public BehaviorTree Build()
