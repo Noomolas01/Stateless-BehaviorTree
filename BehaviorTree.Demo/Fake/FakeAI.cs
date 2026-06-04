@@ -23,7 +23,7 @@ public class FakeAI
                         .Action(new FindTarget())
                         .Selector()
                             .Sequence()
-                                .Condition(new TargetWithinMeleeRange())
+                                .Condition(new FakeTargetWithinMeleeRange())
                                 .Condition(new MeleeAttackCDIsFinished())
                                 .Action(new MeleeAttack())
                             .End()
@@ -37,9 +37,6 @@ public class FakeAI
                     .Action(new Idle())
                     .Build();
 
-        TickResult tickResult = _Brain.Tick(context, blackboard);
-
-    
     }
 
 }
