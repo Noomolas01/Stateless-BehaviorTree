@@ -3,15 +3,15 @@ using BehaviorTree.Core.Tree;
 
 namespace BehaviorTree.Demo.Fake
 {
-    internal class FakeMeleeAttackCDIsFinished : AConditionNode
+    internal class FakeRangeAttackCDIsFinished : AConditionNode
     {
         protected override bool Evaluate(WorldContext pWorldState, Blackboard pBlackboard)
         {
-            object? lMeleeCD = pBlackboard.Get("MeleeCD");
+           object? lRangeCD = pBlackboard.Get("RangeCD");
 
-            if (lMeleeCD != null)
+            if (lRangeCD != null)
             {
-                float lCD = (float)lMeleeCD;
+                float lCD = (float)lRangeCD;
                 Console.WriteLine($"Est-ce que mon attaque de melee est disponible ? {lCD <=0}");
                 return lCD <= 0;
             }

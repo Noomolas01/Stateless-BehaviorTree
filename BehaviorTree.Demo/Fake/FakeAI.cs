@@ -15,8 +15,11 @@ public class FakeAI
     {
         // Memory
         Blackboard blackboard = new();
-        //Sensors ?
+        // World State 
         WorldContext context = new();
+
+        context.Set<FakePlayer>("Player", new FakePlayer(new() { X = 0, Y = 0 }));
+        blackboard.Set
 
         _Brain = new BT.Builder()
                     .Sequence()
@@ -24,17 +27,17 @@ public class FakeAI
                         .Selector()
                             .Sequence()
                                 .Condition(new FakeTargetWithinMeleeRange())
-                                .Condition(new MeleeAttackCDIsFinished())
-                                .Action(new MeleeAttack())
+                                .Condition(new FakeMeleeAttackCDIsFinished())
+                                .Action(new FakeMeleeAttack())
                             .End()
                             .Sequence()
-                                .Condition(new TargetWithinDistanceRange())
-                                .Condition(new RangeAttackCDIsFinished())
-                                .Action(new RangeAttack())
+                                .Condition(new FakeTargetWithinDistanceRange())
+                                .Condition(new FakeRangeAttackCDIsFinished())
+                                .Action(new FakeRangeAttack())
                             .End()
                         .End()
                     .End()
-                    .Action(new Idle())
+                    .Action(new FakeIdle())
                     .Build();
 
     }
