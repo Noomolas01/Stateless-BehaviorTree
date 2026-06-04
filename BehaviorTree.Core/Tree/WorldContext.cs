@@ -1,12 +1,12 @@
 namespace BehaviorTree.Core.Tree;
 
-public class Blackboard
+public class WorldContext
 {
-    private readonly Dictionary<string, object?> _memory = new();
+    private readonly Dictionary<string, object?> _World = new();
 
     public object? Get(string pKey)
     {
-        if (_memory.TryGetValue(pKey, out object? value))
+        if (_World.TryGetValue(pKey, out object? value))
         {
             return value;
         }
@@ -17,9 +17,9 @@ public class Blackboard
 
     public void Set<T>(string pKey, T pValue)
     {
-        if (_memory.ContainsKey(pKey))
+        if (_World.ContainsKey(pKey))
         {
-            _memory[pKey] = pValue;
+            _World[pKey] = pValue;
             return;
         }
 
