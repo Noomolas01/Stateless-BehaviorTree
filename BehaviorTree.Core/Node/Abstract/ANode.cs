@@ -6,5 +6,5 @@ public abstract class ANode(string pName = "")
 {
     public string name = pName;
 
-    public abstract TickResult Tick(WorldState pWorldState, Blackboard pBlackboard);
+    public abstract TickResult Tick(WorldContext pWorldState, Blackboard pBlackboard);
 }

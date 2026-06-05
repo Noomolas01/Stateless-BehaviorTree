@@ -7,7 +7,7 @@ namespace BehaviorTree.Tests;
 public class UnitTestBuilder
 {
     private Blackboard bb;
-    private WorldState ws;
+    private WorldContext ws;
     [SetUp]
     public void Setup()
     {

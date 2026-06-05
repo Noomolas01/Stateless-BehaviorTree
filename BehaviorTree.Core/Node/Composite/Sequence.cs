@@ -10,7 +10,7 @@ public class Sequence : ANode, IComposite
     public List<ANode> Children { get; } = [];
     private int _LastChildrenIndex = 0;
 
-    public TickResult ProcessChildren(WorldState pWorldState, Blackboard pBlackboard)
+    public TickResult ProcessChildren(WorldContext pWorldState, Blackboard pBlackboard)
     {
         for (int i = _LastChildrenIndex; i < Children.Count; i++)
         {
@@ -49,7 +49,7 @@ public class Sequence : ANode, IComposite
 
         Children.Add(pNode);
     }
-    public override TickResult Tick(WorldState pWorldState, Blackboard pBlackboard)
+    public override TickResult Tick(WorldContext pWorldState, Blackboard pBlackboard)
     {
         return ProcessChildren(pWorldState, pBlackboard);
     }

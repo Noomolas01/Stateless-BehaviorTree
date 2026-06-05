@@ -11,18 +11,18 @@ public class Blackboard
             return value;
         }
 
-        Console.WriteLine("Key doesn't exist.");
+        Console.WriteLine($"Key: {pKey} doesn't exist.");
         return null;
     }
 
     public void Set<T>(string pKey, T pValue)
     {
-        if (_memory.ContainsKey(pKey))
+        if (!_memory.ContainsKey(pKey))
         {
-            _memory[pKey] = pValue;
-            return;
+            Console.WriteLine($"Key: {pKey} added.");
+
         }
 
-        Console.WriteLine("Key doesn't exist.");
+        _memory[pKey] = pValue;
     }
 }

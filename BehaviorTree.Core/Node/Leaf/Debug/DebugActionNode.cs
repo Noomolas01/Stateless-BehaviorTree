@@ -1,5 +1,6 @@
 
 using BehaviorTree.Core.Node.Abstract;
+using BehaviorTree.Core.Tree;
 
 namespace BehaviorTree.Core.Node.Leaf.Debug
 {
@@ -13,7 +14,7 @@ namespace BehaviorTree.Core.Node.Leaf.Debug
             name = pName;
         }
 
-        protected override TickResult Do()
+        protected override TickResult Do(WorldContext pWorldState, Blackboard pBlackboard)
         {
             Console.WriteLine($"(ACTION){name}: {_debugResult}");
             return new TickResult(_debugResult, null);

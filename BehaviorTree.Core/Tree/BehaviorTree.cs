@@ -9,7 +9,7 @@ namespace BehaviorTree.Core.Tree
         private readonly Selector _root = new();
         private BehaviorTree() { }
 
-        public override TickResult Tick(WorldState pWorldState, Blackboard pBlackboard)
+        public override TickResult Tick(WorldContext pWorldState, Blackboard pBlackboard)
         {
             return _root.Tick(pWorldState, pBlackboard);
         }

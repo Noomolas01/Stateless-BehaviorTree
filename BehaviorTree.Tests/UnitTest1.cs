@@ -8,7 +8,7 @@ namespace BehaviorTree.Tests;
 public class Tests
 {
     private Blackboard bb;
-    private WorldState ws;
+    private WorldContext ws;
     [SetUp]
     public void Setup()
     {
