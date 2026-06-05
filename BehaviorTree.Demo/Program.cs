@@ -1,9 +1,14 @@
 ﻿using BehaviorTree.Core.Node.Leaf;
+using BehaviorTree.Demo.Fake;
 using BT = BehaviorTree.Core.Tree.BehaviorTree;
 
-// BT lBehaviorTree = new BT.Builder()
-//                    .Sequence()
-//                    .Action(new MoveAction())
-//                    .Build();
+FakeAI fakeAI = new();
 
- Console.WriteLine("");
+
+for (int i = 0; i < 10; i++)
+{
+    Console.WriteLine($"Tick n°{i+1} start");
+    fakeAI.GetDecision();
+    Console.WriteLine($"Tick n°{i+1} end");
+
+}

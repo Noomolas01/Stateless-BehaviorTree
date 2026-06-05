@@ -11,6 +11,7 @@ namespace BehaviorTree.Demo.Fake
             if (!HasStarted)
             {
                 Console.WriteLine("Je commence à attaquer");
+                HasStarted = true;
                 return new TickResult(NodeStatus.RUNNING, new AttackDecision(AttackType.MELEE));
             }
 

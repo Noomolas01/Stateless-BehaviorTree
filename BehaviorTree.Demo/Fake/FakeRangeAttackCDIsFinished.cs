@@ -12,7 +12,7 @@ namespace BehaviorTree.Demo.Fake
             if (lRangeCD != null)
             {
                 float lCD = (float)lRangeCD;
-                Console.WriteLine($"Est-ce que mon attaque de melee est disponible ? {lCD <=0}");
+                Console.WriteLine($"Est-ce que mon attaque de distance est disponible ? {lCD <=0}");
                 return lCD <= 0;
             }
 

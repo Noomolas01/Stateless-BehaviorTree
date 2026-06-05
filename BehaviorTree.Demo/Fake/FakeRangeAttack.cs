@@ -9,7 +9,10 @@ namespace BehaviorTree.Demo.Fake
         protected override TickResult Do(WorldContext pWorldState, Blackboard pBlackboard)
         {
             if (!HasStarted)
+            {
+                HasStarted = true;
                 return new TickResult(NodeStatus.RUNNING, new AttackDecision(AttackType.RANGE));
+            }
 
             object? lResult = pBlackboard.Get("RangeAttackFinished");
 
