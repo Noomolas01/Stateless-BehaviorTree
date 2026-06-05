@@ -4,11 +4,10 @@ using BT = BehaviorTree.Core.Tree.BehaviorTree;
 
 FakeAI fakeAI = new();
 
-
-for (int i = 0; i < 10; i++)
+// Fake GameLoop
+for (int i = 0; i < 50; i++)
 {
-    Console.WriteLine($"Tick n°{i+1} start");
-    fakeAI.GetDecision();
-    Console.WriteLine($"Tick n°{i+1} end");
-
+    Console.WriteLine($"--Frame n°{i + 1} start--");
+    fakeAI.FakeUpdate(i);
+    Console.WriteLine($"--Frame n°{i + 1} end--");
 }

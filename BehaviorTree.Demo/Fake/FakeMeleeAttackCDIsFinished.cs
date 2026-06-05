@@ -7,13 +7,12 @@ namespace BehaviorTree.Demo.Fake
     {
         protected override bool Evaluate(WorldContext pWorldState, Blackboard pBlackboard)
         {
-            object? lMeleeCD = pBlackboard.Get("MeleeCD");
+            object? lIsMeleeReady = pBlackboard.Get("MeleeIsReady");
 
-            if (lMeleeCD != null)
+            if (lIsMeleeReady != null)
             {
-                float lCD = (float)lMeleeCD;
-                Console.WriteLine($"Est-ce que mon attaque de melee est disponible ? {lCD <=0}");
-                return lCD <= 0;
+                Console.WriteLine($"Est-ce que mon attaque de melee est disponible ? {(bool)lIsMeleeReady}");
+                return (bool)lIsMeleeReady;
             }
 
             return false;

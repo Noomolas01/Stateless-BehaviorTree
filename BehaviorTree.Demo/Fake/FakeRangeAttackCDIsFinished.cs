@@ -7,13 +7,13 @@ namespace BehaviorTree.Demo.Fake
     {
         protected override bool Evaluate(WorldContext pWorldState, Blackboard pBlackboard)
         {
-           object? lRangeCD = pBlackboard.Get("RangeCD");
+           object? lIsRangeReady = pBlackboard.Get("RangeIsReady");
 
-            if (lRangeCD != null)
+            if (lIsRangeReady != null)
             {
-                float lCD = (float)lRangeCD;
-                Console.WriteLine($"Est-ce que mon attaque de distance est disponible ? {lCD <=0}");
-                return lCD <= 0;
+                bool lCD = (bool)lIsRangeReady;
+                Console.WriteLine($"Est-ce que mon attaque de distance est disponible ? {lCD}");
+                return lCD;
             }
 
             return false;

@@ -11,6 +11,8 @@ namespace BehaviorTree.Demo.Fake
             if (!HasStarted)
             {
                 HasStarted = true;
+                Console.WriteLine("Je décide d'attaquer en range");
+
                 return new TickResult(NodeStatus.RUNNING, new AttackDecision(AttackType.RANGE));
             }
 
@@ -18,9 +20,12 @@ namespace BehaviorTree.Demo.Fake
 
             if (lResult != null && ((bool)lResult))
             {
+                Console.WriteLine("J'ai réussi mon attaque de range");
+                HasStarted = false;
                 return new TickResult(NodeStatus.SUCCESS, null);
             }
 
+            Console.WriteLine("Attaque de range toujours en cours");
 
             return new TickResult(NodeStatus.RUNNING, new AttackDecision(AttackType.RANGE));
 

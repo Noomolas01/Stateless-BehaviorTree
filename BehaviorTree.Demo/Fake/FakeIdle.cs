@@ -8,7 +8,7 @@ namespace BehaviorTree.Demo.Fake
     {
         protected override TickResult Do(WorldContext pWorldState, Blackboard pBlackboard)
         {
-            Console.WriteLine("J'attends");
+            Console.WriteLine("J'attends et danse la zumba");
             return new TickResult(NodeStatus.SUCCESS, null);
         }
     }

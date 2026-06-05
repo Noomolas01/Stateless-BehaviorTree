@@ -7,23 +7,30 @@ using BT = BehaviorTree.Core.Tree.BehaviorTree;
 
 namespace BehaviorTree.Demo.Fake;
 
-public class FakeAI
+public class FakeAI // : Node/Monobehaviour
 {
     private readonly BT _Brain;
     // Memory
-    private readonly Blackboard blackboard = new();
+    private readonly Blackboard _blackboard = new();
     // World State 
     private readonly WorldContext context = new();
+    //Components
+    private readonly FakeAttackManager _fakeAttackManager;
 
+    private int _tickCounter = 0;
 
     public FakeAI()
     {
         context.Set<FakePlayer>("Player", new FakePlayer(new() { X = 0, Y = 0 }));
-        blackboard.Set("MeleeCD", 3f);
-        blackboard.Set("RangeCD", 3f);
-        blackboard.Set("MeleeAttackFinished", false);
-        blackboard.Set("RangeAttackFinished", false);
-        blackboard.Set("Target", context.Get("Player"));
+        _blackboard.Set("MeleeCD", 3f);
+        _blackboard.Set("RangeCD", 3f);
+        _blackboard.Set("MeleeAttackFinished", false);
+        _blackboard.Set("RangeAttackFinished", false);
+        _blackboard.Set("MeleeIsReady", false);
+        _blackboard.Set("RangeIsReady", false);
+        _blackboard.Set("Target", context.Get("Player"));
+
+        _fakeAttackManager = new FakeAttackManager(_blackboard);
 
         _Brain = new BT.Builder()
                     .Sequence()
@@ -46,19 +53,44 @@ public class FakeAI
 
     }
 
-    public IAIDecision? GetDecision()
+    private void Think()
     {
-        float? lMeleeCD = (float?)blackboard.Get("MeleeCD");
-        float? lRangeCD = (float?)blackboard.Get("RangeCD");
-        Console.WriteLine("before: " + lMeleeCD);
-        Console.WriteLine("before: " + lRangeCD);
+        IAIDecision? lAIDecision = GetDecision();
 
-        blackboard.Set("MeleeCD", --lMeleeCD);
-        blackboard.Set("RangeCD", --lRangeCD);
-        Console.WriteLine("after: " + lMeleeCD);
-        Console.WriteLine("after: " + lRangeCD);
+        switch (lAIDecision)
+        {
+            case AttackDecision attackDecision:
+                _fakeAttackManager.ReactOn(attackDecision);
+                break;
+            case null:
+                break;
+        }
+    }
 
-        return _Brain.Tick(context, blackboard).decision;
+    public void FakeUpdate(int pFrameCounter)
+    {
+        _fakeAttackManager.FakeUpdate();
+        
+
+        if (pFrameCounter % 3 == 0)
+        {
+            _tickCounter++;
+            Console.WriteLine($"Tick n°{_tickCounter} start");
+            Think();
+            Console.WriteLine($"Tick n°{_tickCounter} end");
+        }
+
+    }
+
+    private IAIDecision? GetDecision()
+    {
+        float? lMeleeCD = (float?)_blackboard.Get("MeleeCD");
+        float? lRangeCD = (float?)_blackboard.Get("RangeCD");
+
+        IAIDecision? lDecision = _Brain.Tick(context, _blackboard).decision;
+        
+        Console.WriteLine($"Decision : {lDecision}");
+        return lDecision;
     }
 
 }
