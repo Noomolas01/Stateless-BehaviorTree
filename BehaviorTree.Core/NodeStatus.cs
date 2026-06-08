@@ -1,10 +1,11 @@
-namespace BehaviorTree.Core;
-
-public enum NodeStatus
+namespace BehaviorTree.Core
 {
-    //INACTIVE ?
-    SUCCESS,
-    RUNNING,
-    FAILURE
+    public enum NodeStatus
+    {
+        //INACTIVE ?
+        SUCCESS,
+        RUNNING,
+        FAILURE
 
+    }
 }

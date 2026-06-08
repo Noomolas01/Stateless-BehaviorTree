@@ -1,14 +1,17 @@
 using BehaviorTree.Core.Tree;
 
-namespace BehaviorTree.Core.Node.Abstract;
-
-public abstract class AActionNode (string pName = "") : ANode(pName)
+namespace BehaviorTree.Core.Node.Abstract
 {
-    public bool HasStarted {get; protected set;}
-    protected abstract TickResult Do(WorldContext pWorldState, Blackboard pBlackboard);
-
-    public override TickResult Tick(WorldContext pWorldState, Blackboard pBlackboard)
+    public abstract class AActionNode: ANode
     {
-        return Do(pWorldState, pBlackboard);
+        public AActionNode(string pName = "") : base(pName) { }
+        public bool HasStarted { get; protected set; }
+        protected abstract TickResult Do(WorldContext pWorldState, Blackboard pBlackboard);
+
+        public override TickResult Tick(WorldContext pWorldState, Blackboard pBlackboard)
+        {
+            return Do(pWorldState, pBlackboard);
+        }
     }
+
 }

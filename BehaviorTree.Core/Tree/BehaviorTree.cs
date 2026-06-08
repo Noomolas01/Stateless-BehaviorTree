@@ -1,12 +1,13 @@
 using BehaviorTree.Core.Node.Abstract;
 using BehaviorTree.Core.Node.Composite;
 using BehaviorTree.Core.Node.Interfaces;
+using System.Collections.Generic;
 
 namespace BehaviorTree.Core.Tree
 {
     public sealed class BehaviorTree : ANode
     {
-        private readonly Selector _root = new();
+        private readonly Selector _root = new Selector();
         private BehaviorTree() { }
 
         public override TickResult Tick(WorldContext pWorldState, Blackboard pBlackboard)
@@ -16,14 +17,14 @@ namespace BehaviorTree.Core.Tree
 
         public class Builder
         {
-            private readonly BehaviorTree _brain = new();
-            private readonly Stack<IComposite> _nodes = new();
+            private readonly BehaviorTree _brain = new BehaviorTree();
+            private readonly Stack<IComposite> _nodes = new Stack<IComposite>();
 
 
             public BehaviorTree.Builder Selector()
             {
                 IComposite lParent = GetParent();
-                Selector lNewSelector = new();
+                Selector lNewSelector = new Selector();
                 lParent.Add(lNewSelector);
                 _nodes.Push(lNewSelector);
 
@@ -33,7 +34,7 @@ namespace BehaviorTree.Core.Tree
             public BehaviorTree.Builder Sequence()
             {
                 IComposite lParent = GetParent();
-                Sequence lNewSequence = new();
+                Sequence lNewSequence = new Sequence();
                 lParent.Add(lNewSequence);
                 _nodes.Push(lNewSequence);
 

@@ -1,15 +1,19 @@
 using BehaviorTree.Core.Tree;
 
-namespace BehaviorTree.Core.Node.Abstract;
-
-public abstract class AConditionNode(string pName = "") : ANode(pName)
+namespace BehaviorTree.Core.Node.Abstract
 {
-    protected abstract bool Evaluate(WorldContext pWorldState, Blackboard pBlackboard);
 
-    public override TickResult Tick(WorldContext pWorldState, Blackboard pBlackboard)
+    public abstract class AConditionNode : ANode
     {
-        bool lConditionMet = Evaluate(pWorldState, pBlackboard);
+        public AConditionNode(string pName = "") : base(pName) { }
 
-        return lConditionMet ? new TickResult(NodeStatus.SUCCESS, null)  : new TickResult(NodeStatus.FAILURE, null);
+        protected abstract bool Evaluate(WorldContext pWorldState, Blackboard pBlackboard);
+
+        public override TickResult Tick(WorldContext pWorldState, Blackboard pBlackboard)
+        {
+            bool lConditionMet = Evaluate(pWorldState, pBlackboard);
+
+            return lConditionMet ? new TickResult(NodeStatus.SUCCESS, null) : new TickResult(NodeStatus.FAILURE, null);
+        }
     }
 }

@@ -1,4 +1,10 @@
-namespace BehaviorTree.Core;
+namespace BehaviorTree.Core
+{
+    public interface IAIDecision
+    {
 
-public interface IAIDecision;
+    }
+
+}
+
 

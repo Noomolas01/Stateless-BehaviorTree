@@ -1,10 +1,16 @@
 using BehaviorTree.Core.Tree;
 
-namespace BehaviorTree.Core.Node.Abstract;
-
-public abstract class ANode(string pName = "")
+namespace BehaviorTree.Core.Node.Abstract
 {
-    public string name = pName;
+    public abstract class ANode
+    {
+        public string name;
 
-    public abstract TickResult Tick(WorldContext pWorldState, Blackboard pBlackboard);
+        public ANode(string pName = "")
+        {
+            name = pName;
+        }
+
+        public abstract TickResult Tick(WorldContext pWorldState, Blackboard pBlackboard);
+    }
 }

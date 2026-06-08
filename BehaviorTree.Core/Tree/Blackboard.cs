@@ -1,28 +1,32 @@
-namespace BehaviorTree.Core.Tree;
+using System.Collections.Generic;
+using System;
 
-public class Blackboard
+namespace BehaviorTree.Core.Tree
 {
-    private readonly Dictionary<string, object?> _memory = new();
-
-    public object? Get(string pKey)
+    public class Blackboard
     {
-        if (_memory.TryGetValue(pKey, out object? value))
+        private readonly Dictionary<string, object?> _memory = new Dictionary<string, object?>();
+
+        public object? Get(string pKey)
         {
-            return value;
+            if (_memory.TryGetValue(pKey, out object? value))
+            {
+                return value;
+            }
+
+            Console.WriteLine($"Key: {pKey} doesn't exist.");
+            return null;
         }
 
-        Console.WriteLine($"Key: {pKey} doesn't exist.");
-        return null;
-    }
-
-    public void Set<T>(string pKey, T pValue)
-    {
-        if (!_memory.ContainsKey(pKey))
+        public void Set<T>(string pKey, T pValue)
         {
-            Console.WriteLine($"Key: {pKey} added.");
+            if (!_memory.ContainsKey(pKey))
+            {
+                Console.WriteLine($"Key: {pKey} added.");
 
+            }
+
+            _memory[pKey] = pValue;
         }
-
-        _memory[pKey] = pValue;
     }
 }

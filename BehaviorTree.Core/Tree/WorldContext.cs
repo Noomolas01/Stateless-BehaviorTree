@@ -1,27 +1,31 @@
-namespace BehaviorTree.Core.Tree;
+using System.Collections.Generic;
+using System;
 
-public class WorldContext
+namespace BehaviorTree.Core.Tree
 {
-    private readonly Dictionary<string, object?> _World = new();
-
-    public object? Get(string pKey)
+    public class WorldContext
     {
-        if (_World.TryGetValue(pKey, out object? value))
+        private readonly Dictionary<string, object?> _World = new Dictionary<string, object?>();
+
+        public object? Get(string pKey)
         {
-            return value;
+            if (_World.TryGetValue(pKey, out object? value))
+            {
+                return value;
+            }
+
+            Console.WriteLine($"Key: {pKey} doesn't exist.");
+            return null;
         }
 
-        Console.WriteLine($"Key: {pKey} doesn't exist.");
-        return null;
-    }
-
-    public void Set<T>(string pKey, T pValue)
-    {
-        if (!_World.ContainsKey(pKey))
+        public void Set<T>(string pKey, T pValue)
         {
-           Console.WriteLine($"Key: {pKey} added.");
-        }
+            if (!_World.ContainsKey(pKey))
+            {
+                Console.WriteLine($"Key: {pKey} added.");
+            }
 
-        _World[pKey] = pValue;
+            _World[pKey] = pValue;
+        }
     }
 }
