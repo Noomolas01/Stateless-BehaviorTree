@@ -1,9 +1,10 @@
 namespace BehaviorTree.Core
 {
-    public struct TickResult
+    public readonly struct TickResult
     {
-        public IAIDecision? decision;
-        public NodeStatus status;
+        public readonly IAIDecision? decision;
+        public readonly NodeStatus status;
+
         public TickResult(NodeStatus pResult, IAIDecision? pAIDecision)
         {
             decision = pAIDecision;
