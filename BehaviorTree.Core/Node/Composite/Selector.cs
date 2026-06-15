@@ -3,6 +3,7 @@ using BehaviorTree.Core.Node.Interfaces;
 using BehaviorTree.Core.Tree;
 using System.Collections.Generic;
 using System;
+using BehaviorTree.Core.Tree.DataManagement;
 
 namespace BehaviorTree.Core.Node.Composite
 {
@@ -11,11 +12,11 @@ namespace BehaviorTree.Core.Node.Composite
         public List<ANode> Children { get; } = new List<ANode>();
         private int _LastChildrenIndex = 0;
 
-        public TickResult ProcessChildren(WorldContext pWorldState, Blackboard pBlackboard)
+        public TickResult ProcessChildren(WorldContext pWorldContext, Blackboard pBlackboard)
         {
             for (int i = _LastChildrenIndex; i < Children.Count; i++)
             {
-                TickResult lCurrentChildResult = Children[i].Tick(pWorldState, pBlackboard);
+                TickResult lCurrentChildResult = Children[i].Tick(pWorldContext, pBlackboard);
 
                 if (lCurrentChildResult.status == NodeStatus.SUCCESS)
                 {
@@ -31,7 +32,7 @@ namespace BehaviorTree.Core.Node.Composite
             }
 
             _LastChildrenIndex = 0;
-            return new TickResult(NodeStatus.FAILURE, null);
+            return new TickResult(NodeStatus.FAILURE, null, pBlackboard);
         }
 
         public void Add(ANode pNode)
@@ -51,9 +52,9 @@ namespace BehaviorTree.Core.Node.Composite
             Children.Add(pNode);
         }
 
-        public override TickResult Tick(WorldContext pWorldState, Blackboard pBlackboard)
+        public override TickResult Tick(WorldContext pWorldContext, Blackboard pBlackboard)
         {
-            return ProcessChildren(pWorldState, pBlackboard);
+            return ProcessChildren(pWorldContext, pBlackboard);
         }
     }
 }

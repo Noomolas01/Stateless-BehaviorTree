@@ -1,6 +1,7 @@
 
 using BehaviorTree.Core.Node.Abstract;
 using BehaviorTree.Core.Tree;
+using BehaviorTree.Core.Tree.DataManagement;
 using System.Collections.Generic;
 
 namespace BehaviorTree.Core.Node.Interfaces
@@ -8,7 +9,7 @@ namespace BehaviorTree.Core.Node.Interfaces
     public interface IComposite
     {
         List<ANode> Children { get; }
-        public TickResult ProcessChildren(WorldContext pWorldState, Blackboard pBlackboard);
+        public TickResult ProcessChildren(WorldContext pWorldContext, Blackboard pBlackboard);
         public void Add(ANode pNode);
     }
 

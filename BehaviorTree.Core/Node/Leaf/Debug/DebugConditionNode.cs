@@ -1,6 +1,7 @@
 
 using BehaviorTree.Core.Node.Abstract;
 using BehaviorTree.Core.Tree;
+using BehaviorTree.Core.Tree.DataManagement;
 using System;
 
 namespace BehaviorTree.Core.Node.Leaf.Debug
@@ -15,7 +16,7 @@ namespace BehaviorTree.Core.Node.Leaf.Debug
             name = pName;
         }
 
-        protected override bool Evaluate(WorldContext pWorldState, Blackboard pBlackboard)
+        protected override bool Evaluate(WorldContext pWorldContext, Blackboard pBlackboard)
         {
             Console.WriteLine($"(COND){name}: {_FakeResult}");
             return _FakeResult;

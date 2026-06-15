@@ -1,6 +1,7 @@
 
 using BehaviorTree.Core.Node.Abstract;
 using BehaviorTree.Core.Tree;
+using BehaviorTree.Core.Tree.DataManagement;
 using System;
 
 namespace BehaviorTree.Core.Node.Leaf.Debug
@@ -15,10 +16,10 @@ namespace BehaviorTree.Core.Node.Leaf.Debug
             name = pName;
         }
 
-        protected override TickResult Do(WorldContext pWorldState, Blackboard pBlackboard)
+        protected override TickResult Do(WorldContext pWorldContext, Blackboard pBlackboard)
         {
             Console.WriteLine($"(ACTION){name}: {_debugResult}");
-            return new TickResult(_debugResult, null);
+            return new TickResult(_debugResult, null, pBlackboard);
         }
     }
 }

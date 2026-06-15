@@ -1,4 +1,5 @@
 using BehaviorTree.Core.Tree;
+using BehaviorTree.Core.Tree.DataManagement;
 
 namespace BehaviorTree.Core.Node.Abstract
 {
@@ -7,13 +8,13 @@ namespace BehaviorTree.Core.Node.Abstract
     {
         public AConditionNode(string pName = "") : base(pName) { }
 
-        protected abstract bool Evaluate(WorldContext pWorldState, Blackboard pBlackboard);
+        protected abstract bool Evaluate(WorldContext pWorldContext, Blackboard pBlackboard);
 
-        public override TickResult Tick(WorldContext pWorldState, Blackboard pBlackboard)
+        public override TickResult Tick(WorldContext pWorldContext, Blackboard pBlackboard)
         {
-            bool lConditionMet = Evaluate(pWorldState, pBlackboard);
+            bool lConditionMet = Evaluate(pWorldContext, pBlackboard);
 
-            return lConditionMet ? new TickResult(NodeStatus.SUCCESS, null) : new TickResult(NodeStatus.FAILURE, null);
+            return lConditionMet ? new TickResult(NodeStatus.SUCCESS, null, pBlackboard) : new TickResult(NodeStatus.FAILURE, null, pBlackboard);
         }
     }
 }

@@ -1,6 +1,7 @@
 using BehaviorTree.Core.Node.Abstract;
 using BehaviorTree.Core.Node.Composite;
 using BehaviorTree.Core.Node.Interfaces;
+using BehaviorTree.Core.Tree.DataManagement;
 using System.Collections.Generic;
 
 namespace BehaviorTree.Core.Tree
@@ -10,9 +11,9 @@ namespace BehaviorTree.Core.Tree
         private readonly Selector _root = new Selector();
         private BehaviorTree() { }
 
-        public override TickResult Tick(WorldContext pWorldState, Blackboard pBlackboard)
+        public override TickResult Tick(WorldContext pWorldContext, Blackboard pBlackboard)
         {
-            return _root.Tick(pWorldState, pBlackboard);
+            return _root.Tick(pWorldContext, pBlackboard);
         }
 
         public class Builder

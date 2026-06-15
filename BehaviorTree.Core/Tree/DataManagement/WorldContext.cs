@@ -1,15 +1,15 @@
 using System.Collections.Generic;
 using System;
 
-namespace BehaviorTree.Core.Tree
+namespace BehaviorTree.Core.Tree.DataManagement
 {
-    public class Blackboard
+    public class WorldContext
     {
-        private readonly Dictionary<string, object?> _memory = new Dictionary<string, object?>();
+        private readonly Dictionary<string, object?> _World = new Dictionary<string, object?>();
 
         public object? Get(string pKey)
         {
-            if (_memory.TryGetValue(pKey, out object? value))
+            if (_World.TryGetValue(pKey, out object? value))
             {
                 return value;
             }
@@ -20,13 +20,12 @@ namespace BehaviorTree.Core.Tree
 
         public void Set<T>(string pKey, T pValue)
         {
-            if (!_memory.ContainsKey(pKey))
+            if (!_World.ContainsKey(pKey))
             {
                 Console.WriteLine($"Key: {pKey} added.");
-
             }
 
-            _memory[pKey] = pValue;
+            _World[pKey] = pValue;
         }
     }
 }

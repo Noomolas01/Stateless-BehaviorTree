@@ -1,4 +1,5 @@
 using BehaviorTree.Core.Tree;
+using BehaviorTree.Core.Tree.DataManagement;
 
 namespace BehaviorTree.Core.Node.Abstract
 {
@@ -6,11 +7,11 @@ namespace BehaviorTree.Core.Node.Abstract
     {
         public AActionNode(string pName = "") : base(pName) { }
         public bool HasStarted { get; protected set; }
-        protected abstract TickResult Do(WorldContext pWorldState, Blackboard pBlackboard);
+        protected abstract TickResult Do(WorldContext pWorldContext, Blackboard pBlackboard);
 
-        public override TickResult Tick(WorldContext pWorldState, Blackboard pBlackboard)
+        public override TickResult Tick(WorldContext pWorldContext, Blackboard pBlackboard)
         {
-            return Do(pWorldState, pBlackboard);
+            return Do(pWorldContext, pBlackboard);
         }
     }
 
