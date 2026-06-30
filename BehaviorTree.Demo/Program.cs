@@ -19,5 +19,5 @@ BT lTest = new BT.Builder()
                     .Action(new DebugActionNode(BehaviorTree.Core.NodeStatus.SUCCESS, "Test"), new Repeat(2))
             .Build();
 
-Console.WriteLine(lTest.Tick(new WorldContext(), new Blackboard()).status);
+Console.WriteLine(lTest.Tick(new Blackboard(), new Blackboard()).status);
 

@@ -9,11 +9,11 @@ namespace BehaviorTree.Core
         public readonly NodeStatus status;
         public readonly Blackboard blackboard;
 
-        public TickResult(NodeStatus pResult, IAIDecision? pAIDecision, Blackboard pBlackboard)
+        public TickResult(NodeStatus pResult, IAIDecision? pAIDecision, Blackboard pMemory)
         {
             decision = pAIDecision;
             status = pResult;
-            blackboard = pBlackboard;
+            blackboard = pMemory;
         }
 
         public override string ToString()

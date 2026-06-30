@@ -12,6 +12,6 @@ namespace BehaviorTree.Core.Node.Abstract
             name = pName;
         }
 
-        public abstract TickResult Tick(WorldContext pWorldContext, Blackboard pBlackboard);
+        public abstract TickResult Tick(Blackboard pWorldContext, Blackboard pMemory);
     }
 }

@@ -9,13 +9,13 @@ public class Repeat : ADecorator
         _count = pCount;
     }
 
-    protected override TickResult Decorate(ANode pNode, WorldContext pWorldContext, Blackboard pBlackboard)
+    protected override TickResult Decorate(ANode pNode, Blackboard pWorldContext, Blackboard pMemory)
     {
         TickResult lChildTickResult = default;
 
         for(int i = 0; i < _count; i++)
         {
-            lChildTickResult = child!.Tick(pWorldContext, pBlackboard);
+            lChildTickResult = child!.Tick(pWorldContext, pMemory);
         }   
 
         return lChildTickResult;

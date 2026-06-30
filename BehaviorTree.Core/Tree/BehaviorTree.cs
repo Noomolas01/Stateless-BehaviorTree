@@ -11,9 +11,9 @@ namespace BehaviorTree.Core.Tree
         private readonly Selector _root = new Selector();
         private BehaviorTree() { }
 
-        public override TickResult Tick(WorldContext pWorldContext, Blackboard pBlackboard)
+        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory)
         {
-            return _root.Tick(pWorldContext, pBlackboard);
+            return _root.Tick(pWorldContext, pMemory);
         }
 
         public class Builder

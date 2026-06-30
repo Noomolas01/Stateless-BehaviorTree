@@ -8,13 +8,13 @@ namespace BehaviorTree.Core.Node.Abstract
     {
         public AConditionNode(string pName = "") : base(pName) { }
 
-        protected abstract bool Evaluate(WorldContext pWorldContext, Blackboard pBlackboard);
+        protected abstract bool Evaluate(Blackboard pWorldContext, Blackboard pMemory);
 
-        public override TickResult Tick(WorldContext pWorldContext, Blackboard pBlackboard)
+        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory)
         {
-            bool lConditionMet = Evaluate(pWorldContext, pBlackboard);
+            bool lConditionMet = Evaluate(pWorldContext, pMemory);
 
-            return lConditionMet ? new TickResult(NodeStatus.SUCCESS, null, pBlackboard) : new TickResult(NodeStatus.FAILURE, null, pBlackboard);
+            return lConditionMet ? new TickResult(NodeStatus.SUCCESS, null, pMemory) : new TickResult(NodeStatus.FAILURE, null, pMemory);
         }
     }
 }

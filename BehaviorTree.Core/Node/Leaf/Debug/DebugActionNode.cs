@@ -16,10 +16,10 @@ namespace BehaviorTree.Core.Node.Leaf.Debug
             name = pName;
         }
 
-        protected override TickResult Do(WorldContext pWorldContext, Blackboard pBlackboard)
+        protected override TickResult Do(Blackboard pWorldContext, Blackboard pMemory)
         {
             Console.WriteLine($"(ACTION){name}: {_debugResult}");
-            return new TickResult(_debugResult, null, pBlackboard);
+            return new TickResult(_debugResult, null, pMemory);
         }
     }
 }

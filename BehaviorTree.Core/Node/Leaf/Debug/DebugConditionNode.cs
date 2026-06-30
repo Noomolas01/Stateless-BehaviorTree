@@ -16,7 +16,7 @@ namespace BehaviorTree.Core.Node.Leaf.Debug
             name = pName;
         }
 
-        protected override bool Evaluate(WorldContext pWorldContext, Blackboard pBlackboard)
+        protected override bool Evaluate(Blackboard pWorldContext, Blackboard pMemory)
         {
             Console.WriteLine($"(COND){name}: {_FakeResult}");
             return _FakeResult;

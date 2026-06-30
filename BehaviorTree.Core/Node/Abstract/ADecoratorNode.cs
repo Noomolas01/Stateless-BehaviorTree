@@ -11,10 +11,10 @@ public abstract class ADecorator : ANode
       child = pChild;
    }
    
-   protected abstract TickResult Decorate(ANode pNode, WorldContext pWorldContext, Blackboard pBlackboard);
+   protected abstract TickResult Decorate(ANode pNode, Blackboard pWorldContext, Blackboard pMemory);
 
-   public override TickResult Tick(WorldContext pWorldContext, Blackboard pBlackboard)
+   public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory)
    {
-      return Decorate(child!, pWorldContext, pBlackboard);
+      return Decorate(child!, pWorldContext, pMemory);
    }
 }

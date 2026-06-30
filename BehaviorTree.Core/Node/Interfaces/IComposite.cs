@@ -9,7 +9,7 @@ namespace BehaviorTree.Core.Node.Interfaces
     public interface IComposite
     {
         List<ANode> Children { get; }
-        public TickResult ProcessChildren(WorldContext pWorldContext, Blackboard pBlackboard);
+        public TickResult ProcessChildren(Blackboard pWorldContext, Blackboard pMemory);
         public void Add(ANode pNode);
     }
 
