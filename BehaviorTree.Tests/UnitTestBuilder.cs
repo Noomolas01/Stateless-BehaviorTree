@@ -1,6 +1,6 @@
 using BehaviorTree.Core;
 using BehaviorTree.Core.Node.Leaf.Debug;
-using BehaviorTree.Core.Tree;
+using BehaviorTree.Core.Tree.DataManagement;
 using BT = BehaviorTree.Core.Tree.BehaviorTree;
 namespace BehaviorTree.Tests;
 

@@ -1,10 +1,9 @@
 using BehaviorTree.Core;
 using BehaviorTree.Core.Node.Composite;
-using BehaviorTree.Core.Node.Leaf;
 using BehaviorTree.Core.Node.Leaf.Debug;
-using BehaviorTree.Core.Tree;
-namespace BehaviorTree.Tests;
+using BehaviorTree.Core.Tree.DataManagement;
 
+namespace BehaviorTree.Tests;
 public class Tests
 {
     private Blackboard bb;
@@ -87,5 +86,16 @@ public class Tests
         lSequence.Add(new DebugActionNode(NodeStatus.RUNNING));
 
         Assert.That(lSequence.Tick(ws, bb).status, Is.EqualTo(NodeStatus.RUNNING));
+    }
+
+    [Test]
+    public void Add_Typed_Key_In_Blackboard_Value_Should_Be_True()
+    {
+        Blackboard lbb = new();
+        BBKey<bool> lTestKey = new("IsAliyaHungrey");
+        lbb.Set(lTestKey, true);
+        lbb.Get(lTestKey, out bool lValue);
+
+        Assert.That(lValue, Is.EqualTo(true));
     }
 }

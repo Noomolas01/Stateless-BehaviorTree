@@ -58,6 +58,15 @@ namespace BehaviorTree.Core.Tree
                 return this;
             }
 
+            public BehaviorTree.Builder Action(AActionNode pActionNode, ADecorator pDecorator)
+            {
+                IComposite lParent = GetParent();
+                pDecorator.Init(pActionNode);
+                lParent.Add(pDecorator);
+
+                return this;
+            }
+
             public BehaviorTree.Builder Condition(AConditionNode pConditionNode)
             {
                 IComposite lParent = GetParent();
@@ -65,6 +74,25 @@ namespace BehaviorTree.Core.Tree
 
                 return this;
             }
+
+            public BehaviorTree.Builder Condition(AConditionNode pActionNode, ADecorator pDecorator)
+            {
+                IComposite lParent = GetParent();
+                pDecorator.Init(pActionNode);
+                lParent.Add(pDecorator);
+
+                return this;
+            }
+
+            public BehaviorTree.Builder Append(BehaviorTree pBehaviorTree)
+            {
+                IComposite lParent = GetParent();
+                lParent.Add(pBehaviorTree);
+
+                return this;
+            }
+
+
 
             private IComposite GetParent()
             {
