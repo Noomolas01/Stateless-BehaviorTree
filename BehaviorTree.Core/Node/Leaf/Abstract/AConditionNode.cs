@@ -1,9 +1,9 @@
-using BehaviorTree.Core.Tree;
-using BehaviorTree.Core.Tree.DataManagement;
+using BehaviorTree.Core.Node.Abstract;
+using BehaviorTree.Core.Tree.Blackboard;
+using BehaviorTree.Core.Tree.Results;
 
-namespace BehaviorTree.Core.Node.Abstract
+namespace BehaviorTree.Core.Node.Leaf.Abstract
 {
-
     public abstract class AConditionNode : ANode
     {
         public AConditionNode(string pName = "") : base(pName) { }

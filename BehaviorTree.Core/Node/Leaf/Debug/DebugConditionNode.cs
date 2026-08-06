@@ -1,7 +1,5 @@
-
-using BehaviorTree.Core.Node.Abstract;
-using BehaviorTree.Core.Tree;
-using BehaviorTree.Core.Tree.DataManagement;
+using BehaviorTree.Core.Node.Leaf.Abstract;
+using BehaviorTree.Core.Tree.Blackboard;
 using System;
 
 namespace BehaviorTree.Core.Node.Leaf.Debug
@@ -21,5 +19,6 @@ namespace BehaviorTree.Core.Node.Leaf.Debug
             Console.WriteLine($"(COND){name}: {_FakeResult}");
             return _FakeResult;
         }
+
     }
 }

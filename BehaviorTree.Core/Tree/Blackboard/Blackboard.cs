@@ -1,14 +1,15 @@
 using System.Collections.Generic;
 using System;
-namespace BehaviorTree.Core.Tree.DataManagement
+
+namespace BehaviorTree.Core.Tree.Blackboard
 {
     public class Blackboard
     {
-        private readonly Dictionary<string, object> _memory = new Dictionary<string, object>();
+        private readonly Dictionary<string, object> _kvp = new Dictionary<string, object>();
 
         public bool Get<T>(BBKey<T> pKey, out T pValue)
         {
-            if (_memory.TryGetValue(pKey.name, out object value))
+            if (_kvp.TryGetValue(pKey.name, out object value))
             {
                 if (value is T castValue)
                 {
@@ -24,17 +25,17 @@ namespace BehaviorTree.Core.Tree.DataManagement
 
         public void Set<T>(BBKey<T> pKey, T pValue) where T :notnull
         {
-            if (!_memory.ContainsKey(pKey.name))
+            if (!_kvp.ContainsKey(pKey.name))
             {
                 Console.WriteLine($"Key: {pKey.name} added.");
             }
 
-            _memory[pKey.name] = pValue!;
+            _kvp[pKey.name] = pValue!;
         }
 
         public void Remove<T>(BBKey<T> pKey)
         {
-            if (!_memory.Remove(pKey.name))
+            if (!_kvp.Remove(pKey.name))
             {
                 Console.WriteLine($"Key: {pKey.name} doesn't exist.");
             }

@@ -1,5 +1,6 @@
 using BehaviorTree.Core.Tree;
-using BehaviorTree.Core.Tree.DataManagement;
+using BehaviorTree.Core.Tree.Blackboard;
+using BehaviorTree.Core.Tree.Results;
 
 namespace BehaviorTree.Core.Node.Abstract
 {
@@ -13,5 +14,6 @@ namespace BehaviorTree.Core.Node.Abstract
         }
 
         public abstract TickResult Tick(Blackboard pWorldContext, Blackboard pMemory);
+
     }
 }

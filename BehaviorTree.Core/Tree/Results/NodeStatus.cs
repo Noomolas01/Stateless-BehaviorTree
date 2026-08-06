@@ -6,6 +6,5 @@ namespace BehaviorTree.Core
         SUCCESS,
         RUNNING,
         FAILURE
-
     }
 }

@@ -1,8 +1,12 @@
 using BehaviorTree.Core.Node.Abstract;
 using BehaviorTree.Core.Node.Composite;
-using BehaviorTree.Core.Node.Interfaces;
-using BehaviorTree.Core.Tree.DataManagement;
+using BehaviorTree.Core.Node.Composite.Interfaces;
+using BehaviorTree.Core.Node.Decorator.Abstract;
+using BehaviorTree.Core.Node.Leaf.Abstract;
+using BehaviorTree.Core.Tree.Results;
+using System;
 using System.Collections.Generic;
+using BB = BehaviorTree.Core.Tree.Blackboard.Blackboard;
 
 namespace BehaviorTree.Core.Tree
 {
@@ -11,23 +15,23 @@ namespace BehaviorTree.Core.Tree
         private readonly Selector _root = new Selector();
         private BehaviorTree() { }
 
-        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory)
+        public override TickResult Tick(BB pWorldContext, BB pMemory)
         {
             return _root.Tick(pWorldContext, pMemory);
         }
 
+  
         public class Builder
         {
-            private readonly BehaviorTree _brain = new BehaviorTree();
-            private readonly Stack<IComposite> _nodes = new Stack<IComposite>();
-
+            private readonly BehaviorTree _tree = new BehaviorTree();
+            private readonly Stack<IComposite> _composites = new Stack<IComposite>();
 
             public BehaviorTree.Builder Selector()
             {
                 IComposite lParent = GetParent();
                 Selector lNewSelector = new Selector();
                 lParent.Add(lNewSelector);
-                _nodes.Push(lNewSelector);
+                _composites.Push(lNewSelector);
 
                 return this;
             }
@@ -37,15 +41,15 @@ namespace BehaviorTree.Core.Tree
                 IComposite lParent = GetParent();
                 Sequence lNewSequence = new Sequence();
                 lParent.Add(lNewSequence);
-                _nodes.Push(lNewSequence);
+                _composites.Push(lNewSequence);
 
                 return this;
             }
 
             public BehaviorTree.Builder End()
             {
-                if (_nodes.Count > 0)
-                    _nodes.Pop();
+                if (_composites.Count > 0)
+                    _composites.Pop();
 
                 return this;
             }
@@ -58,7 +62,7 @@ namespace BehaviorTree.Core.Tree
                 return this;
             }
 
-            public BehaviorTree.Builder Action(AActionNode pActionNode, ADecorator pDecorator)
+            internal BehaviorTree.Builder Action(AActionNode pActionNode, ADecorator pDecorator)
             {
                 IComposite lParent = GetParent();
                 pDecorator.Init(pActionNode);
@@ -75,7 +79,7 @@ namespace BehaviorTree.Core.Tree
                 return this;
             }
 
-            public BehaviorTree.Builder Condition(AConditionNode pActionNode, ADecorator pDecorator)
+            internal BehaviorTree.Builder Condition(AConditionNode pActionNode, ADecorator pDecorator)
             {
                 IComposite lParent = GetParent();
                 pDecorator.Init(pActionNode);
@@ -92,21 +96,19 @@ namespace BehaviorTree.Core.Tree
                 return this;
             }
 
-
-
             private IComposite GetParent()
             {
-                if (_nodes.Count == 0)
-                    return _brain._root;
+                if (_composites.Count == 0)
+                    return _tree._root;
 
-                IComposite lParent = _nodes.Peek();
+                IComposite lParent = _composites.Peek();
 
-                return lParent ??= _brain._root;
+                return lParent ??= _tree._root;
             }
 
             public BehaviorTree Build()
             {
-                return _brain;
+                return _tree;
             }
 
         }

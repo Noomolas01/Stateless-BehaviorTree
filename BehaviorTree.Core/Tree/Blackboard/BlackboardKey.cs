@@ -1,4 +1,4 @@
-namespace BehaviorTree.Core.Tree.DataManagement
+namespace BehaviorTree.Core.Tree.Blackboard
 {
     public class BBKey<T>
     {

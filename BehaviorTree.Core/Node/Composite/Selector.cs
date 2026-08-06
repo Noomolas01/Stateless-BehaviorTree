@@ -1,22 +1,25 @@
 using BehaviorTree.Core.Node.Abstract;
-using BehaviorTree.Core.Node.Interfaces;
-using BehaviorTree.Core.Tree;
 using System.Collections.Generic;
 using System;
-using BehaviorTree.Core.Tree.DataManagement;
+using BehaviorTree.Core.Tree.Blackboard;
+using BehaviorTree.Core.Tree.Results;
+using BehaviorTree.Core.Node.Composite.Interfaces;
 
 namespace BehaviorTree.Core.Node.Composite
 {
     public class Selector : ANode, IComposite
     {
         public List<ANode> Children { get; } = new List<ANode>();
+        private ANode? _CurrentChild; 
         private int _LastChildrenIndex = 0;
 
         public TickResult ProcessChildren(Blackboard pWorldContext, Blackboard pMemory)
         {
             for (int i = _LastChildrenIndex; i < Children.Count; i++)
             {
-                TickResult lCurrentChildResult = Children[i].Tick(pWorldContext, pMemory);
+                _CurrentChild = Children[i];
+
+                TickResult lCurrentChildResult = _CurrentChild.Tick(pWorldContext, pMemory);
 
                 if (lCurrentChildResult.status == NodeStatus.SUCCESS)
                 {

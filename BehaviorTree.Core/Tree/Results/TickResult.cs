@@ -1,15 +1,13 @@
-using BehaviorTree.Core.Tree;
-using BehaviorTree.Core.Tree.DataManagement;
-
-namespace BehaviorTree.Core
+using BB = BehaviorTree.Core.Tree.Blackboard.Blackboard;
+namespace BehaviorTree.Core.Tree.Results
 {
     public readonly struct TickResult
     {
         public readonly IAIDecision? decision;
         public readonly NodeStatus status;
-        public readonly Blackboard blackboard;
+        public readonly BB blackboard;
 
-        public TickResult(NodeStatus pResult, IAIDecision? pAIDecision, Blackboard pMemory)
+        public TickResult(NodeStatus pResult, IAIDecision? pAIDecision, BB pMemory)
         {
             decision = pAIDecision;
             status = pResult;
