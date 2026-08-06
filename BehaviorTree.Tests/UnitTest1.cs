@@ -1,7 +1,7 @@
 using BehaviorTree.Core;
 using BehaviorTree.Core.Node.Composite;
 using BehaviorTree.Core.Node.Leaf.Debug;
-using BehaviorTree.Core.Tree.DataManagement;
+using BehaviorTree.Core.Tree.Blackboard;
 
 namespace BehaviorTree.Tests;
 public class Tests
@@ -92,7 +92,7 @@ public class Tests
     public void Add_Typed_Key_In_Blackboard_Value_Should_Be_True()
     {
         Blackboard lbb = new();
-        BBKey<bool> lTestKey = new("IsAliyaHungrey");
+        BBKey<bool> lTestKey = new("IsAliyaHungry");
         lbb.Set(lTestKey, true);
         lbb.Get(lTestKey, out bool lValue);
 
