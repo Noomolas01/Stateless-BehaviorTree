@@ -16,34 +16,40 @@ namespace BehaviorTree.Core.Tree
 {
     public sealed class BehaviorTree : ANode
     {
-        private readonly Selector _root = new Selector();
-        private BehaviorTree() { }
-
-        public override TickResult Tick(BB pWorldContext, BB pMemory)
+        public readonly Selector root = new Selector("Root");
+        private BehaviorTree() 
         {
-            return _root.Tick(pWorldContext, pMemory);
+
+        }
+        public override TickResult Tick(BB pWorldContext, BB pMemory, ITickObserver? pTickOberver = null)
+        {
+            return root.Tick(pWorldContext, pMemory, pTickOberver);
         }
 
-  
+        public void GetChildrenName()
+        {
+          root.GetChildrenName();
+        }
+
         public class Builder
         {
             private readonly BehaviorTree _tree = new BehaviorTree();
             private readonly Stack<IComposite> _composites = new Stack<IComposite>();
 
-            public BehaviorTree.Builder Selector()
+            public BehaviorTree.Builder Selector(string pName = "")
             {
                 IComposite lParent = GetParent();
-                Selector lNewSelector = new Selector();
+                Selector lNewSelector = new Selector(pName);
                 lParent.Add(lNewSelector);
                 _composites.Push(lNewSelector);
 
                 return this;
             }
 
-            public BehaviorTree.Builder Sequence()
+            public BehaviorTree.Builder Sequence(string pName = "")
             {
                 IComposite lParent = GetParent();
-                Sequence lNewSequence = new Sequence();
+                Sequence lNewSequence = new Sequence(pName);
                 lParent.Add(lNewSequence);
                 _composites.Push(lNewSequence);
 
@@ -95,7 +101,17 @@ namespace BehaviorTree.Core.Tree
             public BehaviorTree.Builder Append(BehaviorTree pBehaviorTree)
             {
                 IComposite lParent = GetParent();
-                lParent.Add(pBehaviorTree);
+
+                if (pBehaviorTree == _tree)
+                {
+                    Console.WriteLine("Error: Tree cannot add itself as a child");
+                    return this;
+                }
+
+                foreach (var lChild in pBehaviorTree.root.Children)
+                {
+                    lParent.Add(lChild);
+                }
 
                 return this;
             }
@@ -103,11 +119,11 @@ namespace BehaviorTree.Core.Tree
             private IComposite GetParent()
             {
                 if (_composites.Count == 0)
-                    return _tree._root;
+                    return _tree.root;
 
                 IComposite lParent = _composites.Peek();
 
-                return lParent ??= _tree._root;
+                return lParent ??= _tree.root;
             }
 
             public BehaviorTree Build()

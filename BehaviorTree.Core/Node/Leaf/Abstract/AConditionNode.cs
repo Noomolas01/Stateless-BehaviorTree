@@ -15,7 +15,7 @@ namespace BehaviorTree.Core.Node.Leaf.Abstract
 
         protected abstract bool Evaluate(Blackboard pWorldContext, Blackboard pMemory);
 
-        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory)
+        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickObserver? pTickObserver = null)
         {
             bool lConditionMet = Evaluate(pWorldContext, pMemory);
 

@@ -6,7 +6,7 @@ namespace BehaviorTree.Core
 {
     public enum NodeStatus
     {
-        //INACTIVE ?
+        INACTIVE,
         SUCCESS,
         RUNNING,
         FAILURE

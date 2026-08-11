@@ -20,7 +20,7 @@ namespace BehaviorTree.Core.Node.Decorator.Abstract
 
         protected abstract TickResult Decorate(ANode pNode, Blackboard pWorldContext, Blackboard pMemory);
 
-        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory)
+        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickObserver? pTickObserver = null)
         {
             return Decorate(child!, pWorldContext, pMemory);
         }

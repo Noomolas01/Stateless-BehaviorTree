@@ -8,6 +8,8 @@ using System;
 using BehaviorTree.Core.Tree.Blackboard;
 using BehaviorTree.Core.Tree.Results;
 using BehaviorTree.Core.Node.Composite.Interfaces;
+using System.Collections.ObjectModel;
+using BehaviorTree.Core.Tree;
 
 namespace BehaviorTree.Core.Node.Composite
 {
@@ -17,13 +19,18 @@ namespace BehaviorTree.Core.Node.Composite
         private ANode? _CurrentChild; 
         private int _LastChildrenIndex = 0;
 
-        public TickResult ProcessChildren(Blackboard pWorldContext, Blackboard pMemory)
+        public Selector(string pName = "") : base(pName)
+        {
+        }
+
+        public TickResult ProcessChildren(Blackboard pWorldContext, Blackboard pMemory, ITickObserver? pTickObserver = null)
         {
             for (int i = _LastChildrenIndex; i < Children.Count; i++)
             {
                 _CurrentChild = Children[i];
 
-                TickResult lCurrentChildResult = _CurrentChild.Tick(pWorldContext, pMemory);
+                TickResult lCurrentChildResult = _CurrentChild.Tick(pWorldContext, pMemory, pTickObserver);
+                pTickObserver?.OnTick(_CurrentChild, lCurrentChildResult);
 
                 if (lCurrentChildResult.status == NodeStatus.SUCCESS)
                 {
@@ -37,9 +44,22 @@ namespace BehaviorTree.Core.Node.Composite
                     return lCurrentChildResult;
                 }
             }
-
+         
             _LastChildrenIndex = 0;
             return new TickResult(NodeStatus.FAILURE, null, pMemory);
+        }
+
+        public void GetChildrenName()
+        {
+            foreach (var child in Children)
+            {
+                Console.WriteLine(child.name);
+
+                if (child is Selector || child is Sequence)
+                {
+                    ((Sequence)child).GetChildrenName();
+                }
+            }
         }
 
         public void Add(ANode pNode)
@@ -59,9 +79,9 @@ namespace BehaviorTree.Core.Node.Composite
             Children.Add(pNode);
         }
 
-        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory)
+        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickObserver? pTickOberver = null)
         {
-            return ProcessChildren(pWorldContext, pMemory);
+            return ProcessChildren(pWorldContext, pMemory, pTickOberver);
         }
     }
 }

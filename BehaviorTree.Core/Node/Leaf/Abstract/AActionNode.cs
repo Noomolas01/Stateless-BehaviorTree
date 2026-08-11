@@ -15,7 +15,7 @@ namespace BehaviorTree.Core.Node.Leaf.Abstract
         public bool HasStarted { get; protected set; }
         protected abstract TickResult Do(Blackboard pWorldContext, Blackboard pMemory);
 
-        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory)
+        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickObserver? pTickObserver = null)
         {
             return Do(pWorldContext, pMemory);
         }

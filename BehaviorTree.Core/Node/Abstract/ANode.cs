@@ -18,7 +18,7 @@ namespace BehaviorTree.Core.Node.Abstract
             name = pName;
         }
 
-        public abstract TickResult Tick(Blackboard pWorldContext, Blackboard pMemory);
+        public abstract TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickObserver? pTickOberver = null);
 
     }
 }
