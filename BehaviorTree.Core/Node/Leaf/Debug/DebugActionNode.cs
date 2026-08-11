@@ -6,6 +6,7 @@ using BehaviorTree.Core.Node.Leaf.Abstract;
 using BehaviorTree.Core.Tree.Blackboard;
 using BehaviorTree.Core.Tree.Results;
 using System;
+using System.Text;
 
 namespace BehaviorTree.Core.Node.Leaf.Debug
 {
@@ -21,7 +22,9 @@ namespace BehaviorTree.Core.Node.Leaf.Debug
 
         protected override TickResult Do(Blackboard pWorldContext, Blackboard pMemory)
         {
-            Console.WriteLine($"(ACTION){name}: {_debugResult}");
+            pMemory.Get("DebugOutput", out StringBuilder sb);
+            string output = $"(ACTION){name}: {_debugResult}\n";
+            sb.AppendLine(output);
             return new TickResult(_debugResult, null, pMemory);
         }
     }
