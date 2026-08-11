@@ -1,3 +1,7 @@
+// ========================================================
+// Author: Muhammad H. Fayette Mikano
+// ========================================================
+
 namespace BehaviorTree.Core.Tree.Blackboard
 {
     public class BBKey<T>

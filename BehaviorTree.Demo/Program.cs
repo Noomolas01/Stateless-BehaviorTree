@@ -1,15 +1,20 @@
-﻿using BehaviorTree.Core.Node.Leaf;
+// ========================================================
+// Author: Muhammad H. Fayette Mikano
+// ========================================================
+
 using BehaviorTree.Core.Node.Leaf.Debug;
-using BehaviorTree.Core.Tree.DataManagement;
+using BehaviorTree.Core.Tree.Blackboard;
 using BT = BehaviorTree.Core.Tree.BehaviorTree;
 
-
+using Spectre.Console;
+using System.Text;
+using BehaviorTree.Debug;
 
 
 BT lMoveTree = new BT.Builder()
-                .Sequence()
+                .Sequence("Move Sequence")
                     .Condition(new DebugConditionNode(true, "CanMove?"))
-                    .Action(new DebugActionNode(BehaviorTree.Core.NodeStatus.SUCCESS, "Move"))
+                    .Action(new DebugActionNode(BehaviorTree.Core.NodeStatus.SUCCESS, "Move Action"))
                 .End()
                 .Build();
 

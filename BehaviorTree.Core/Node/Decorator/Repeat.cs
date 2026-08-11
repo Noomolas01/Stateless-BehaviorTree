@@ -1,3 +1,7 @@
+// ========================================================
+// Author: Muhammad H. Fayette Mikano
+// ========================================================
+
 using BehaviorTree.Core.Node.Abstract;
 using BehaviorTree.Core.Node.Decorator.Abstract;
 using BehaviorTree.Core.Tree.Blackboard;

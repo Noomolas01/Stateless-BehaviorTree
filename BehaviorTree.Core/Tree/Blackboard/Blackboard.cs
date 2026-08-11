@@ -1,5 +1,10 @@
+// ========================================================
+// Author: Muhammad H. Fayette Mikano
+// ========================================================
+
 using System.Collections.Generic;
 using System;
+using System.Collections;
 
 namespace BehaviorTree.Core.Tree.Blackboard
 {
