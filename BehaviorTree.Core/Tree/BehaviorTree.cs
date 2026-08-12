@@ -23,7 +23,9 @@ namespace BehaviorTree.Core.Tree
         }
         public override TickResult Tick(BB pWorldContext, BB pMemory, ITickObserver? pTickOberver = null)
         {
-            return root.Tick(pWorldContext, pMemory, pTickOberver);
+            TickResult lResult = root.Tick(pWorldContext, pMemory, pTickOberver);
+            pTickOberver?.OnTick(root, lResult);
+            return lResult;
         }
 
         public void GetChildrenName()
