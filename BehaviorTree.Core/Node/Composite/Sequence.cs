@@ -29,7 +29,7 @@ namespace BehaviorTree.Core.Node.Composite
             {
                 _CurrentChild = Children[i];
 
-                TickResult lCurrentChildResult = _CurrentChild.Tick(pWorldContext, pMemory);
+                TickResult lCurrentChildResult = _CurrentChild.Tick(pWorldContext, pMemory, pTickObserver);
                 pTickObserver?.OnTick(_CurrentChild, lCurrentChildResult);
 
                 if (lCurrentChildResult.status == NodeStatus.FAILURE)
