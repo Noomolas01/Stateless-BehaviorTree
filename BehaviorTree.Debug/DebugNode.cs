@@ -43,13 +43,13 @@ namespace BehaviorTree.Debug
     public class DebugTree : ITickObserver
     {
         public readonly Dictionary<ANode, DebugNode> tree = new Dictionary<ANode,DebugNode>();
-        private readonly DebugNode _root;
+        public readonly DebugNode root;
 
         public DebugTree(Core.Tree.BehaviorTree pTree)
         {
-            _root = new DebugNode(pTree.root);
-            tree.Add(pTree.root, _root);
-            Init(_root);
+            root = new DebugNode(pTree.root);
+            tree.Add(pTree.root, root);
+            Init(root);
         }
 
         public void OnTick(ANode pNode, TickResult pResult)
@@ -77,14 +77,12 @@ namespace BehaviorTree.Debug
 
         public void Traverse()
         {
-            Traverse(_root);
+            Traverse(root);
         }
 
         private void Traverse(DebugNode pRoot)
         {
-            Console.WriteLine(pRoot.id);
-            Console.WriteLine("It contains:" + tree.ContainsValue(pRoot));
-
+           
             if (pRoot.children != null)
             {
                 foreach(var n in pRoot.children)
