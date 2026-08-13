@@ -3,25 +3,28 @@
 // ========================================================
 
 using BehaviorTree.Core.Node.Abstract;
-using System;
-using BehaviorTree.Core.Tree.Blackboard;
-using BehaviorTree.Core.Tree.Results;
 using BehaviorTree.Core.Node.Composite.Interfaces;
 using BehaviorTree.Core.Tree;
-using BehaviorTree.Core.Node.Composite.Abstract;
+using BehaviorTree.Core.Tree.Blackboard;
+using BehaviorTree.Core.Tree.Results;
+using System;
+using System.Collections.Generic;
 
 namespace BehaviorTree.Core.Node.Composite
 {
-    public class Selector : AComposite
+    [Obsolete]
+    internal class SequenceDeprecated : ANode, IComposite
     {
-        private ANode? _CurrentChild; 
+        public List<ANode> Children { get; } = new List<ANode>();
+        private ANode? _CurrentChild;
         private int _LastChildrenIndex = 0;
 
-        public Selector(string pName = "") : base(pName)
+
+        public SequenceDeprecated(string pName = "") : base(pName)
         {
         }
 
-        public override TickResult ProcessChildren(Blackboard pWorldContext, Blackboard pMemory, ITickObserver? pTickObserver = null)
+        public TickResult ProcessChildren(Blackboard pWorldContext, Blackboard pMemory, ITickObserver? pTickObserver = null)
         {
             for (int i = _LastChildrenIndex; i < Children.Count; i++)
             {
@@ -30,7 +33,7 @@ namespace BehaviorTree.Core.Node.Composite
                 TickResult lCurrentChildResult = _CurrentChild.Tick(pWorldContext, pMemory, pTickObserver);
                 pTickObserver?.OnTick(_CurrentChild, lCurrentChildResult);
 
-                if (lCurrentChildResult.status == NodeStatus.SUCCESS)
+                if (lCurrentChildResult.status == NodeStatus.FAILURE)
                 {
                     _LastChildrenIndex = 0;
                     return lCurrentChildResult;
@@ -42,9 +45,9 @@ namespace BehaviorTree.Core.Node.Composite
                     return lCurrentChildResult;
                 }
             }
-         
+
             _LastChildrenIndex = 0;
-            return new TickResult(NodeStatus.FAILURE, null, pMemory);
+            return new TickResult(NodeStatus.SUCCESS, null, pMemory);
         }
 
         public void GetChildrenName()
@@ -53,14 +56,14 @@ namespace BehaviorTree.Core.Node.Composite
             {
                 Console.WriteLine(child.name);
 
-                if (child is Selector || child is Sequence)
+                if (child is SelectorDeprecated || child is SequenceDeprecated)
                 {
-                    ((Sequence)child).GetChildrenName();
+                    ((SequenceDeprecated)child).GetChildrenName();
                 }
             }
         }
 
-        public override void Add(ANode pNode)
+        public void Add(ANode pNode)
         {
             if (pNode == null)
             {
@@ -76,10 +79,10 @@ namespace BehaviorTree.Core.Node.Composite
 
             Children.Add(pNode);
         }
-
         public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickObserver? pTickOberver = null)
         {
             return ProcessChildren(pWorldContext, pMemory, pTickOberver);
         }
     }
+
 }

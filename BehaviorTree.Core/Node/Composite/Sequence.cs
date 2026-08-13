@@ -3,18 +3,16 @@
 // ========================================================
 
 using BehaviorTree.Core.Node.Abstract;
-using BehaviorTree.Core.Node.Composite.Interfaces;
+using BehaviorTree.Core.Node.Composite.Abstract;
 using BehaviorTree.Core.Tree;
 using BehaviorTree.Core.Tree.Blackboard;
 using BehaviorTree.Core.Tree.Results;
 using System;
-using System.Collections.Generic;
 
 namespace BehaviorTree.Core.Node.Composite
 {
-    public class Sequence : ANode, IComposite
+    public class Sequence : AComposite
     {
-        public List<ANode> Children { get; } = new List<ANode>();
         private ANode? _CurrentChild;
         private int _LastChildrenIndex = 0;
 
@@ -23,7 +21,7 @@ namespace BehaviorTree.Core.Node.Composite
         {
         }
 
-        public TickResult ProcessChildren(Blackboard pWorldContext, Blackboard pMemory, ITickObserver? pTickObserver = null)
+        public override TickResult ProcessChildren(Blackboard pWorldContext, Blackboard pMemory, ITickObserver? pTickObserver = null)
         {
             for (int i = _LastChildrenIndex; i < Children.Count; i++)
             {
@@ -62,7 +60,7 @@ namespace BehaviorTree.Core.Node.Composite
             }
         }
 
-        public void Add(ANode pNode)
+        public override void Add(ANode pNode)
         {
             if (pNode == null)
             {

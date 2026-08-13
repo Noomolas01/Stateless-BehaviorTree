@@ -1,5 +1,6 @@
 ﻿using BehaviorTree.Core;
 using BehaviorTree.Core.Node.Abstract;
+using BehaviorTree.Core.Node.Composite.Abstract;
 using BehaviorTree.Core.Node.Composite.Interfaces;
 using BehaviorTree.Core.Tree;
 using BehaviorTree.Core.Tree.Results;
@@ -20,12 +21,12 @@ namespace BehaviorTree.Debug
         {
             id = pRuntimeNode.name;
             runtimeNode = pRuntimeNode;
-            if (pRuntimeNode is IComposite lComposite)
+            if (pRuntimeNode is AComposite lComposite)
                 InitChildren(lComposite);
             
         }
 
-        public void InitChildren(IComposite pComposite)
+        public void InitChildren(AComposite pComposite)
         {
             if (pComposite == null || pComposite.Children.Count == 0) 
                 return;
@@ -47,8 +48,8 @@ namespace BehaviorTree.Debug
 
         public DebugTree(Core.Tree.BehaviorTree pTree)
         {
-            root = new DebugNode(pTree.root);
-            tree.Add(pTree.root, root);
+            root = new DebugNode(pTree.Root!);
+            tree.Add(pTree.Root!, root);
             Init(root);
         }
 

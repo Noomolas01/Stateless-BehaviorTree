@@ -4,6 +4,7 @@
 
 using BehaviorTree.Core.Node.Abstract;
 using BehaviorTree.Core.Node.Composite;
+using BehaviorTree.Core.Node.Composite.Abstract;
 using BehaviorTree.Core.Node.Composite.Interfaces;
 using BehaviorTree.Core.Node.Decorator.Abstract;
 using BehaviorTree.Core.Node.Leaf.Abstract;
@@ -16,32 +17,34 @@ namespace BehaviorTree.Core.Tree
 {
     public sealed class BehaviorTree : ANode
     {
-        public readonly Selector root = new Selector("Root");
+        public AComposite? Root { get; set; }
         private BehaviorTree() 
         {
 
         }
         public override TickResult Tick(BB pWorldContext, BB pMemory, ITickObserver? pTickOberver = null)
         {
-            TickResult lResult = root.Tick(pWorldContext, pMemory, pTickOberver);
-            pTickOberver?.OnTick(root, lResult);
+            TickResult lResult = Root!.Tick(pWorldContext, pMemory, pTickOberver);
+            pTickOberver?.OnTick(Root!, lResult);
             return lResult;
-        }
-
-        public void GetChildrenName()
-        {
-          root.GetChildrenName();
         }
 
         public class Builder
         {
             private readonly BehaviorTree _tree = new BehaviorTree();
-            private readonly Stack<IComposite> _composites = new Stack<IComposite>();
+            private readonly Stack<AComposite> _composites = new Stack<AComposite>();
 
             public BehaviorTree.Builder Selector(string pName = "")
             {
-                IComposite lParent = GetParent();
                 Selector lNewSelector = new Selector(pName);
+
+                if (_tree.Root == null)
+                {
+                    _tree.Root = lNewSelector;
+                    return this;
+                }
+
+                AComposite lParent = GetParent();
                 lParent.Add(lNewSelector);
                 _composites.Push(lNewSelector);
 
@@ -50,8 +53,14 @@ namespace BehaviorTree.Core.Tree
 
             public BehaviorTree.Builder Sequence(string pName = "")
             {
-                IComposite lParent = GetParent();
                 Sequence lNewSequence = new Sequence(pName);
+                
+                if (_tree.Root == null)
+                {
+                    _tree.Root = lNewSequence;
+                    return this;
+                }
+                AComposite lParent = GetParent();
                 lParent.Add(lNewSequence);
                 _composites.Push(lNewSequence);
 
@@ -68,7 +77,7 @@ namespace BehaviorTree.Core.Tree
 
             public BehaviorTree.Builder Action(AActionNode pActionNode)
             {
-                IComposite lParent = GetParent();
+                AComposite lParent = GetParent();
                 lParent.Add(pActionNode);
 
                 return this;
@@ -76,7 +85,7 @@ namespace BehaviorTree.Core.Tree
 
             internal BehaviorTree.Builder Action(AActionNode pActionNode, ADecorator pDecorator)
             {
-                IComposite lParent = GetParent();
+                AComposite lParent = GetParent();
                 pDecorator.Init(pActionNode);
                 lParent.Add(pDecorator);
 
@@ -85,7 +94,7 @@ namespace BehaviorTree.Core.Tree
 
             public BehaviorTree.Builder Condition(AConditionNode pConditionNode)
             {
-                IComposite lParent = GetParent();
+                AComposite lParent = GetParent();
                 lParent.Add(pConditionNode);
 
                 return this;
@@ -93,7 +102,7 @@ namespace BehaviorTree.Core.Tree
 
             internal BehaviorTree.Builder Condition(AConditionNode pActionNode, ADecorator pDecorator)
             {
-                IComposite lParent = GetParent();
+                AComposite lParent = GetParent();
                 pDecorator.Init(pActionNode);
                 lParent.Add(pDecorator);
 
@@ -102,7 +111,7 @@ namespace BehaviorTree.Core.Tree
 
             public BehaviorTree.Builder Append(BehaviorTree pBehaviorTree)
             {
-                IComposite lParent = GetParent();
+                AComposite lParent = GetParent();
 
                 if (pBehaviorTree == _tree)
                 {
@@ -110,7 +119,7 @@ namespace BehaviorTree.Core.Tree
                     return this;
                 }
 
-                foreach (var lChild in pBehaviorTree.root.Children)
+                foreach (var lChild in pBehaviorTree.Root!.Children)
                 {
                     lParent.Add(lChild);
                 }
@@ -118,14 +127,17 @@ namespace BehaviorTree.Core.Tree
                 return this;
             }
 
-            private IComposite GetParent()
+            private AComposite GetParent()
             {
+                if (_tree.Root == null)
+                    throw new Exception($"There's no root in this builder's tree");
+
                 if (_composites.Count == 0)
-                    return _tree.root;
+                    return _tree.Root!;
 
-                IComposite lParent = _composites.Peek();
+                AComposite lParent = _composites.Peek();
 
-                return lParent ??= _tree.root;
+                return lParent ??= _tree.Root!;
             }
 
             public BehaviorTree Build()
