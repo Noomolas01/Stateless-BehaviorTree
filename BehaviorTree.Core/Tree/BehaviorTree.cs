@@ -119,10 +119,7 @@ namespace BehaviorTree.Core.Tree
                     return this;
                 }
 
-                foreach (var lChild in pBehaviorTree.Root!.Children)
-                {
-                    lParent.Add(lChild);
-                }
+                lParent.Add(pBehaviorTree.Root!);
 
                 return this;
             }
