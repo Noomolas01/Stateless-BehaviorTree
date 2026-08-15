@@ -2,16 +2,14 @@
 using BehaviorTree.Core.Tree.Blackboard;
 using BehaviorTree.Core.Tree.Results;
 using BehaviorTree.Demo.Fake.Decisions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace BehaviorTree.Demo.Fake.Actions
 {
     internal class DoAttack : AActionNode
     {
+        public DoAttack(string pName ="DoAttack") :base(pName) { }
+
         protected override TickResult Do(Blackboard pWorldContext, Blackboard pMemory)
         {
             if (!pMemory.Get("AttackStarted", out bool hasStarted))
