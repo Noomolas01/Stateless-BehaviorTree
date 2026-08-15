@@ -5,7 +5,6 @@
 using BehaviorTree.Core.Node.Abstract;
 using BehaviorTree.Core.Node.Composite;
 using BehaviorTree.Core.Node.Composite.Abstract;
-using BehaviorTree.Core.Node.Composite.Interfaces;
 using BehaviorTree.Core.Node.Decorator.Abstract;
 using BehaviorTree.Core.Node.Leaf.Abstract;
 using BehaviorTree.Core.Tree.Results;
@@ -15,10 +14,11 @@ using BB = BehaviorTree.Core.Tree.Blackboard.Blackboard;
 
 namespace BehaviorTree.Core.Tree
 {
-    public sealed class BehaviorTree : ANode
+    public class BehaviorTree : ANode
     {
         public AComposite? Root { get; set; }
-        private BehaviorTree() 
+        
+        protected BehaviorTree() 
         {
 
         }

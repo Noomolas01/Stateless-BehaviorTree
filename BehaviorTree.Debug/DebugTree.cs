@@ -8,11 +8,13 @@ using System.Text;
 
 namespace BehaviorTree.Debug
 {
-    public class DebugTree : ITickObserver
+    public class DebugTree : Core.Tree.BehaviorTree, ITickObserver
     {
         public readonly Dictionary<ANode, DebugNode> tree = new Dictionary<ANode,DebugNode>();
         public readonly DebugNode root;
         public readonly Blackboard memory;
+
+        public readonly Core.Tree.BehaviorTree runtimeTree;
 
         public DebugTree(Core.Tree.BehaviorTree pTree, Blackboard pBlackboard)
         {
@@ -20,6 +22,13 @@ namespace BehaviorTree.Debug
             tree.Add(pTree.Root!, root);
             memory = pBlackboard;
             Init(root);
+            runtimeTree = pTree;
+
+        }
+
+        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickObserver? pTickOberver = null)
+        {
+            return runtimeTree.Tick(pWorldContext, pMemory, this);
         }
 
         public void OnTick(ANode pNode, TickResult pResult)
