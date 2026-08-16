@@ -4,11 +4,13 @@
 
 using BehaviorTree.Core.Node.Leaf.Debug;
 using BehaviorTree.Core.Tree.Blackboard;
-using BT = BehaviorTree.Core.Tree.BehaviorTree;
-
 using Spectre.Console;
 using System.Text;
 using BehaviorTree.Debug;
+using BehaviorTree.Demo.Fake;
+using BehaviorTree.Demo.Fake.Actions;
+using BT = BehaviorTree.Core.Tree.BehaviorTree;
+using BehaviorTree.Demo.Fake.Conditions;
 
 
 BT lMoveTree = new BT.Builder()
@@ -26,25 +28,21 @@ BT lTest = new BT.Builder()
                  .End()
             .Build();
 
-//BT lSubTree = new BT.Builder()
-//                .Sequence("Sub Tree Sequence")
-//                    .Sequence()
-//                    .End()
-//                .End()
-//                .Build();
 
-Blackboard lMemory = new();
-lMemory.Set("DebugOutput", new StringBuilder());
-DebugTree lDebug = new(lTest, lMemory);
-Thread.Sleep(3000);
+BT lCombatTree = new BT.Builder()
+                .Sequence("Combat Tree")
+                    .Condition(new AttackCondition())
+                    .Action(new DoAttack())   
+                .End()
+            .Build();
+
+
 
 Tree CreateVisualTree(DebugNode pNode)
 {
     var lVisualTree = new Tree("Behavior tree");
     var lRoot = lVisualTree.AddNode("Root");
     Build(lRoot, pNode);
-    //AnsiConsole.Write(lVisualTree);
-
     return lVisualTree;
 }
 
@@ -76,19 +74,27 @@ TreeNode Build(TreeNode pRoot, DebugNode pDebugNode)
     return lSubTree;
 }
 
+Entity lEntity_A = new("A");
+DebugTree lDebug = new (lCombatTree, lEntity_A.Memory);
+lEntity_A.aiComponent.Init(lDebug, 1f / 60.0f, lEntity_A.Memory);
+
 int i = 0;
+float lFakeDeltaTime = 1.0f / 60.0f;
 while (true)
 {
-    lTest.Tick(null!, lMemory, lDebug);
-    // lDebug.Traverse();
+    lEntity_A.Update(lFakeDeltaTime);
+    
     Console.WriteLine(lDebug.GetMemory());
-    lMemory.Get("DebugOutput", out StringBuilder sb);
+
     Panel lPanel = new(CreateVisualTree(lDebug.root));
+
+
     lPanel.BorderStyle(new Style(Color.SpringGreen1));
     lPanel.Header = new($"=== Tick n°{i + 1} ===\n");
     AnsiConsole.Write(lPanel);
+    lDebug.Clean();
     Thread.Sleep(1000);
-    sb.Clear();
+    
     AnsiConsole.Clear();
     i++;
 }
