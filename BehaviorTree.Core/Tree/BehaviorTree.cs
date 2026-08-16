@@ -24,8 +24,9 @@ namespace BehaviorTree.Core.Tree
         }
         public override TickResult Tick(BB pWorldContext, BB pMemory, ITickObserver? pTickOberver = null)
         {
+            pTickOberver?.OnTickStart(Root!);
             TickResult lResult = Root!.Tick(pWorldContext, pMemory, pTickOberver);
-            pTickOberver?.OnTick(Root!, lResult);
+            pTickOberver?.OnTickEnd(Root!, lResult);
             return lResult;
         }
 

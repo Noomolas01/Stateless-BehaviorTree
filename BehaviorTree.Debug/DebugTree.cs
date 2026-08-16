@@ -10,7 +10,7 @@ namespace BehaviorTree.Debug
 {
     public class DebugTree : Core.Tree.BehaviorTree, ITickObserver
     {
-        public readonly Dictionary<ANode, DebugNode> tree = new Dictionary<ANode,DebugNode>();
+        public readonly Dictionary<ANode, DebugNode> tree = new Dictionary<ANode, DebugNode>();
         public readonly DebugNode root;
         public readonly Blackboard memory;
 
@@ -31,15 +31,28 @@ namespace BehaviorTree.Debug
             return runtimeTree.Tick(pWorldContext, pMemory, this);
         }
 
-        public void OnTick(ANode pNode, TickResult pResult)
+        public void OnTickStart(ANode pNode)
+        {
+            tree[pNode].result = new TickResult(Core.NodeStatus.INACTIVE, null, memory);
+        }
+
+        public void OnTickEnd(ANode pNode, TickResult pResult)
         {
             tree[pNode].result = pResult;
             Console.WriteLine($"{pNode.name} has been ticked with the result : {pResult}");
         }
-        
+
+        public void Clean()
+        {
+            foreach(var key in tree.Keys)
+            {
+                tree[key].result = new TickResult(Core.NodeStatus.INACTIVE, null, memory);
+            }
+        }
+
         private void Init(DebugNode pNodes)
         {
-            if (pNodes.children == null || pNodes.children.Count == 0 )
+            if (pNodes.children == null || pNodes.children.Count == 0)
                 return;
 
             foreach (var n in pNodes.children)
@@ -64,7 +77,7 @@ namespace BehaviorTree.Debug
 
             lSb.AppendLine("==DEBUG==");
             lSb.AppendLine(memory.ToString());
-         
+
 
             return lSb.ToString();
         }
@@ -74,12 +87,12 @@ namespace BehaviorTree.Debug
             Console.WriteLine(pNode.id);
             if (pNode.children != null)
             {
-                foreach(var n in pNode.children)
+                foreach (var n in pNode.children)
                 {
                     Traverse(n);
                 }
             }
         }
-    
+
     }
 }

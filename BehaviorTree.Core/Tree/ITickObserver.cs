@@ -5,6 +5,7 @@ namespace BehaviorTree.Core.Tree
 {
     public interface ITickObserver
     {
-        void OnTick(ANode pNode, TickResult pResult);
+        void OnTickStart(ANode pNode);
+        void OnTickEnd(ANode pNode, TickResult pResult);
     }
 }
