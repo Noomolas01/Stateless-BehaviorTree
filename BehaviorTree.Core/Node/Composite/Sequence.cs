@@ -27,7 +27,7 @@ namespace BehaviorTree.Core.Node.Composite
             {
                 _CurrentChild = Children[i];
 
-               // pTickObserver?.OnTickStart(_CurrentChild);
+                pTickObserver?.OnTickStart(_CurrentChild);
                 TickResult lCurrentChildResult = _CurrentChild.Tick(pWorldContext, pMemory, pTickObserver);
                 pTickObserver?.OnTickEnd(_CurrentChild, lCurrentChildResult);
 

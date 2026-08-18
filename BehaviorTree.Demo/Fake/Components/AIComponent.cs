@@ -41,6 +41,7 @@ namespace BehaviorTree.Demo.Fake.Components
 
                 if (lDecision != null)
                     sendDecision?.Invoke(lDecision);
+
             }
 
             _ElapsedTime += pDeltaTime;

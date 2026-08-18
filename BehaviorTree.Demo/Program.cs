@@ -11,6 +11,7 @@ using BehaviorTree.Demo.Fake;
 using BehaviorTree.Demo.Fake.Actions;
 using BT = BehaviorTree.Core.Tree.BehaviorTree;
 using BehaviorTree.Demo.Fake.Conditions;
+using BehaviorTree.Core.Node.Leaf;
 
 
 BT lMoveTree = new BT.Builder()
@@ -32,7 +33,7 @@ BT lTest = new BT.Builder()
 BT lCombatTree = new BT.Builder()
                 .Sequence("Combat Tree")
                     .Condition(new AttackCondition())
-                    .Action(new DoAttack())   
+                    .Action(new DoAttack())
                 .End()
             .Build();
 
@@ -82,9 +83,9 @@ int i = 0;
 float lFakeDeltaTime = 1.0f / 60.0f;
 while (true)
 {
+    Console.WriteLine(lDebug.GetMemory());
     lEntity_A.Update(lFakeDeltaTime);
     
-    Console.WriteLine(lDebug.GetMemory());
 
     Panel lPanel = new(CreateVisualTree(lDebug.root));
 
@@ -93,7 +94,7 @@ while (true)
     lPanel.Header = new($"=== Tick n°{i + 1} ===\n");
     AnsiConsole.Write(lPanel);
     lDebug.Clean();
-    Thread.Sleep(1000);
+    Thread.Sleep(2000);
     
     AnsiConsole.Clear();
     i++;

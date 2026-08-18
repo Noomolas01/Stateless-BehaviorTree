@@ -21,7 +21,7 @@ namespace BehaviorTree.Core.Node.Leaf.Debug
 
         protected override bool Evaluate(Blackboard pWorldContext, Blackboard pMemory)
         {
-            pMemory.Get("DebugOutput", out StringBuilder sb);
+            pMemory.TryGet("DebugOutput", out StringBuilder sb);
             string lOutput = $"(COND){name}: {_FakeResult}\n";
 
             sb.AppendLine(lOutput);

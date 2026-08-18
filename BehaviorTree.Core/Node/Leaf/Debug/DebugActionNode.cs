@@ -22,7 +22,7 @@ namespace BehaviorTree.Core.Node.Leaf.Debug
 
         protected override TickResult Do(Blackboard pWorldContext, Blackboard pMemory)
         {
-            pMemory.Get("DebugOutput", out StringBuilder sb);
+            pMemory.TryGet("DebugOutput", out StringBuilder sb);
             string output = $"(ACTION){name}: {_debugResult}\n";
             sb.AppendLine(output);
             return new TickResult(_debugResult, null, pMemory);

@@ -17,7 +17,7 @@ namespace BehaviorTree.Demo.Fake.Conditions
 
         protected override bool Evaluate(Blackboard pWorldContext, Blackboard pMemory)
         {
-            if (!pMemory.Get("IsAttackReady", out bool lIsReady))
+            if (!pMemory.TryGet("IsAttackReady", out bool lIsReady))
             {
                 throw new Exception("Key IsAttackReady is not in memory");
             }

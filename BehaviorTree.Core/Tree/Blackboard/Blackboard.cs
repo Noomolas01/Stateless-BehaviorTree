@@ -13,7 +13,7 @@ namespace BehaviorTree.Core.Tree.Blackboard
     {
         private readonly Dictionary<string, object> _kvps = new Dictionary<string, object>();
 
-        public bool Get<T>(BBKey<T> pKey, out T pValue)
+        public bool TryGet<T>(BBKey<T> pKey, out T pValue)
         {
             if (_kvps.TryGetValue(pKey.name, out object value))
             {
@@ -27,6 +27,31 @@ namespace BehaviorTree.Core.Tree.Blackboard
             Console.WriteLine($"Key: {pKey.name} doesn't exist.");
             pValue = default!;
             return false;
+        }
+
+        public T Get<T>(BBKey<T> pKey)
+        {
+            if (_kvps.TryGetValue(pKey.name, out object value))
+            {
+                if (value is T castValue)
+                {
+                    return castValue;
+                }
+            }
+
+            throw new Exception($"Key: {pKey.name} doesn't exist.");
+        }
+        public T Get<T>(string pKey)
+        {
+            if (_kvps.TryGetValue(pKey, out object value))
+            {
+                if (value is T castValue)
+                {
+                    return castValue;
+                }
+            }
+
+            throw new Exception($"Key: {pKey} doesn't exist.");
         }
 
         public void Set<T>(BBKey<T> pKey, T pValue) where T :notnull
@@ -47,7 +72,7 @@ namespace BehaviorTree.Core.Tree.Blackboard
             }
         }
 
-        public bool Get<T>(string pKey, out T pValue)
+        public bool TryGet<T>(string pKey, out T pValue)
         {
             if (_kvps.TryGetValue(pKey, out object value))
             {

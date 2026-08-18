@@ -98,7 +98,7 @@ public class Tests
         Blackboard lbb = new();
         BBKey<bool> lTestKey = new("IsAliyaHungry");
         lbb.Set(lTestKey, true);
-        lbb.Get(lTestKey, out bool lValue);
+        lbb.TryGet(lTestKey, out bool lValue);
 
         Assert.That(lValue, Is.EqualTo(true));
     }

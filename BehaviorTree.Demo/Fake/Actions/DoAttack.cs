@@ -8,14 +8,14 @@ namespace BehaviorTree.Demo.Fake.Actions
 {
     internal class DoAttack : AActionNode
     {
-        public DoAttack(string pName ="DoAttack") :base(pName) { }
+        public DoAttack(string pName = "DoAttack") : base(pName) { }
 
         protected override TickResult Do(Blackboard pWorldContext, Blackboard pMemory)
         {
-            if (!pMemory.Get("AttackStarted", out bool hasStarted))
+            if (!pMemory.TryGet("AttackStarted", out bool hasStarted))
                 throw new Exception("Key AttackStarted is not in memory");
 
-            if (!pMemory.Get("AttackFinished", out bool hasFinished))
+            if (!pMemory.TryGet("AttackFinished", out bool hasFinished))
                 throw new Exception("Key AttackFinished is not in memory");
 
 
