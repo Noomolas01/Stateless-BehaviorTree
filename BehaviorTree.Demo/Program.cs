@@ -2,43 +2,16 @@
 // Author: Muhammad H. Fayette Mikano
 // ========================================================
 
-using BehaviorTree.Core.Node.Leaf.Debug;
-using BehaviorTree.Core.Tree.Blackboard;
+
 using Spectre.Console;
-using System.Text;
 using BehaviorTree.Debug;
 using BehaviorTree.Demo.Fake;
 using BehaviorTree.Demo.Fake.Actions;
 using BT = BehaviorTree.Core.Tree.BehaviorTree;
 using BehaviorTree.Demo.Fake.Conditions;
-using BehaviorTree.Core.Node.Leaf;
+using System.Diagnostics;
 
-
-BT lMoveTree = new BT.Builder()
-                .Sequence("Move Sequence")
-                    .Condition(new DebugConditionNode(false, "CanMove?"))
-                    .Action(new DebugActionNode(BehaviorTree.Core.NodeStatus.SUCCESS, "Move Action"))
-                .End()
-                .Build();
-
-BT lTest = new BT.Builder()
-                .Sequence("Test Sequence")
-                    .Append(lMoveTree)
-                    .Action(new DebugActionNode(BehaviorTree.Core.NodeStatus.FAILURE, "Test Action"))
-                    .Action(new DebugActionNode(BehaviorTree.Core.NodeStatus.SUCCESS, "Test Action 2"))
-                 .End()
-            .Build();
-
-
-BT lCombatTree = new BT.Builder()
-                .Sequence("Combat Tree")
-                    .Condition(new AttackCondition())
-                    .Action(new DoAttack())
-                .End()
-            .Build();
-
-
-
+#region Rendering functions
 Tree CreateVisualTree(DebugNode pNode)
 {
     var lVisualTree = new Tree("Behavior tree");
@@ -59,6 +32,7 @@ TreeNode Build(TreeNode pRoot, DebugNode pDebugNode)
     };
 
     var lSubTree = pRoot.AddNode(new Markup(pDebugNode.id, lStyle));
+
     if (pDebugNode.children == null || pDebugNode.children.Count == 0)
         return lSubTree;
 
@@ -75,27 +49,60 @@ TreeNode Build(TreeNode pRoot, DebugNode pDebugNode)
     return lSubTree;
 }
 
-Entity lEntity_A = new("A");
-DebugTree lDebug = new (lCombatTree, lEntity_A.Memory);
-lEntity_A.aiComponent.Init(lDebug, 1f / 60.0f, lEntity_A.Memory);
+#endregion
+
+BT lSimpleCombatTree = new BT.Builder()
+                 .Sequence("Combat Tree (Sequence)")
+                    .Condition(new AttackCondition())
+                    .Action(new DoAttack())
+                .End()
+            .Build();
+
+Entity lAgent_A = new("A");
+DebugTree lDebug = new(lSimpleCombatTree, lAgent_A.Memory);
+
+const int DELTA_TIME_MS = 500;
+lAgent_A.aiComponent.Init(lDebug, 1f, lAgent_A.Memory);
 
 int i = 0;
-float lFakeDeltaTime = 1.0f / 60.0f;
+
+Stopwatch lStopwatch = new();
+lStopwatch.Start();
+
 while (true)
 {
-    Console.WriteLine(lDebug.GetMemory());
-    lEntity_A.Update(lFakeDeltaTime);
+    #region Rendering
     
 
-    Panel lPanel = new(CreateVisualTree(lDebug.root));
+    Text lMemoryText = new(lDebug.GetMemory());
+    lMemoryText.Justify(Justify.Center);
 
+    Panel lMemoryPanel = new(lMemoryText)
+    {
+        Header = new("=== Memory Debug ==="),
+        Width = 40,
+    };
 
-    lPanel.BorderStyle(new Style(Color.SpringGreen1));
-    lPanel.Header = new($"=== Tick n°{i + 1} ===\n");
+    AnsiConsole.Write(lMemoryPanel);
+    #endregion
+  
+    lAgent_A.Update(DELTA_TIME_MS / 1000.0f);
+    AnsiConsole.Write($"Frame n°{i + 1}\n");
+    AnsiConsole.Write(new Text($"Program Started {lStopwatch.ElapsedMilliseconds / 1000} second(s) ago\n"));
+    #region Rendering
+    Panel lPanel = new(CreateVisualTree(lDebug.root))
+    {
+        Header = new("Entity A"),
+        BorderStyle = new Style(Color.SpringGreen1),
+        Expand = false,
+        Width = 40
+    };
+    
     AnsiConsole.Write(lPanel);
+    #endregion
+
     lDebug.Clean();
-    Thread.Sleep(2000);
-    
+    Thread.Sleep(DELTA_TIME_MS);
     AnsiConsole.Clear();
     i++;
 }
