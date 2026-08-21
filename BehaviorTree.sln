@@ -11,8 +11,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorTree.Demo", "Behavi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorTree.Debug", "BehaviorTree.Debug\BehaviorTree.Debug.csproj", "{C8CC6D12-E40E-7FC9-2457-A2BFE7C4FA27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorTree.ConsoleVisualizer", "BehaviorTree.ConsoleVisualizer\BehaviorTree.ConsoleVisualizer.csproj", "{6BEEE9FD-4115-4BC1-A2A9-533E802436D7}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,18 +69,6 @@ Global
 		{C8CC6D12-E40E-7FC9-2457-A2BFE7C4FA27}.Release|x64.Build.0 = Release|Any CPU
 		{C8CC6D12-E40E-7FC9-2457-A2BFE7C4FA27}.Release|x86.ActiveCfg = Release|Any CPU
 		{C8CC6D12-E40E-7FC9-2457-A2BFE7C4FA27}.Release|x86.Build.0 = Release|Any CPU
-		{6BEEE9FD-4115-4BC1-A2A9-533E802436D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6BEEE9FD-4115-4BC1-A2A9-533E802436D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6BEEE9FD-4115-4BC1-A2A9-533E802436D7}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{6BEEE9FD-4115-4BC1-A2A9-533E802436D7}.Debug|x64.Build.0 = Debug|Any CPU
-		{6BEEE9FD-4115-4BC1-A2A9-533E802436D7}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{6BEEE9FD-4115-4BC1-A2A9-533E802436D7}.Debug|x86.Build.0 = Debug|Any CPU
-		{6BEEE9FD-4115-4BC1-A2A9-533E802436D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6BEEE9FD-4115-4BC1-A2A9-533E802436D7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6BEEE9FD-4115-4BC1-A2A9-533E802436D7}.Release|x64.ActiveCfg = Release|Any CPU
-		{6BEEE9FD-4115-4BC1-A2A9-533E802436D7}.Release|x64.Build.0 = Release|Any CPU
-		{6BEEE9FD-4115-4BC1-A2A9-533E802436D7}.Release|x86.ActiveCfg = Release|Any CPU
-		{6BEEE9FD-4115-4BC1-A2A9-533E802436D7}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
