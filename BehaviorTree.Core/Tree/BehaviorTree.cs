@@ -7,6 +7,8 @@ using BehaviorTree.Core.Node.Composite;
 using BehaviorTree.Core.Node.Composite.Abstract;
 using BehaviorTree.Core.Node.Decorator.Abstract;
 using BehaviorTree.Core.Node.Leaf.Abstract;
+using BehaviorTree.Core.Tree.Blackboard;
+using BehaviorTree.Core.Tree.Interfaces;
 using BehaviorTree.Core.Tree.Results;
 using System;
 using System.Collections.Generic;
