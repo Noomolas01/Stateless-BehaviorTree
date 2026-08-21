@@ -11,11 +11,11 @@ namespace BehaviorTree.Core.Tree.Blackboard
 {
     public class Blackboard
     {
-        private readonly Dictionary<string, object> _kvps = new Dictionary<string, object>();
+        private readonly Dictionary<string, object> _objectsByID = new Dictionary<string, object>();
 
         public bool TryGet<T>(BBKey<T> pKey, out T pValue)
         {
-            if (_kvps.TryGetValue(pKey.name, out object value))
+            if (_objectsByID.TryGetValue(pKey.name, out object value))
             {
                 if (value is T castValue)
                 {
@@ -31,7 +31,7 @@ namespace BehaviorTree.Core.Tree.Blackboard
 
         public T Get<T>(BBKey<T> pKey)
         {
-            if (_kvps.TryGetValue(pKey.name, out object value))
+            if (_objectsByID.TryGetValue(pKey.name, out object value))
             {
                 if (value is T castValue)
                 {
@@ -43,7 +43,7 @@ namespace BehaviorTree.Core.Tree.Blackboard
         }
         public T Get<T>(string pKey)
         {
-            if (_kvps.TryGetValue(pKey, out object value))
+            if (_objectsByID.TryGetValue(pKey, out object value))
             {
                 if (value is T castValue)
                 {
@@ -56,17 +56,17 @@ namespace BehaviorTree.Core.Tree.Blackboard
 
         public void Set<T>(BBKey<T> pKey, T pValue) where T :notnull
         {
-            if (!_kvps.ContainsKey(pKey.name))
+            if (!_objectsByID.ContainsKey(pKey.name))
             {
                 Console.WriteLine($"Key: {pKey.name} added.");
             }
 
-            _kvps[pKey.name] = pValue!;
+            _objectsByID[pKey.name] = pValue!;
         }
 
         public void Remove<T>(BBKey<T> pKey)
         {
-            if (!_kvps.Remove(pKey.name))
+            if (!_objectsByID.Remove(pKey.name))
             {
                 Console.WriteLine($"Key: {pKey.name} doesn't exist.");
             }
@@ -74,7 +74,7 @@ namespace BehaviorTree.Core.Tree.Blackboard
 
         public bool TryGet<T>(string pKey, out T pValue)
         {
-            if (_kvps.TryGetValue(pKey, out object value))
+            if (_objectsByID.TryGetValue(pKey, out object value))
             {
                 if (value is T castValue)
                 {
@@ -90,17 +90,17 @@ namespace BehaviorTree.Core.Tree.Blackboard
 
         public void Set<T>(string pKey, T pValue) where T : notnull
         {
-            if (!_kvps.ContainsKey(pKey))
+            if (!_objectsByID.ContainsKey(pKey))
             {
                 Console.WriteLine($"Key: {pKey} added.");
             }
 
-            _kvps[pKey] = pValue!;
+            _objectsByID[pKey] = pValue!;
         }
 
         public void Remove<T>(string pKey)
         {
-            if (!_kvps.Remove(pKey))
+            if (!_objectsByID.Remove(pKey))
             {
                 Console.WriteLine($"Key: {pKey} doesn't exist.");
             }
@@ -110,7 +110,7 @@ namespace BehaviorTree.Core.Tree.Blackboard
         {
             StringBuilder lSb = new StringBuilder();
 
-            foreach (var kvp in _kvps)
+            foreach (var kvp in _objectsByID)
             {
                 string lKvpString = $"{kvp.Key} : {kvp.Value}";
                 lSb.AppendLine(lKvpString);
