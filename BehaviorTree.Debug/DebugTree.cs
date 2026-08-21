@@ -39,7 +39,6 @@ namespace BehaviorTree.Debug
         public void OnTickEnd(ANode pNode, TickResult pResult)
         {
             tree[pNode].result = pResult;
-            Console.WriteLine($"{pNode.name} has been ticked with the result : {pResult}");
         }
 
         public void Clean()
@@ -77,7 +76,6 @@ namespace BehaviorTree.Debug
 
             lSb.AppendLine("==DEBUG==");
             lSb.AppendLine(memory.ToString());
-
 
             return lSb.ToString();
         }

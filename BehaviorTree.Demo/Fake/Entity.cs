@@ -16,7 +16,6 @@ namespace BehaviorTree.Demo.Fake
         public Entity(string pid)
         {
             id = pid;
-            Memory.Set("DebugOutput", new StringBuilder());
             aiComponent = new AIComponent(this);
             _movementComponent = new MovementComponent(Memory);
             _combatComponent = new CombatComponent(Memory);
