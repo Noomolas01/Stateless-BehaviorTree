@@ -27,14 +27,14 @@ namespace BehaviorTree.Demo.Fake.Components
             // Here intialize movement logic...
             Console.WriteLine("Received a Movement Decision");
 
-            destination = lMovementDecision.destination;
+            //destination = lMovementDecision.destination;
             
             
         }
 
         public override void Update(float pDeltaTime)
         {
-            // Here han
+            // Here handle movement logic
         }
     }
 }
