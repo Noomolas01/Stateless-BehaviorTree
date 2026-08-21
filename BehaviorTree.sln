@@ -9,8 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorTree.Tests", "Behav
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorTree.Demo", "BehaviorTree.Demo\BehaviorTree.Demo.csproj", "{A4C67450-8D4A-4E75-862D-7AA67724A79F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GodotExample", "..\..\Documents\fps-\GodotExample.csproj", "{24CB40B9-6127-4D5E-A3B3-9649808087B3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorTree.Debug", "BehaviorTree.Debug\BehaviorTree.Debug.csproj", "{C8CC6D12-E40E-7FC9-2457-A2BFE7C4FA27}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorTree.ConsoleVisualizer", "BehaviorTree.ConsoleVisualizer\BehaviorTree.ConsoleVisualizer.csproj", "{6BEEE9FD-4115-4BC1-A2A9-533E802436D7}"
@@ -61,18 +59,6 @@ Global
 		{A4C67450-8D4A-4E75-862D-7AA67724A79F}.Release|x64.Build.0 = Release|Any CPU
 		{A4C67450-8D4A-4E75-862D-7AA67724A79F}.Release|x86.ActiveCfg = Release|Any CPU
 		{A4C67450-8D4A-4E75-862D-7AA67724A79F}.Release|x86.Build.0 = Release|Any CPU
-		{24CB40B9-6127-4D5E-A3B3-9649808087B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{24CB40B9-6127-4D5E-A3B3-9649808087B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{24CB40B9-6127-4D5E-A3B3-9649808087B3}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{24CB40B9-6127-4D5E-A3B3-9649808087B3}.Debug|x64.Build.0 = Debug|Any CPU
-		{24CB40B9-6127-4D5E-A3B3-9649808087B3}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{24CB40B9-6127-4D5E-A3B3-9649808087B3}.Debug|x86.Build.0 = Debug|Any CPU
-		{24CB40B9-6127-4D5E-A3B3-9649808087B3}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{24CB40B9-6127-4D5E-A3B3-9649808087B3}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{24CB40B9-6127-4D5E-A3B3-9649808087B3}.Release|x64.ActiveCfg = Debug|Any CPU
-		{24CB40B9-6127-4D5E-A3B3-9649808087B3}.Release|x64.Build.0 = Debug|Any CPU
-		{24CB40B9-6127-4D5E-A3B3-9649808087B3}.Release|x86.ActiveCfg = Debug|Any CPU
-		{24CB40B9-6127-4D5E-A3B3-9649808087B3}.Release|x86.Build.0 = Debug|Any CPU
 		{C8CC6D12-E40E-7FC9-2457-A2BFE7C4FA27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{C8CC6D12-E40E-7FC9-2457-A2BFE7C4FA27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8CC6D12-E40E-7FC9-2457-A2BFE7C4FA27}.Debug|x64.ActiveCfg = Debug|Any CPU
