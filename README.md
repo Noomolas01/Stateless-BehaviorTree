@@ -7,25 +7,33 @@ _[![Spectre.Console NuGet Version](https://img.shields.io/nuget/v/spectre.consol
 ## 🌟 Highlights
 
 - Engine Agnostic
-- Code-Driven Behavior Tree
-- Stateless Nodes
-- Clear separation between choosing a behavior and applying it
+- A code-driven behavior tree
+- (Almost) Stateless Nodes
+- Behavior selection & execution are decoupled
 
 ## ℹ️ Overview
 
-Stateless
+>If you don't know anything about behavior tree, I recommand you to watch this [video](https://www.youtube.com/watch?v=6VBCXvfNlCM&t=149s)
 
+**Stateless Behavior Tree** is a framework build to create easy and maintenable behavior tree for video games.
 
+### Features
 
+Composites node implemented :
+- Sequence
+- Selector
 
+Leaves node :
+- Action
+- Condition
 
 ## 🚀 Usage
-
 
 
 ```cs
 BlackBoard memory = new Blackboard();
 BlackBoard worldContext = new Blackboard();
+
 
 BT simpleCombatTree = new BT.Builder()
                  .Sequence("Combat Tree (Sequence)")
@@ -40,24 +48,15 @@ sendDecision?.Invoke(decision);
 ```
 
 
-## ⬇️ Installation
-
-
+## ⬇️ Installation & Run Demo
 
 ```bash
-git clone
+git clone https://github.com/Noomolas01/Stateless-BehaviorTree.git && dotnet build Stateless-BehaviorTree\BehaviorTree.Demo\BehaviorTree.Demo.csproj && dotnet run --project Stateless-BehaviorTree\BehaviorTree.Demo\BehaviorTree.Demo.csproj
+
 ```
 
-And be sure to specify any other minimum requirements like Python versions or operating systems.
 
-*You may be inclined to add development instructions here, don't.*
+### ✍️ About Me
 
-
-## 💭 Feedback and Contributing
-
-Add a link to the Discussions tab in your repo and invite users to open issues for bugs/feature requests.
-
-This is also a great place to invite others to contribute in any ways that make sense for your project. Point people to your DEVELOPMENT and/or CONTRIBUTING guides if you have them.
-### ✍️ Author
-
-Muhammad H. Fayette Mikano
+Hello, I'm Muhammad, I study game development and I'm really interested in symbolic AI in video games.
+Don't hesitate to message me !
