@@ -14,6 +14,8 @@ namespace BehaviorTree.Demo.Fake.Components
 
         private readonly Entity _owner;
 
+        private bool _tickedAtStart;
+        private int _tickCount = 0;
 
         public AIComponent(Entity pOwner)
         {
@@ -34,28 +36,36 @@ namespace BehaviorTree.Demo.Fake.Components
             ArgumentNullException.ThrowIfNull(_tree);
             ArgumentNullException.ThrowIfNull(memory);
 
-            if (_ElapsedTime == 0)
+            if (_ElapsedTime == 0 && !_tickedAtStart)
             {
                 IAIDecision? lDecision = _tree.Tick(null!, memory).decision;
-                Console.WriteLine($"{_owner.id}'s tree ticked");
 
+                _tickCount++;
                 if (lDecision != null)
                     sendDecision?.Invoke(lDecision);
+                _tickedAtStart = true;
+
+                Console.WriteLine($"Tick n°{_tickCount}");
+
+                return;
 
             }
 
             _ElapsedTime += pDeltaTime;
 
-            if (_ElapsedTime > _timeBetweenTick)
+            if (_ElapsedTime >= _timeBetweenTick)
             {
                 IAIDecision? lDecision = _tree.Tick(null!, memory).decision;
-                Console.WriteLine($"{_owner.id}'s tree ticked");
+                _tickCount++;
 
                 if (lDecision != null)
                     sendDecision?.Invoke(lDecision);
 
                 _ElapsedTime = 0f;
             }
+
+            Console.WriteLine($"Tick n°{_tickCount}");
+
         }
     }
 }

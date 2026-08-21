@@ -1,10 +1,5 @@
 ﻿using BehaviorTree.Core.Node.Leaf.Abstract;
 using BehaviorTree.Core.Tree.Blackboard;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BehaviorTree.Demo.Fake.Conditions
 {
