@@ -33,7 +33,7 @@ namespace BehaviorTree.Debug
 
         public void OnTickStart(ANode pNode)
         {
-            tree[pNode].result = new TickResult(Core.NodeStatus.INACTIVE, null, memory);
+            tree[pNode].result = new TickResult(NodeStatus.INACTIVE, null, memory);
         }
 
         public void OnTickEnd(ANode pNode, TickResult pResult)
@@ -45,7 +45,7 @@ namespace BehaviorTree.Debug
         {
             foreach(var key in tree.Keys)
             {
-                tree[key].result = new TickResult(Core.NodeStatus.INACTIVE, null, memory);
+                tree[key].result = new TickResult(NodeStatus.INACTIVE, null, memory);
             }
         }
 
@@ -72,12 +72,7 @@ namespace BehaviorTree.Debug
 
         public string GetMemory()
         {
-            StringBuilder lSb = new StringBuilder();
-
-            lSb.AppendLine("==DEBUG==");
-            lSb.AppendLine(memory.ToString());
-
-            return lSb.ToString();
+            return memory.ToString();
         }
 
         private void Traverse(DebugNode pNode)
