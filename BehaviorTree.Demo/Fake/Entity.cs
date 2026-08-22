@@ -20,6 +20,8 @@ namespace BehaviorTree.Demo.Fake
             _movementComponent = new MovementComponent(Memory);
             _combatComponent = new CombatComponent(Memory);
 
+            this.Memory.Set("id", id);
+
             aiComponent.sendDecision += _movementComponent.OnDecision;
             aiComponent.sendDecision += _combatComponent.OnDecision;
         }

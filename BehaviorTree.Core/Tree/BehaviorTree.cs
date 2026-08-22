@@ -18,7 +18,7 @@ namespace BehaviorTree.Core.Tree
 {
     public class BehaviorTree : ANode
     {
-        public AComposite? Root { get; set; }
+        public AComposite? Root { get; private set; }
         
         protected BehaviorTree() 
         {
