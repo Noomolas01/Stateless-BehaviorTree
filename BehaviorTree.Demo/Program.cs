@@ -10,6 +10,7 @@ using BehaviorTree.Demo.Fake.Actions;
 using BT = BehaviorTree.Core.Tree.BehaviorTree;
 using BehaviorTree.Demo.Fake.Conditions;
 using System.Diagnostics;
+using BehaviorTree.Core.Tree.Results;
 
 #region Rendering functions
 Tree CreateVisualTree(DebugNode pNode)
@@ -41,15 +42,12 @@ TreeNode Build(TreeNode pRoot, DebugNode pDebugNode)
         Build(lSubTree, n);
     }
 
-    //var intermediateTree = new Tree(pDebugNode.id);
-    //intermediateTree.AddNode(lSubTree);
-    //var panel = new Panel(intermediateTree);
-    //AnsiConsole.Write(panel);
-
     return lSubTree;
 }
 
 #endregion
+
+const int DELTA_TIME_MS = 500;
 
 BT lSimpleCombatTree = new BT.Builder()
                  .Sequence("Combat Tree (Sequence)")
@@ -61,25 +59,25 @@ BT lSimpleCombatTree = new BT.Builder()
 Entity lAgent_A = new("A");
 DebugTree lDebug = new(lSimpleCombatTree, lAgent_A.Memory);
 
-const int DELTA_TIME_MS = 500;
-lAgent_A.aiComponent.Init(lDebug, 1f, lAgent_A.Memory);
-
-int i = 0;
+lAgent_A.aiComponent.Init(lDebug, 1, lAgent_A.Memory);
 
 Stopwatch lStopwatch = new();
 lStopwatch.Start();
 
+int i = 0;
+
 while (true)
 {
     #region Rendering
-    
+
+    AnsiConsole.Write("=== Behavior Tree Demo===\n\n");
 
     Text lMemoryText = new(lDebug.GetMemory());
     lMemoryText.Justify(Justify.Center);
 
     Panel lMemoryPanel = new(lMemoryText)
     {
-        Header = new("=== Memory Debug ==="),
+        Header = new("=== Entity A's Memory ==="),
         Width = 40,
     };
 
@@ -87,9 +85,10 @@ while (true)
     #endregion
   
     lAgent_A.Update(DELTA_TIME_MS / 1000.0f);
+    
+    #region Rendering
     AnsiConsole.Write($"Frame n°{i + 1}\n");
     AnsiConsole.Write(new Text($"Program Started {lStopwatch.ElapsedMilliseconds / 1000} second(s) ago\n"));
-    #region Rendering
     Panel lPanel = new(CreateVisualTree(lDebug.root))
     {
         Header = new("Entity A"),
