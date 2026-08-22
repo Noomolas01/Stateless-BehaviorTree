@@ -2,7 +2,7 @@
 // Author: Muhammad H. Fayette Mikano
 // ========================================================
 
-namespace BehaviorTree.Core
+namespace BehaviorTree.Core.Tree.Results
 {
     public enum NodeStatus
     {

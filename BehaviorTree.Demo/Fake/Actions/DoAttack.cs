@@ -23,11 +23,11 @@ namespace BehaviorTree.Demo.Fake.Actions
             {
                 pMemory.Set("AttackFinished", false);
                 pMemory.Set("AttackStarted", false);
-                return new TickResult(Core.NodeStatus.SUCCESS, null, pMemory);
+                return new TickResult(NodeStatus.SUCCESS, null, pMemory);
             }
 
             pMemory.Set("AttackStarted", true);
-            return new TickResult(Core.NodeStatus.RUNNING, new CombatDecision(), pMemory);
+            return new TickResult(NodeStatus.RUNNING, new CombatDecision(), pMemory);
 
         }
     }

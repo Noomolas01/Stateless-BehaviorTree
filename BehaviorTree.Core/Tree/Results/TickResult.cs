@@ -11,7 +11,7 @@ namespace BehaviorTree.Core.Tree.Results
         public readonly NodeStatus status;
         public readonly BB blackboard;
 
-        public TickResult(/*NodeName nbode,*/NodeStatus pResult, IAIDecision? pAIDecision, BB pMemory)
+        public TickResult(NodeStatus pResult, IAIDecision? pAIDecision, BB pMemory)
         {
             decision = pAIDecision;
             status = pResult;

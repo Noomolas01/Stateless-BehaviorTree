@@ -26,11 +26,11 @@ namespace BehaviorTree.Demo.Fake.Actions
             {
                 pMemory.Set("MovemementStarted", false);
                 pMemory.Set("MovemementFinished", false);
-                return new TickResult(Core.NodeStatus.SUCCESS, null, pMemory);
+                return new TickResult(NodeStatus.SUCCESS, null, pMemory);
             }
 
             pMemory.Set("MovementStarted", true);
-            return new TickResult(Core.NodeStatus.RUNNING, new CombatDecision(), pMemory);
+            return new TickResult(NodeStatus.RUNNING, new CombatDecision(), pMemory);
 
         }
     }

@@ -24,10 +24,10 @@ TreeNode Build(TreeNode pRoot, DebugNode pDebugNode)
 {
     var lStyle = pDebugNode.result.status switch
     {
-        BehaviorTree.Core.NodeStatus.INACTIVE => new Style(foreground: Color.Gray11),
-        BehaviorTree.Core.NodeStatus.SUCCESS => new Style(foreground: Color.Green),
-        BehaviorTree.Core.NodeStatus.RUNNING => new Style(foreground: Color.Yellow),
-        BehaviorTree.Core.NodeStatus.FAILURE => new Style(foreground: Color.Red),
+        NodeStatus.INACTIVE => new Style(foreground: Color.Gray11),
+        NodeStatus.SUCCESS => new Style(foreground: Color.Green),
+        NodeStatus.RUNNING => new Style(foreground: Color.Yellow),
+        NodeStatus.FAILURE => new Style(foreground: Color.Red),
         _ => new Style(),
     };
 
