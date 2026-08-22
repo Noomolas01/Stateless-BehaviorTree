@@ -2,13 +2,11 @@
 // Author: Muhammad H. Fayette Mikano
 // ========================================================
 
-using BehaviorTree.Core.Node.Abstract;
-using System;
 using BehaviorTree.Core.Tree.Blackboard;
 using BehaviorTree.Core.Tree.Results;
-using BehaviorTree.Core.Node.Composite.Interfaces;
 using BehaviorTree.Core.Node.Composite.Abstract;
 using BehaviorTree.Core.Tree.Interfaces;
+using BehaviorTree.Core.Node.Abstract;
 
 namespace BehaviorTree.Core.Node.Composite
 {
@@ -22,32 +20,36 @@ namespace BehaviorTree.Core.Node.Composite
 
         public override TickResult ProcessChildren(Blackboard pWorldContext, Blackboard pMemory, ITickObserver? pTickObserver = null)
         {
-            for (int i = lastChildrenIndex; i < Children.Count; i++)
-            {
-                currentChild = Children[i];
 
-                pTickObserver?.OnTickStart(currentChild);
-                TickResult lCurrentChildResult = currentChild.Tick(pWorldContext, pMemory, pTickObserver);
-                pTickObserver?.OnTickEnd(currentChild, lCurrentChildResult);
+            if (!lastChildrenByBlackboard.ContainsKey(pMemory))
+            {
+                lastChildrenByBlackboard[pMemory] = 0;
+            }
+
+            for (int i = lastChildrenByBlackboard[pMemory]; i < Children.Count; i++)
+            {
+                ANode lCurrentChild = Children[i];
+
+                pTickObserver?.OnTickStart(lCurrentChild);
+                TickResult lCurrentChildResult = lCurrentChild.Tick(pWorldContext, pMemory, pTickObserver);
+                pTickObserver?.OnTickEnd(lCurrentChild, lCurrentChildResult);
 
                 if (lCurrentChildResult.status == NodeStatus.SUCCESS)
                 {
-                    lastChildrenIndex = 0;
+                    lastChildrenByBlackboard[pMemory] = 0;
                     return lCurrentChildResult;
                 }
 
                 else if (lCurrentChildResult.status == NodeStatus.RUNNING)
                 {
-                    lastChildrenIndex = i;
+                    lastChildrenByBlackboard[pMemory] = i;
                     return lCurrentChildResult;
                 }
             }
          
-            lastChildrenIndex = 0;
+            lastChildrenByBlackboard[pMemory] = 0;
             return new TickResult(NodeStatus.FAILURE, null, pMemory);
         }
-
-   
 
         public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickObserver? pTickOberver = null)
         {

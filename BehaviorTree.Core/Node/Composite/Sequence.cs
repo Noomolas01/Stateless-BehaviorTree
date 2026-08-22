@@ -13,37 +13,38 @@ namespace BehaviorTree.Core.Node.Composite
 {
     public class Sequence : AComposite
     {
-
-
-
-        public Sequence(string pName = "") : base(pName)
-        {
-        }
+        public Sequence(string pName = "") : base(pName) { }
 
         public override TickResult ProcessChildren(Blackboard pWorldContext, Blackboard pMemory, ITickObserver? pTickObserver = null)
         {
-            for (int i = lastChildrenIndex; i < Children.Count; i++)
+            if (!lastChildrenByBlackboard.ContainsKey(pMemory))
             {
-                currentChild = Children[i];
+                lastChildrenByBlackboard[pMemory] = 0;
+            }
 
-                pTickObserver?.OnTickStart(currentChild);
-                TickResult lCurrentChildResult = currentChild.Tick(pWorldContext, pMemory, pTickObserver);
-                pTickObserver?.OnTickEnd(currentChild, lCurrentChildResult);
+
+            for (int i = lastChildrenByBlackboard[pMemory]; i < Children.Count; i++)
+            {
+                ANode lCurrentChild = Children[i];
+
+                pTickObserver?.OnTickStart(lCurrentChild);
+                TickResult lCurrentChildResult = lCurrentChild.Tick(pWorldContext, pMemory, pTickObserver);
+                pTickObserver?.OnTickEnd(lCurrentChild, lCurrentChildResult);
 
                 if (lCurrentChildResult.status == NodeStatus.FAILURE)
                 {
-                    lastChildrenIndex = 0;
+                    lastChildrenByBlackboard[pMemory] = 0;
                     return lCurrentChildResult;
                 }
 
                 else if (lCurrentChildResult.status == NodeStatus.RUNNING)
                 {
-                    lastChildrenIndex = i;
+                    lastChildrenByBlackboard[pMemory] = i;
                     return lCurrentChildResult;
                 }
             }
 
-            lastChildrenIndex = 0;
+            lastChildrenByBlackboard[pMemory] = 0;
             return new TickResult(NodeStatus.SUCCESS, null, pMemory);
         }
 

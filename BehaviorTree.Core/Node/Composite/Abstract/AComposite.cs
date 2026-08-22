@@ -9,10 +9,11 @@ namespace BehaviorTree.Core.Node.Composite.Abstract
 {
     public abstract class AComposite : ANode
     {
-        protected  ANode? currentChild;
-        protected int lastChildrenIndex = 0;
+        protected readonly Dictionary<Blackboard, int> lastChildrenByBlackboard = new Dictionary<Blackboard, int>();
+        public List<ANode> Children { get; private set; } = new List<ANode>();
+
         public AComposite(string pName = "") : base(pName) { }
-        public List<ANode> Children { get; } = new List<ANode>();
+
         public abstract TickResult ProcessChildren(Blackboard pWorldContext, Blackboard pMemory, ITickObserver? pTickObserver = null);
         public void Add(ANode pNode)
         {
@@ -30,5 +31,5 @@ namespace BehaviorTree.Core.Node.Composite.Abstract
 
             Children.Add(pNode);
         }
-    } 
+    }
 }
