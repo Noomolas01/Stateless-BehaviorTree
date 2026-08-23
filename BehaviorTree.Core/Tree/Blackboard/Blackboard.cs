@@ -4,7 +4,6 @@
 
 using System.Collections.Generic;
 using System;
-using System.Collections;
 using System.Text;
 
 namespace BehaviorTree.Core.Tree.Blackboard
@@ -24,9 +23,8 @@ namespace BehaviorTree.Core.Tree.Blackboard
                 }
             }
 
-            Console.WriteLine($"Key: {pKey.name} doesn't exist.");
             pValue = default!;
-            return false;
+            throw new KeyNotFoundException($"Key: {pKey.name} doesn't exist.");
         }
 
         public T Get<T>(BBKey<T> pKey)
@@ -39,7 +37,7 @@ namespace BehaviorTree.Core.Tree.Blackboard
                 }
             }
 
-            throw new Exception($"Key: {pKey.name} doesn't exist.");
+            throw new KeyNotFoundException($"Key: {pKey.name} doesn't exist.");
         }
         public T Get<T>(string pKey)
         {
@@ -51,7 +49,7 @@ namespace BehaviorTree.Core.Tree.Blackboard
                 }
             }
 
-            throw new Exception($"Key: {pKey} doesn't exist.");
+            throw new KeyNotFoundException($"Key: {pKey} doesn't exist.");
         }
 
         public void Set<T>(BBKey<T> pKey, T pValue) where T :notnull
@@ -68,7 +66,7 @@ namespace BehaviorTree.Core.Tree.Blackboard
         {
             if (!_objectsByID.Remove(pKey.name))
             {
-                Console.WriteLine($"Key: {pKey.name} doesn't exist.");
+                throw new KeyNotFoundException($"Key: {pKey.name} doesn't exist.");
             }
         }
 
@@ -83,9 +81,8 @@ namespace BehaviorTree.Core.Tree.Blackboard
                 }
             }
 
-            Console.WriteLine($"Key: {pKey} doesn't exist.");
             pValue = default!;
-            return false;
+            throw new KeyNotFoundException($"Key: {pKey} doesn't exist.");
         }
 
         public void Set<T>(string pKey, T pValue) where T : notnull
@@ -102,7 +99,7 @@ namespace BehaviorTree.Core.Tree.Blackboard
         {
             if (!_objectsByID.Remove(pKey))
             {
-                Console.WriteLine($"Key: {pKey} doesn't exist.");
+                throw new KeyNotFoundException($"Key: {pKey} doesn't exist.");
             }
         }
 
@@ -112,8 +109,7 @@ namespace BehaviorTree.Core.Tree.Blackboard
 
             foreach (var kvp in _objectsByID)
             {
-                string lKvpString = $"{kvp.Key} : {kvp.Value}";
-                lSb.AppendLine(lKvpString);
+                lSb.Append(kvp.Key).Append(" : ").Append(kvp.Value) ;
             }
 
             return lSb.ToString();
