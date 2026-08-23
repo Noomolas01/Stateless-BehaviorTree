@@ -10,7 +10,7 @@ namespace BehaviorTree.Core.Node.Abstract
 {
     public abstract class ANode
     {
-        public string name;
+        public readonly string name;
 
         public ANode(string pName = "")
         {
