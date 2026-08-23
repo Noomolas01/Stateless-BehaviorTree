@@ -19,14 +19,12 @@ namespace BehaviorTree.Core.Node.Composite.Abstract
         {
             if (pNode == null)
             {
-                Console.WriteLine($"{name} cannot add a null node.");
-                return;
+                throw new ArgumentException($"{name} cannot add a null node.");
             }
 
             if (pNode == this)
             {
-                Console.WriteLine($"{name} cannot add itself.");
-                return;
+                throw new ArgumentException($"{name} cannot add a null node.");
             }
 
             Children.Add(pNode);
