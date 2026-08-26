@@ -109,7 +109,7 @@ namespace BehaviorTree.Core.Tree.Blackboard
 
             foreach (var kvp in _objectsByID)
             {
-                lSb.Append(kvp.Key).Append(" : ").Append(kvp.Value) ;
+                lSb.Append(kvp.Key).Append(" : ").Append(kvp.Value).AppendLine() ;
             }
 
             return lSb.ToString();
