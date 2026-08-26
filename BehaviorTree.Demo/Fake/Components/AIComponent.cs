@@ -43,10 +43,10 @@ namespace BehaviorTree.Demo.Fake.Components
 
                 _tickCount++;
                 if (lDecision != null)
-                    sendDecision?.Invoke(lDecision);
+                    decisionEmitter?.Invoke(lDecision);
                 _tickedAtStart = true;
 
-                Console.WriteLine($"Tick n°{_tickCount}");
+                AnsiConsole.Write(new Markup($"[IndianRed_1]Tick n°{_tickCount}[/]\n"));
 
                 return;
 
@@ -65,7 +65,7 @@ namespace BehaviorTree.Demo.Fake.Components
                 _ElapsedTime = 0f;
             }
 
-            Console.WriteLine($"Tick n°{_tickCount}");
+            AnsiConsole.Write(new Markup($"[IndianRed_1]Tick n°{_tickCount}[/]\n"));
 
         }
     }
