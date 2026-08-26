@@ -16,7 +16,6 @@ namespace BehaviorTree.Core.Node.Leaf.Debug
         public DebugConditionNode(bool pResult, string pName = "") : base(pName)
         {
             _FakeResult = pResult;
-            name = pName;
         }
 
         protected override bool Evaluate(Blackboard pWorldContext, Blackboard pMemory)

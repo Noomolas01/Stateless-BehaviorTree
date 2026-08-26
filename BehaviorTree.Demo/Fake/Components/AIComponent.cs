@@ -1,5 +1,6 @@
 ﻿using BehaviorTree.Core.Tree.Blackboard;
 using BehaviorTree.Core.Tree.Results;
+using Spectre.Console;
 
 namespace BehaviorTree.Demo.Fake.Components
 {
@@ -10,7 +11,7 @@ namespace BehaviorTree.Demo.Fake.Components
         private Core.Tree.BehaviorTree? _tree;
 
         public Blackboard? memory;
-        public Action<IAIDecision>? sendDecision;
+        public Action<IAIDecision>? decisionEmitter;
 
         private readonly Entity _owner;
 
@@ -22,13 +23,13 @@ namespace BehaviorTree.Demo.Fake.Components
             _owner = pOwner;
         }
 
-        public void Init(Core.Tree.BehaviorTree? pTree, float pTickDuration, Blackboard? pMemory)
+        public void Init(Core.Tree.BehaviorTree? pTree, float pTimeBetweenTickInSec, Blackboard? pMemory)
         {
             ArgumentNullException.ThrowIfNull(pTree);
             ArgumentNullException.ThrowIfNull(pMemory);
 
             _tree = pTree;
-            _timeBetweenTick = pTickDuration;
+            _timeBetweenTick = pTimeBetweenTickInSec;
             memory = pMemory;
         }
         public void Update(float pDeltaTime)
@@ -59,7 +60,7 @@ namespace BehaviorTree.Demo.Fake.Components
                 _tickCount++;
 
                 if (lDecision != null)
-                    sendDecision?.Invoke(lDecision);
+                    decisionEmitter?.Invoke(lDecision);
 
                 _ElapsedTime = 0f;
             }

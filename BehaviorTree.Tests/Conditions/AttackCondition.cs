@@ -5,9 +5,9 @@ namespace BehaviorTree.Demo.Fake.Conditions
 {
     internal class AttackCondition : AConditionNode
     {
-        public AttackCondition() 
+        public AttackCondition() :base("AttackCondition")
         {
-            name = typeof(AttackCondition).Name;
+           
         }
 
         protected override bool Evaluate(Blackboard pWorldContext, Blackboard pMemory)

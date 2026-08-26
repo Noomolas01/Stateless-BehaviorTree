@@ -17,7 +17,6 @@ namespace BehaviorTree.Core.Node.Leaf.Debug
         public DebugActionNode(NodeStatus pResult, string pName = "") : base(pName)
         {
             _debugResult = pResult;
-            name = pName;
         }
 
         protected override TickResult Do(Blackboard pWorldContext, Blackboard pMemory)

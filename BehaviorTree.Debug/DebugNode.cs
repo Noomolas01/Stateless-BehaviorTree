@@ -28,6 +28,7 @@ namespace BehaviorTree.Debug
                 return;
 
             List<DebugNode> lChildren = new List<DebugNode>();
+
             foreach (var n in pComposite.Children)
             {
                 lChildren.Add(new DebugNode(n));

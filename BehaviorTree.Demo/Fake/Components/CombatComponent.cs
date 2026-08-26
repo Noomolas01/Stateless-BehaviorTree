@@ -9,8 +9,8 @@ namespace BehaviorTree.Demo.Fake.Components
     internal class CombatComponent : AComponent
     {
         private int _frameCount;
-        private int _attackDurationInFrame = 5;
-        private int _attackCooldownInFrame = 10;
+        public readonly int attackDurationInSec = 5;
+        public readonly int attackCooldownInSec = 10;
 
         private int _currentCooldown;
 
@@ -52,11 +52,11 @@ namespace BehaviorTree.Demo.Fake.Components
         public override void Update(float pDeltaTime)
         {
             string lIsAttackReadyText = string.Empty;
-            if (_currentCooldown < _attackCooldownInFrame)
+
+            if (_currentCooldown < attackCooldownInSec)
             {
                 lIsAttackReadyText = "Attack is not ready yet";
                 _currentCooldown++;
-
             }
 
             else
@@ -69,7 +69,7 @@ namespace BehaviorTree.Demo.Fake.Components
                 string lIsAttackProcessingText = "Attack is processing...";
 
                 // When component has finished its job, it writes in the Memory how it went
-                if (_frameCount >= _attackDurationInFrame)
+                if (_frameCount >= attackDurationInSec)
                 {
                     memory.Set("AttackFinished", true);
                     lIsAttackProcessingText = "Attack is done";

@@ -8,7 +8,7 @@ namespace BehaviorTree.Demo.Fake
     {
         public readonly AIComponent aiComponent;
         private readonly MovementComponent _movementComponent;
-        private readonly CombatComponent _combatComponent;
+        public readonly CombatComponent combatComponent;
         public Blackboard Memory { get; private set; } = new();
 
         public readonly string id;
@@ -18,12 +18,12 @@ namespace BehaviorTree.Demo.Fake
             id = pid;
             aiComponent = new AIComponent(this);
             _movementComponent = new MovementComponent(Memory);
-            _combatComponent = new CombatComponent(Memory);
+            combatComponent = new CombatComponent(Memory);
 
             this.Memory.Set("id", id);
 
-            aiComponent.sendDecision += _movementComponent.OnDecision;
-            aiComponent.sendDecision += _combatComponent.OnDecision;
+            aiComponent.decisionEmitter += _movementComponent.OnDecision;
+            aiComponent.decisionEmitter += combatComponent.OnDecision;
         }
 
         public void SetMemory(Blackboard pMemory)
@@ -34,7 +34,7 @@ namespace BehaviorTree.Demo.Fake
         public void Update(float pDeltaTime)
         {
             _movementComponent.Update(pDeltaTime);
-            _combatComponent.Update(pDeltaTime);
+            combatComponent.Update(pDeltaTime);
             aiComponent.Update(pDeltaTime);
         }
     }

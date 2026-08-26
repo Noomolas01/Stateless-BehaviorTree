@@ -8,9 +8,9 @@ namespace BehaviorTree.Demo.Fake.Actions
 {
     internal class DoMovement : AActionNode
     {
-        public DoMovement()
+        public DoMovement() : base("DoMovement")
         {
-            name = GetType().Name;
+            
         }
 
         protected override TickResult Do(Blackboard pWorldContext, Blackboard pMemory)
