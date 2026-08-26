@@ -71,4 +71,5 @@ public class BuilderTest
         Assert.That(lTree.Tick(null!, memory_B).status, Is.EqualTo(NodeStatus.FAILURE));
         Console.WriteLine("Enity B cannot Attack.");
     }
+
 }

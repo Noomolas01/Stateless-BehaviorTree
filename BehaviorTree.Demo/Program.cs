@@ -71,7 +71,8 @@ int i = 0;
 StringBuilder lPresentationTextBuilder = new();
 
 lPresentationTextBuilder.AppendLine()
-                        .AppendLine($"[orange1]Combat component[/] handles attacks and is [Aquamarine1]frame-based[/].")
+                        .AppendLine($"The program draws a frame every [green]{(float)DELTA_TIME_MS / 1000}[/] seconds.")
+                        .AppendLine($"[orange1]Combat component[/] handles attacks and is [green]time-based[/].")
                         .AppendLine($"Attacks are available every [green]{lAgent_A.combatComponent.attackCooldownInSec} seconds[/]")
                         .AppendLine($"Attacks take [green]{lAgent_A.combatComponent.attackDurationInSec} seconds[/] to complete")
                         .AppendLine()
