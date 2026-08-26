@@ -25,7 +25,7 @@ namespace BehaviorTree.Core.Node.Composite.Abstract
 
             if (pNode == this)
             {
-                throw new ArgumentException($"{name} cannot add a null node.");
+                throw new ArgumentException($"{name} cannot add itself as a node.");
             }
 
 
