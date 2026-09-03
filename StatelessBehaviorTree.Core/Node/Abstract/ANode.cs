@@ -8,6 +8,9 @@ using BehaviorTree.Core.Tree.Results;
 
 namespace BehaviorTree.Core.Node.Abstract
 {
+    /// <summary>
+    /// Base class for every tree or tree's node
+    /// </summary>
     public abstract class ANode
     {
         public readonly string name;

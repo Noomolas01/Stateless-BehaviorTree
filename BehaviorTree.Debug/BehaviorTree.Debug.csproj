@@ -5,8 +5,4 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\BehaviorTree.Core\BehaviorTree.Core.csproj" />
-  </ItemGroup>
-
 </Project>

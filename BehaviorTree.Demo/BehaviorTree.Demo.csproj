@@ -6,7 +6,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BehaviorTree.Core\BehaviorTree.Core.csproj" />
     <ProjectReference Include="..\BehaviorTree.Debug\BehaviorTree.Debug.csproj" />
   </ItemGroup>
 

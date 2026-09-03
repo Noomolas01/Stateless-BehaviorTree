@@ -32,6 +32,29 @@ namespace BehaviorTree.Core.Tree
             return lResult;
         }
 
+        public void Traverse(Action<ANode>? pCallback)
+        {
+            if (Root == null)
+                return;
+
+            Traverse(Root, pCallback);
+        }
+
+        private void Traverse(AComposite pCompositeNode, Action<ANode>? pCallback)
+        {
+            pCallback?.Invoke(pCompositeNode);
+
+            foreach (var lChild in pCompositeNode.Children)
+            {
+                pCallback?.Invoke(lChild);
+
+                if (lChild is AComposite lComposite)
+                {
+                    Traverse(lComposite, pCallback);
+                }
+            }
+        }
+
         public class Builder
         {
             private readonly BehaviorTree _tree = new BehaviorTree();

@@ -2,23 +2,27 @@
 // Author: Muhammad H. Fayette Mikano
 // ========================================================
 
-using BehaviorTree.Core.Node.Abstract;
-using BehaviorTree.Core.Node.Composite.Abstract;
 using BehaviorTree.Core.Tree.Blackboard;
-using BehaviorTree.Core.Tree.Interfaces;
 using BehaviorTree.Core.Tree.Results;
-using System;
+using BehaviorTree.Core.Node.Composite.Abstract;
+using BehaviorTree.Core.Tree.Interfaces;
+using BehaviorTree.Core.Node.Abstract;
 
 namespace BehaviorTree.Core.Node.Composite
 {
-    public class Sequence : AComposite
+    /// <summary>
+    /// Composite node that stops processing when a child returns SUCCESS
+    /// </summary>
+    public class Selector : AComposite
     {
-        public Sequence(string pName = "") : base(pName) { }
+        public Selector(string pName = "") : base(pName)
+        {
+        }
 
         public override TickResult ProcessChildren(Blackboard pWorldContext, Blackboard pMemory, ITickObserver? pTickObserver = null)
         {
-            var lData = dataByBlackboard.GetValue(pMemory, _ => new CompositeData());
-            
+           var lData = dataByBlackboard.GetValue(pMemory, _ => new CompositeData());
+
             for (int i = lData.lastChildrenIndex; i < Children.Count; i++)
             {
                 ANode lCurrentChild = Children[i];
@@ -27,9 +31,9 @@ namespace BehaviorTree.Core.Node.Composite
                 TickResult lCurrentChildResult = lCurrentChild.Tick(pWorldContext, pMemory, pTickObserver);
                 pTickObserver?.OnTickEnd(lCurrentChild, lCurrentChildResult);
 
-                if (lCurrentChildResult.status == NodeStatus.FAILURE)
+                if (lCurrentChildResult.status == NodeStatus.SUCCESS)
                 {
-                    lData.lastChildrenIndex = 0;
+                    lData.lastChildrenIndex= 0;
                     return lCurrentChildResult;
                 }
 
@@ -41,7 +45,7 @@ namespace BehaviorTree.Core.Node.Composite
             }
 
             lData.lastChildrenIndex = 0;
-            return new TickResult(NodeStatus.SUCCESS, null, pMemory);
+            return new TickResult(NodeStatus.FAILURE, null, pMemory);
         }
 
         public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickObserver? pTickOberver = null)
@@ -49,5 +53,4 @@ namespace BehaviorTree.Core.Node.Composite
             return ProcessChildren(pWorldContext, pMemory, pTickOberver);
         }
     }
-
 }

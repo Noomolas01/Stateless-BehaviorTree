@@ -9,6 +9,9 @@ using BehaviorTree.Core.Tree.Results;
 
 namespace BehaviorTree.Core.Node.Leaf.Abstract
 {
+    /// <summary>
+    /// Base class for action node 
+    /// </summary>
     public abstract class AActionNode: ANode
     {
         public AActionNode(string pName = "") : base(pName) { }

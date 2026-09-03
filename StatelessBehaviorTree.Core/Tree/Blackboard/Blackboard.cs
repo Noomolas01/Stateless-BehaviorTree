@@ -8,10 +8,22 @@ using System.Text;
 
 namespace BehaviorTree.Core.Tree.Blackboard
 {
+    /// <summary>
+    /// A class holding nodes or entities <b>states</b>. 
+    /// </summary>
     public class Blackboard
     {
         private readonly Dictionary<string, object> _objectsByID = new Dictionary<string, object>();
 
+        /// <summary>
+        /// Provides a not blocking alternative to <see cref="Get{T}(BBKey{T})"/>
+        /// </summary>
+        /// <remarks>
+        /// Use this if you want to add a fallback when a key is missing in the <see cref="Blackboard"/>. <br/>
+        /// If you want to throw an exception if the key is missing, use <see cref="Get{T}(BBKey{T})"/> instead.
+        /// </remarks>
+        /// <typeparam name="T">Value's type</typeparam>
+        /// <returns> returns <c>true</c> if tke key is present in the blackboard, otherwise returns <c>false</c> </returns>
         public bool TryGet<T>(BBKey<T> pKey, out T pValue)
         {
             if (_objectsByID.TryGetValue(pKey.name, out object value))
@@ -24,9 +36,19 @@ namespace BehaviorTree.Core.Tree.Blackboard
             }
 
             pValue = default!;
-            throw new KeyNotFoundException($"Key: {pKey.name} doesn't exist.");
+            return false;
         }
-
+        /// <summary>
+        /// Get a value in the blackboard with a blackboard key. 
+        /// </summary>
+        /// 
+        /// <remarks>
+        /// This method is <b>type-safe</b>. Use this if you want to throw an exception if the key is missing. Otherwise, use <see cref="TryGet{T}(BBKey{T}, out T)"/>
+        /// </remarks>
+        /// 
+        /// <typeparam name="T"></typeparam>
+        /// <param name="pKey"></param>
+        /// <exception cref="KeyNotFoundException"></exception>
         public T Get<T>(BBKey<T> pKey)
         {
             if (_objectsByID.TryGetValue(pKey.name, out object value))
@@ -39,6 +61,15 @@ namespace BehaviorTree.Core.Tree.Blackboard
 
             throw new KeyNotFoundException($"Key: {pKey.name} doesn't exist.");
         }
+
+        /// <summary>
+        /// Get a value in the blackboard with a blackboard key. 
+        /// </summary>
+        /// <remarks> This method is <b>type-unsafe</b>. Only use this if you want to iterate fast.
+        /// It is not recommanded to use this in production since nothing guarantee <typeparamref name="T"/> matches the value associated with the <paramref name="pKey"/> in the <see cref="Blackboard"/>. <br/>
+        /// Use this if you want to throw an exception if the key is missing. Otherwise, use <see cref="Get{T}(string)"/></remarks>
+        /// <typeparam name="T"></typeparam>
+        /// <exception cref="KeyNotFoundException"></exception>
         public T Get<T>(string pKey)
         {
             if (_objectsByID.TryGetValue(pKey, out object value))
@@ -70,6 +101,17 @@ namespace BehaviorTree.Core.Tree.Blackboard
             }
         }
 
+        /// <summary>
+        /// Provides a non-blocking alternative to <see cref="Get{T}(string)"/>
+        /// </summary>
+        /// <remarks>
+        /// This method is <b>type-unsafe</b>. Only use this if you want to iterate fast.
+        /// It is not recommanded to use this in production since nothing guarantee <typeparamref name="T"/> matches the value associated with the <paramref name="pKey"/> in the <see cref="Blackboard"/>. <br/>
+        /// Use this if you want to add a fallback when a key is missing in the <see cref="Blackboard"/>. <br/>
+        /// If you want to throw an exception if the key is missing, use <see cref="Get{T}(BBKey{T})"/> instead.
+        /// </remarks>
+        /// <typeparam name="T">Value's type</typeparam>
+        /// <returns> returns <c>true</c> if tke key is present in the blackboard, otherwise returns <c>false</c> </returns>
         public bool TryGet<T>(string pKey, out T pValue)
         {
             if (_objectsByID.TryGetValue(pKey, out object value))

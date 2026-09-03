@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	  <Author>Noomolas</Author>
+	  <PackageId>Stateless.BehaviorTree</PackageId>
+	  <Version>0.1.1</Version>
+	  <Product>StatelessBehaviorTree</Product>
+	  <Description> A stateless, engine agnostic Behavior Tree library for .NET </Description>
+	  <RepositoryUrl>https://github.com/Noomolas01/Stateless-BehaviorTree</RepositoryUrl>
+	  <PackageLicenseFile>LICENCE.txt</PackageLicenseFile>
+	  <PackageReadmeFile>README.md</PackageReadmeFile>
+	  <PackageTags>behavior-tree;game-ai;game-development;symbolic-ai</PackageTags>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<None Include="LICENCE.txt" Pack="true" Visible="false" PackagePath=""/>
+		<None Include="README.md" Pack="true" PackagePath="\"/>
+	</ItemGroup>
+
+</Project>

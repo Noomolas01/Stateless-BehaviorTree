@@ -58,6 +58,7 @@ BT lSimpleCombatTree = new BT.Builder()
                 .End()
             .Build();
 
+
 Entity lAgent_A = new("A");
 DebugTree lDebug = new(lSimpleCombatTree, lAgent_A.Memory);
 

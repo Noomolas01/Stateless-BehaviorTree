@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorTree.Core", "BehaviorTree.Core\BehaviorTree.Core.csproj", "{65196508-8AF0-4092-901E-0207AE8801B5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorTree.Tests", "BehaviorTree.Tests\BehaviorTree.Tests.csproj", "{98B22D2E-CD90-42BD-A298-D43A31CB69E7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorTree.Demo", "BehaviorTree.Demo\BehaviorTree.Demo.csproj", "{A4C67450-8D4A-4E75-862D-7AA67724A79F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorTree.Debug", "BehaviorTree.Debug\BehaviorTree.Debug.csproj", "{C8CC6D12-E40E-7FC9-2457-A2BFE7C4FA27}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorTree.Core", "StatelessBehaviorTree.Core\BehaviorTree.Core.csproj", "{93EF2BBD-F300-F13E-EA28-1BF167C23F0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,18 +21,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{65196508-8AF0-4092-901E-0207AE8801B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{65196508-8AF0-4092-901E-0207AE8801B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{65196508-8AF0-4092-901E-0207AE8801B5}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{65196508-8AF0-4092-901E-0207AE8801B5}.Debug|x64.Build.0 = Debug|Any CPU
-		{65196508-8AF0-4092-901E-0207AE8801B5}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{65196508-8AF0-4092-901E-0207AE8801B5}.Debug|x86.Build.0 = Debug|Any CPU
-		{65196508-8AF0-4092-901E-0207AE8801B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{65196508-8AF0-4092-901E-0207AE8801B5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{65196508-8AF0-4092-901E-0207AE8801B5}.Release|x64.ActiveCfg = Release|Any CPU
-		{65196508-8AF0-4092-901E-0207AE8801B5}.Release|x64.Build.0 = Release|Any CPU
-		{65196508-8AF0-4092-901E-0207AE8801B5}.Release|x86.ActiveCfg = Release|Any CPU
-		{65196508-8AF0-4092-901E-0207AE8801B5}.Release|x86.Build.0 = Release|Any CPU
 		{98B22D2E-CD90-42BD-A298-D43A31CB69E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{98B22D2E-CD90-42BD-A298-D43A31CB69E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98B22D2E-CD90-42BD-A298-D43A31CB69E7}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -69,6 +57,18 @@ Global
 		{C8CC6D12-E40E-7FC9-2457-A2BFE7C4FA27}.Release|x64.Build.0 = Release|Any CPU
 		{C8CC6D12-E40E-7FC9-2457-A2BFE7C4FA27}.Release|x86.ActiveCfg = Release|Any CPU
 		{C8CC6D12-E40E-7FC9-2457-A2BFE7C4FA27}.Release|x86.Build.0 = Release|Any CPU
+		{93EF2BBD-F300-F13E-EA28-1BF167C23F0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93EF2BBD-F300-F13E-EA28-1BF167C23F0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93EF2BBD-F300-F13E-EA28-1BF167C23F0B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{93EF2BBD-F300-F13E-EA28-1BF167C23F0B}.Debug|x64.Build.0 = Debug|Any CPU
+		{93EF2BBD-F300-F13E-EA28-1BF167C23F0B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{93EF2BBD-F300-F13E-EA28-1BF167C23F0B}.Debug|x86.Build.0 = Debug|Any CPU
+		{93EF2BBD-F300-F13E-EA28-1BF167C23F0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93EF2BBD-F300-F13E-EA28-1BF167C23F0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93EF2BBD-F300-F13E-EA28-1BF167C23F0B}.Release|x64.ActiveCfg = Release|Any CPU
+		{93EF2BBD-F300-F13E-EA28-1BF167C23F0B}.Release|x64.Build.0 = Release|Any CPU
+		{93EF2BBD-F300-F13E-EA28-1BF167C23F0B}.Release|x86.ActiveCfg = Release|Any CPU
+		{93EF2BBD-F300-F13E-EA28-1BF167C23F0B}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
