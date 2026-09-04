@@ -2,13 +2,13 @@
 // Author: Muhammad H. Fayette Mikano
 // ========================================================
 
-using BehaviorTree.Core.Node.Leaf.Debug;
-using BehaviorTree.Core.Tree.Blackboard;
-using BehaviorTree.Core.Tree.Results;
-using BehaviorTree.Demo.Fake.Conditions;
+using StatelessBehaviorTree.Core.Node.Leaf.Debug;
+using StatelessBehaviorTree.Core.Tree.Blackboard;
+using StatelessBehaviorTree.Core.Tree.Results;
+using StatelessBehaviorTree.Demo.Fake.Conditions;
 using System.Text;
-using BT = BehaviorTree.Core.Tree.BehaviorTree;
-namespace BehaviorTree.Tests;
+using BT = StatelessBehaviorTree.Core.Tree.BehaviorTree;
+namespace StatelessBehaviorTree.Tests;
 
 public class BuilderTest
 {

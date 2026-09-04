@@ -2,7 +2,7 @@
 // Author: Muhammad H. Fayette Mikano
 // ========================================================
 
-namespace BehaviorTree.Core.Tree.Results
+namespace StatelessBehaviorTree.Core.Tree.Results
 {
     public interface IAIDecision {}
 

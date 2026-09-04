@@ -1,8 +1,8 @@
-﻿using BehaviorTree.Core.Tree.Blackboard;
-using BehaviorTree.Core.Tree.Results;
+﻿using StatelessBehaviorTree.Core.Tree.Blackboard;
+using StatelessBehaviorTree.Core.Tree.Results;
 using Spectre.Console;
 
-namespace BehaviorTree.Demo.Fake.Components
+namespace StatelessBehaviorTree.Demo.Fake.Components
 {
     internal class AIComponent
     {

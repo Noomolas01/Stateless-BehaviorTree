@@ -1,12 +1,12 @@
-﻿using BehaviorTree.Core.Node.Abstract;
-using BehaviorTree.Core.Tree.Blackboard;
-using BehaviorTree.Core.Tree.Interfaces;
-using BehaviorTree.Core.Tree.Results;
+﻿using StatelessBehaviorTree.Core.Node.Abstract;
+using StatelessBehaviorTree.Core.Tree.Blackboard;
+using StatelessBehaviorTree.Core.Tree.Interfaces;
+using StatelessBehaviorTree.Core.Tree.Results;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
-namespace BehaviorTree.Core.Node.Composite.Abstract
+namespace StatelessBehaviorTree.Core.Node.Composite.Abstract
 {
     /// <summary>
     /// Base class for nodes that process multiple children node
@@ -17,7 +17,7 @@ namespace BehaviorTree.Core.Node.Composite.Abstract
         public List<ANode> Children { get; private set; } = new List<ANode>();
         public AComposite(string pName = "") : base(pName) { }
 
-        public abstract TickResult ProcessChildren(Blackboard pWorldContext, Blackboard pMemory, ITickObserver? pTickObserver = null);
+        public abstract TickResult ProcessChildren(Blackboard pWorldContext, Blackboard pMemory, ITickHook? pTickObserver = null);
         public void Add(ANode pNode)
         {
             if (pNode == null)

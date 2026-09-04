@@ -2,12 +2,12 @@
 // Author: Muhammad H. Fayette Mikano
 // ========================================================
 
-using BehaviorTree.Core.Node.Abstract;
-using BehaviorTree.Core.Tree.Blackboard;
-using BehaviorTree.Core.Tree.Interfaces;
-using BehaviorTree.Core.Tree.Results;
+using StatelessBehaviorTree.Core.Node.Abstract;
+using StatelessBehaviorTree.Core.Tree.Blackboard;
+using StatelessBehaviorTree.Core.Tree.Interfaces;
+using StatelessBehaviorTree.Core.Tree.Results;
 
-namespace BehaviorTree.Core.Node.Leaf.Abstract
+namespace StatelessBehaviorTree.Core.Node.Leaf.Abstract
 {
     /// <summary>
     /// Base class for action node 
@@ -16,8 +16,17 @@ namespace BehaviorTree.Core.Node.Leaf.Abstract
     {
         public AActionNode(string pName = "") : base(pName) { }
         protected abstract TickResult Do(Blackboard pWorldContext, Blackboard pMemory);
-
-        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickObserver? pTickObserver = null)
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        /// <remarks>
+        /// Every class that inherits <see cref="Tick(Blackboard, Blackboard, ITickHook?)"/> from <see cref="AActionNode"/> should return a <see cref="TickResult"/> containing a <see cref="IAIDecision"/>.
+        /// </remarks>
+        /// <param name="pWorldContext"> <inheritdoc/> </param>
+        /// <param name="pMemory"> <inheritdoc/> </param>
+        /// <param name="pTickHook"></param>
+        /// <returns></returns>
+        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickHook? pTickHook = null)
         {
             return Do(pWorldContext, pMemory);
         }

@@ -2,7 +2,7 @@
 // Author: Muhammad H. Fayette Mikano
 // ========================================================
 
-namespace BehaviorTree.Core.Struct
+namespace StatelessBehaviorTree.Core.Struct
 {
 
 

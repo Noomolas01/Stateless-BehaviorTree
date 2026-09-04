@@ -1,10 +1,10 @@
-﻿using BehaviorTree.Core.Node.Abstract;
-using BehaviorTree.Core.Node.Composite.Abstract;
-using BehaviorTree.Core.Tree.Results;
+﻿using StatelessBehaviorTree.Core.Node.Abstract;
+using StatelessBehaviorTree.Core.Node.Composite.Abstract;
+using StatelessBehaviorTree.Core.Tree.Results;
 using System.Collections.Generic;
 
 
-namespace BehaviorTree.Debug
+namespace StatelessBehaviorTree.Debug
 {
     public class DebugNode
     {

@@ -2,12 +2,12 @@
 // Author: Muhammad H. Fayette Mikano
 // ========================================================
 
-using BehaviorTree.Core.Node.Abstract;
-using BehaviorTree.Core.Node.Decorator.Abstract;
-using BehaviorTree.Core.Tree.Blackboard;
-using BehaviorTree.Core.Tree.Results;
+using StatelessBehaviorTree.Core.Node.Abstract;
+using StatelessBehaviorTree.Core.Node.Decorator.Abstract;
+using StatelessBehaviorTree.Core.Tree.Blackboard;
+using StatelessBehaviorTree.Core.Tree.Results;
 
-namespace BehaviorTree.Core.Node.Decorator
+namespace StatelessBehaviorTree.Core.Node.Decorator
 {
     // WIP
     internal class Repeat : ADecorator

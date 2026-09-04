@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System;
 using System.Text;
 
-namespace BehaviorTree.Core.Tree.Blackboard
+namespace StatelessBehaviorTree.Core.Tree.Blackboard
 {
     /// <summary>
     /// A class holding nodes or entities <b>states</b>. 

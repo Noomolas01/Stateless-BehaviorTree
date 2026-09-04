@@ -4,13 +4,13 @@
 
 
 using Spectre.Console;
-using BehaviorTree.Debug;
-using BehaviorTree.Demo.Fake;
-using BehaviorTree.Demo.Fake.Actions;
-using BT = BehaviorTree.Core.Tree.BehaviorTree;
-using BehaviorTree.Demo.Fake.Conditions;
+using StatelessBehaviorTree.Debug;
+using StatelessBehaviorTree.Demo.Fake;
+using StatelessBehaviorTree.Demo.Fake.Actions;
+using BT = StatelessBehaviorTree.Core.Tree.BehaviorTree;
+using StatelessBehaviorTree.Demo.Fake.Conditions;
 using System.Diagnostics;
-using BehaviorTree.Core.Tree.Results;
+using StatelessBehaviorTree.Core.Tree.Results;
 using System.Text;
 
 #region Rendering functions

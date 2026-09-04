@@ -1,8 +1,8 @@
-﻿using BehaviorTree.Core.Tree.Results;
+﻿using StatelessBehaviorTree.Core.Tree.Results;
 using System.Numerics;
 
 
-namespace BehaviorTree.Demo.Fake.Decisions
+namespace StatelessBehaviorTree.Demo.Fake.Decisions
 {
     internal struct MovementDecision : IAIDecision
     {

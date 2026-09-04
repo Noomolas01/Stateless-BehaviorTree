@@ -2,13 +2,13 @@
 // Author: Muhammad H. Fayette Mikano
 // ========================================================
 
-using BehaviorTree.Core.Tree.Blackboard;
-using BehaviorTree.Core.Tree.Results;
-using BehaviorTree.Core.Node.Composite.Abstract;
-using BehaviorTree.Core.Tree.Interfaces;
-using BehaviorTree.Core.Node.Abstract;
+using StatelessBehaviorTree.Core.Tree.Blackboard;
+using StatelessBehaviorTree.Core.Tree.Results;
+using StatelessBehaviorTree.Core.Node.Composite.Abstract;
+using StatelessBehaviorTree.Core.Tree.Interfaces;
+using StatelessBehaviorTree.Core.Node.Abstract;
 
-namespace BehaviorTree.Core.Node.Composite
+namespace StatelessBehaviorTree.Core.Node.Composite
 {
     /// <summary>
     /// Composite node that stops processing when a child returns SUCCESS
@@ -19,7 +19,7 @@ namespace BehaviorTree.Core.Node.Composite
         {
         }
 
-        public override TickResult ProcessChildren(Blackboard pWorldContext, Blackboard pMemory, ITickObserver? pTickObserver = null)
+        public override TickResult ProcessChildren(Blackboard pWorldContext, Blackboard pMemory, ITickHook? pTickObserver = null)
         {
            var lData = dataByBlackboard.GetValue(pMemory, _ => new CompositeData());
 
@@ -48,7 +48,7 @@ namespace BehaviorTree.Core.Node.Composite
             return new TickResult(NodeStatus.FAILURE, null, pMemory);
         }
 
-        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickObserver? pTickOberver = null)
+        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickHook? pTickOberver = null)
         {
             return ProcessChildren(pWorldContext, pMemory, pTickOberver);
         }

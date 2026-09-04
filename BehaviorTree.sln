@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorTree.Demo", "Behavi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorTree.Debug", "BehaviorTree.Debug\BehaviorTree.Debug.csproj", "{C8CC6D12-E40E-7FC9-2457-A2BFE7C4FA27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BehaviorTree.Core", "StatelessBehaviorTree.Core\BehaviorTree.Core.csproj", "{93EF2BBD-F300-F13E-EA28-1BF167C23F0B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatelessBehaviorTree.Core", "StatelessBehaviorTree.Core\StatelessBehaviorTree.Core.csproj", "{93EF2BBD-F300-F13E-EA28-1BF167C23F0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

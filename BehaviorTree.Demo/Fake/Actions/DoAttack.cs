@@ -1,10 +1,10 @@
-﻿using BehaviorTree.Core.Node.Leaf.Abstract;
-using BehaviorTree.Core.Tree.Blackboard;
-using BehaviorTree.Core.Tree.Results;
-using BehaviorTree.Demo.Fake.Decisions;
+﻿using StatelessBehaviorTree.Core.Node.Leaf.Abstract;
+using StatelessBehaviorTree.Core.Tree.Blackboard;
+using StatelessBehaviorTree.Core.Tree.Results;
+using StatelessBehaviorTree.Demo.Fake.Decisions;
 
 
-namespace BehaviorTree.Demo.Fake.Actions
+namespace StatelessBehaviorTree.Demo.Fake.Actions
 {
     internal class DoAttack : AActionNode
     {

@@ -2,7 +2,7 @@
 // Author: Muhammad H. Fayette Mikano
 // ========================================================
 
-namespace BehaviorTree.Core.Tree.Blackboard
+namespace StatelessBehaviorTree.Core.Tree.Blackboard
 {
     public class BBKey<T>
     {

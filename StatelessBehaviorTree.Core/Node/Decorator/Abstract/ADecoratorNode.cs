@@ -2,12 +2,12 @@
 // Author: Muhammad H. Fayette Mikano
 // ========================================================
 
-using BehaviorTree.Core.Node.Abstract;
-using BehaviorTree.Core.Tree.Blackboard;
-using BehaviorTree.Core.Tree.Interfaces;
-using BehaviorTree.Core.Tree.Results;
+using StatelessBehaviorTree.Core.Node.Abstract;
+using StatelessBehaviorTree.Core.Tree.Blackboard;
+using StatelessBehaviorTree.Core.Tree.Interfaces;
+using StatelessBehaviorTree.Core.Tree.Results;
 
-namespace BehaviorTree.Core.Node.Decorator.Abstract
+namespace StatelessBehaviorTree.Core.Node.Decorator.Abstract
 {
     internal abstract class ADecorator : ANode
     {
@@ -20,7 +20,7 @@ namespace BehaviorTree.Core.Node.Decorator.Abstract
 
         protected abstract TickResult Decorate(ANode pNode, Blackboard pWorldContext, Blackboard pMemory);
 
-        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickObserver? pTickObserver = null)
+        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickHook? pTickObserver = null)
         {
             return Decorate(child!, pWorldContext, pMemory);
         }

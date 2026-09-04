@@ -1,7 +1,7 @@
-﻿using BehaviorTree.Core.Tree.Blackboard;
-using BehaviorTree.Core.Tree.Results;
+﻿using StatelessBehaviorTree.Core.Tree.Blackboard;
+using StatelessBehaviorTree.Core.Tree.Results;
 
-namespace BehaviorTree.Demo.Fake.Components
+namespace StatelessBehaviorTree.Demo.Fake.Components
 {
     internal abstract class AComponent
     {

@@ -1,7 +1,7 @@
-﻿using BehaviorTree.Core.Node.Leaf.Abstract;
-using BehaviorTree.Core.Tree.Blackboard;
+﻿using StatelessBehaviorTree.Core.Node.Leaf.Abstract;
+using StatelessBehaviorTree.Core.Tree.Blackboard;
 
-namespace BehaviorTree.Demo.Fake.Conditions
+namespace StatelessBehaviorTree.Demo.Fake.Conditions
 {
     internal class AttackCondition : AConditionNode
     {

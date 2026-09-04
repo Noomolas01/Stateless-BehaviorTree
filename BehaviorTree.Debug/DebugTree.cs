@@ -1,14 +1,14 @@
-﻿using BehaviorTree.Core.Node.Abstract;
-using BehaviorTree.Core.Tree.Blackboard;
-using BehaviorTree.Core.Tree.Interfaces;
-using BehaviorTree.Core.Tree.Results;
+﻿using StatelessBehaviorTree.Core.Node.Abstract;
+using StatelessBehaviorTree.Core.Tree.Blackboard;
+using StatelessBehaviorTree.Core.Tree.Interfaces;
+using StatelessBehaviorTree.Core.Tree.Results;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace BehaviorTree.Debug
+namespace StatelessBehaviorTree.Debug
 {
-    public class DebugTree : Core.Tree.BehaviorTree, ITickObserver
+    public class DebugTree : Core.Tree.BehaviorTree, ITickHook
     {
         public readonly Dictionary<ANode, DebugNode> tree = new Dictionary<ANode, DebugNode>();
         public readonly DebugNode root;
@@ -26,7 +26,7 @@ namespace BehaviorTree.Debug
 
         }
 
-        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickObserver? pTickOberver = null)
+        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickHook? pTickOberver = null)
         {
             return runtimeTree.Tick(pWorldContext, pMemory, this);
         }

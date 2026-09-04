@@ -2,8 +2,8 @@
 // Author: Muhammad H. Fayette Mikano
 // ========================================================
 
-using BB = BehaviorTree.Core.Tree.Blackboard.Blackboard;
-namespace BehaviorTree.Core.Tree.Results
+using BB = StatelessBehaviorTree.Core.Tree.Blackboard.Blackboard;
+namespace StatelessBehaviorTree.Core.Tree.Results
 {
     public readonly struct TickResult
     {

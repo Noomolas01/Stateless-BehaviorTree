@@ -2,13 +2,13 @@
 // Author: Muhammad H. Fayette Mikano
 // ========================================================
 
-using BehaviorTree.Core.Node.Composite;
-using BehaviorTree.Core.Node.Leaf.Debug;
-using BehaviorTree.Core.Tree.Blackboard;
-using BehaviorTree.Core.Tree.Results;
+using StatelessBehaviorTree.Core.Node.Composite;
+using StatelessBehaviorTree.Core.Node.Leaf.Debug;
+using StatelessBehaviorTree.Core.Tree.Blackboard;
+using StatelessBehaviorTree.Core.Tree.Results;
 using System.Text;
 
-namespace BehaviorTree.Tests;
+namespace StatelessBehaviorTree.Tests;
 public class CompositeNodeTest
 {
     private Blackboard bb;

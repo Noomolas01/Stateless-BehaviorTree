@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace BehaviorTree.Core.Node.Composite
+namespace StatelessBehaviorTree.Core.Node.Composite
 {
     public class CompositeData
     {

@@ -1,8 +1,8 @@
-﻿using BehaviorTree.Core.Tree.Blackboard;
-using BehaviorTree.Demo.Fake.Components;
+﻿using StatelessBehaviorTree.Core.Tree.Blackboard;
+using StatelessBehaviorTree.Demo.Fake.Components;
 using System.Text;
 
-namespace BehaviorTree.Demo.Fake
+namespace StatelessBehaviorTree.Demo.Fake
 {
     internal class Entity
     {

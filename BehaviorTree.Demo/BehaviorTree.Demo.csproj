@@ -7,6 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BehaviorTree.Debug\BehaviorTree.Debug.csproj" />
+    <ProjectReference Include="..\StatelessBehaviorTree.Core\StatelessBehaviorTree.Core.csproj" />
   </ItemGroup>
 
   <PropertyGroup>

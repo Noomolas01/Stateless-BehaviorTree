@@ -2,12 +2,12 @@
 // Author: Muhammad H. Fayette Mikano
 // ========================================================
 
-using BehaviorTree.Core.Node.Leaf.Abstract;
-using BehaviorTree.Core.Tree.Blackboard;
+using StatelessBehaviorTree.Core.Node.Leaf.Abstract;
+using StatelessBehaviorTree.Core.Tree.Blackboard;
 using System.Text;
 
 
-namespace BehaviorTree.Core.Node.Leaf.Debug
+namespace StatelessBehaviorTree.Core.Node.Leaf.Debug
 {
     public class DebugConditionNode : AConditionNode
     {

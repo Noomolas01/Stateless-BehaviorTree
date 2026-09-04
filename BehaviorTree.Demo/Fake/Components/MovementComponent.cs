@@ -1,9 +1,9 @@
-﻿using BehaviorTree.Core.Tree.Blackboard;
-using BehaviorTree.Core.Tree.Results;
-using BehaviorTree.Demo.Fake.Decisions;
+﻿using StatelessBehaviorTree.Core.Tree.Blackboard;
+using StatelessBehaviorTree.Core.Tree.Results;
+using StatelessBehaviorTree.Demo.Fake.Decisions;
 using System.Numerics;
 
-namespace BehaviorTree.Demo.Fake.Components
+namespace StatelessBehaviorTree.Demo.Fake.Components
 {
     internal class MovementComponent : AComponent
     {

@@ -2,12 +2,12 @@
 // Author: Muhammad H. Fayette Mikano
 // ========================================================
 
-using BehaviorTree.Core.Node.Abstract;
-using BehaviorTree.Core.Tree.Blackboard;
-using BehaviorTree.Core.Tree.Interfaces;
-using BehaviorTree.Core.Tree.Results;
+using StatelessBehaviorTree.Core.Node.Abstract;
+using StatelessBehaviorTree.Core.Tree.Blackboard;
+using StatelessBehaviorTree.Core.Tree.Interfaces;
+using StatelessBehaviorTree.Core.Tree.Results;
 
-namespace BehaviorTree.Core.Node.Leaf.Abstract
+namespace StatelessBehaviorTree.Core.Node.Leaf.Abstract
 {
     public abstract class AConditionNode : ANode
     {
@@ -15,7 +15,7 @@ namespace BehaviorTree.Core.Node.Leaf.Abstract
 
         protected abstract bool Evaluate(Blackboard pWorldContext, Blackboard pMemory);
 
-        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickObserver? pTickObserver = null)
+        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickHook? pTickObserver = null)
         {
             bool lConditionMet = Evaluate(pWorldContext, pMemory);
 

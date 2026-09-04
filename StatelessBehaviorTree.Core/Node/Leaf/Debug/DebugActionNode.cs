@@ -2,13 +2,13 @@
 // Author: Muhammad H. Fayette Mikano
 // ========================================================
 
-using BehaviorTree.Core.Node.Leaf.Abstract;
-using BehaviorTree.Core.Tree.Blackboard;
-using BehaviorTree.Core.Tree.Results;
+using StatelessBehaviorTree.Core.Node.Leaf.Abstract;
+using StatelessBehaviorTree.Core.Tree.Blackboard;
+using StatelessBehaviorTree.Core.Tree.Results;
 using System;
 using System.Text;
 
-namespace BehaviorTree.Core.Node.Leaf.Debug
+namespace StatelessBehaviorTree.Core.Node.Leaf.Debug
 {
     public class DebugActionNode : AActionNode
     {
