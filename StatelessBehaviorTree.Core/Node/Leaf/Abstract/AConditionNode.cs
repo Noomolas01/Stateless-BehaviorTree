@@ -9,13 +9,23 @@ using StatelessBehaviorTree.Core.Tree.Results;
 
 namespace StatelessBehaviorTree.Core.Node.Leaf.Abstract
 {
+    /// <summary>
+    /// Base class for condition node
+    /// </summary>
     public abstract class AConditionNode : ANode
     {
         public AConditionNode(string pName = "") : base(pName) { }
 
         protected abstract bool Evaluate(Blackboard pWorldContext, Blackboard pMemory);
 
-        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickHook? pTickObserver = null)
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        /// <param name="pWorldContext"> <inheritdoc/> </param>
+        /// <param name="pMemory"> <inheritdoc/> </param>
+        /// <param name="pTickHook"></param>
+        /// <returns></returns>
+        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickHook? pTickHook = null)
         {
             bool lConditionMet = Evaluate(pWorldContext, pMemory);
 

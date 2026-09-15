@@ -5,4 +5,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\StatelessBehaviorTree.Core\StatelessBehaviorTree.Core.csproj" />
+  </ItemGroup>
+
 </Project>

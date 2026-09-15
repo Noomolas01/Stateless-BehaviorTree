@@ -48,9 +48,5 @@ namespace StatelessBehaviorTree.Core.Node.Composite
             return new TickResult(NodeStatus.FAILURE, null, pMemory);
         }
 
-        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickHook? pTickOberver = null)
-        {
-            return ProcessChildren(pWorldContext, pMemory, pTickOberver);
-        }
     }
 }

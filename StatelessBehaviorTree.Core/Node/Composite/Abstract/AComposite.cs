@@ -33,5 +33,10 @@ namespace StatelessBehaviorTree.Core.Node.Composite.Abstract
 
             Children.Add(pNode);
         }
+
+        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickHook? pTickOberver = null)
+        {
+            return ProcessChildren(pWorldContext, pMemory, pTickOberver);
+        }
     }
 }

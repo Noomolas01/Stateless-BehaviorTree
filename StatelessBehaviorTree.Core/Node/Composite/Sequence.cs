@@ -7,7 +7,6 @@ using StatelessBehaviorTree.Core.Node.Composite.Abstract;
 using StatelessBehaviorTree.Core.Tree.Blackboard;
 using StatelessBehaviorTree.Core.Tree.Interfaces;
 using StatelessBehaviorTree.Core.Tree.Results;
-using System;
 
 namespace StatelessBehaviorTree.Core.Node.Composite
 {
@@ -18,7 +17,7 @@ namespace StatelessBehaviorTree.Core.Node.Composite
     {
         public Sequence(string pName = "") : base(pName) { }
 
-        public override TickResult ProcessChildren(Blackboard pWorldContext, Blackboard pMemory, ITickHook? pTickObserver = null)
+        public override TickResult ProcessChildren(Blackboard pWorldContext, Blackboard pMemory, ITickHook? pTickHook = null)
         {
             var lData = dataByBlackboard.GetValue(pMemory, _ => new CompositeData());
             
@@ -26,9 +25,9 @@ namespace StatelessBehaviorTree.Core.Node.Composite
             {
                 ANode lCurrentChild = Children[i];
 
-                pTickObserver?.OnTickStart(lCurrentChild);
-                TickResult lCurrentChildResult = lCurrentChild.Tick(pWorldContext, pMemory, pTickObserver);
-                pTickObserver?.OnTickEnd(lCurrentChild, lCurrentChildResult);
+                pTickHook?.OnTickStart(lCurrentChild);
+                TickResult lCurrentChildResult = lCurrentChild.Tick(pWorldContext, pMemory, pTickHook);
+                pTickHook?.OnTickEnd(lCurrentChild, lCurrentChildResult);
 
                 if (lCurrentChildResult.status == NodeStatus.FAILURE)
                 {
@@ -47,10 +46,7 @@ namespace StatelessBehaviorTree.Core.Node.Composite
             return new TickResult(NodeStatus.SUCCESS, null, pMemory);
         }
 
-        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickHook? pTickOberver = null)
-        {
-            return ProcessChildren(pWorldContext, pMemory, pTickOberver);
-        }
+       
     }
 
 }
