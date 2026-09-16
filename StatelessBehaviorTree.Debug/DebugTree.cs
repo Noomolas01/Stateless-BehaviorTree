@@ -1,25 +1,25 @@
 ﻿using StatelessBehaviorTree.Core.Node.Abstract;
+using StatelessBehaviorTree.Core.Tree;
 using StatelessBehaviorTree.Core.Tree.Blackboard;
 using StatelessBehaviorTree.Core.Tree.Interfaces;
 using StatelessBehaviorTree.Core.Tree.Results;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace StatelessBehaviorTree.Debug
 {
-    public class DebugTree : Core.Tree.BehaviorTree, ITickHook
+    public class DebugTree : BehaviorTree, ITickHook
     {
-        public readonly Dictionary<ANode, DebugNode> tree = new Dictionary<ANode, DebugNode>();
+        public readonly Dictionary<ANode, DebugNode> debugNodeByRuntimeNode = new Dictionary<ANode, DebugNode>();
         public readonly DebugNode root;
+        public readonly BehaviorTree runtimeTree;
         public readonly Blackboard memory;
 
-        public readonly Core.Tree.BehaviorTree runtimeTree;
 
-        public DebugTree(Core.Tree.BehaviorTree pTree, Blackboard pBlackboard)
+        public DebugTree(BehaviorTree pTree, Blackboard pBlackboard)
         {
             root = new DebugNode(pTree.Root!);
-            tree.Add(pTree.Root!, root);
+            debugNodeByRuntimeNode.Add(pTree.Root!, root);
             memory = pBlackboard;
             Init(root);
             runtimeTree = pTree;
@@ -33,19 +33,19 @@ namespace StatelessBehaviorTree.Debug
 
         public void OnTickStart(ANode pNode)
         {
-            tree[pNode].result = new TickResult(NodeStatus.INACTIVE, null, memory);
+            debugNodeByRuntimeNode[pNode].result = new TickResult(NodeStatus.INACTIVE, null, memory);
         }
 
         public void OnTickEnd(ANode pNode, TickResult pResult)
         {
-            tree[pNode].result = pResult;
+            debugNodeByRuntimeNode[pNode].result = pResult;
         }
 
         public void Clean()
         {
-            foreach(var key in tree.Keys)
+            foreach(var key in debugNodeByRuntimeNode.Keys)
             {
-                tree[key].result = new TickResult(NodeStatus.INACTIVE, null, memory);
+                debugNodeByRuntimeNode[key].result = new TickResult(NodeStatus.INACTIVE, null, memory);
             }
         }
 
@@ -56,7 +56,7 @@ namespace StatelessBehaviorTree.Debug
 
             foreach (var n in pNodes.children)
             {
-                tree.Add(n.runtimeNode, n);
+                debugNodeByRuntimeNode.Add(n.runtimeNode, n);
 
                 if (n.children != null && n.children.Count > 0)
                 {
