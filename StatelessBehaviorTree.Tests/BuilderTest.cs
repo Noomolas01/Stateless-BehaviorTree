@@ -14,6 +14,7 @@ public class BuilderTest
 {
     private Blackboard bb;
     private Blackboard ws;
+
     [SetUp]
     public void Setup()
     {

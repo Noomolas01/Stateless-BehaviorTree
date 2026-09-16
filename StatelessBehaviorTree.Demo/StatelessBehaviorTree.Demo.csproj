@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StatelessBehaviorTree.Core\StatelessBehaviorTree.Core.csproj" />
-    <ProjectReference Include="..\StatelessBehaviorTree.Tests\StatelessBehaviorTree.Tests.csproj" />
+    <ProjectReference Include="..\StatelessBehaviorTree.Debug\StatelessBehaviorTree.Debug.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
