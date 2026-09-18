@@ -2,10 +2,11 @@
 // Author: Muhammad H. Fayette Mikano
 // ========================================================
 
+using StatelessBehaviorTree.Core.Tree.Blackboard;
 using System.Collections.Generic;
 using System.Text;
 
-namespace StatelessBehaviorTree.Core.Tree.Blackboard
+namespace StatelessBehaviorTree.Core.Tree.Data
 {
     /// <summary>
     /// A class holding nodes or entities <b>states</b>. 
