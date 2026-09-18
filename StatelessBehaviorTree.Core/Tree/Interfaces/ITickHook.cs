@@ -5,7 +5,7 @@ namespace StatelessBehaviorTree.Core.Tree.Interfaces
 {
     public interface ITickHook
     {
-        void OnTickStart(ANode pNode);
-        void OnTickEnd(ANode pNode, TickResult pResult);
+        void OnTickStart(ARuntimeNode pNode);
+        void OnTickEnd(ARuntimeNode pNode, TickResult pResult);
     }
 }

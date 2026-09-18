@@ -19,7 +19,7 @@ namespace StatelessBehaviorTree.Core.Node.Decorator
             _count = pCount;
         }
 
-        protected override TickResult Decorate(ANode pNode, Blackboard pWorldContext, Blackboard pMemory)
+        protected override TickResult Decorate(ARuntimeNode pNode, Blackboard pWorldContext, Blackboard pMemory)
         {
             TickResult lChildTickResult;
 

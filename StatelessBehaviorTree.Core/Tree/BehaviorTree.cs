@@ -16,10 +16,13 @@ using BB = StatelessBehaviorTree.Core.Tree.Blackboard.Blackboard;
 
 namespace StatelessBehaviorTree.Core.Tree
 {
-    public class BehaviorTree : ANode
+    public class BehaviorTree : ARuntimeNode
     {
         public AComposite? Root { get; private set; }
-        
+        private ITickHook _tickHook;
+
+
+
         protected BehaviorTree() 
         {
 
@@ -32,7 +35,7 @@ namespace StatelessBehaviorTree.Core.Tree
             return lResult;
         }
 
-        public void Traverse(Action<ANode>? pCallback)
+        public void Traverse(Action<ARuntimeNode>? pCallback)
         {
             if (Root == null)
                 return;
@@ -40,7 +43,7 @@ namespace StatelessBehaviorTree.Core.Tree
             Traverse(Root, pCallback);
         }
 
-        private void Traverse(AComposite pCompositeNode, Action<ANode>? pCallback)
+        private void Traverse(AComposite pCompositeNode, Action<ARuntimeNode>? pCallback)
         {
             pCallback?.Invoke(pCompositeNode);
 

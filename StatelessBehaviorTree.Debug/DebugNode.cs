@@ -9,11 +9,11 @@ namespace StatelessBehaviorTree.Debug
     public class DebugNode
     {
         public readonly string id;
-        public readonly ANode runtimeNode;
+        public readonly ARuntimeNode runtimeNode;
         public IReadOnlyList<DebugNode>? children = null;
         public TickResult result;
 
-        public DebugNode(ANode pRuntimeNode)
+        public DebugNode(ARuntimeNode pRuntimeNode)
         {
             id = pRuntimeNode.name;
             runtimeNode = pRuntimeNode;

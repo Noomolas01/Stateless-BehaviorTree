@@ -12,7 +12,7 @@ namespace StatelessBehaviorTree.Core.Node.Leaf.Abstract
     /// <summary>
     /// Base class for action node 
     /// </summary>
-    public abstract class AActionNode: ANode
+    public abstract class AActionNode: ARuntimeNode
     {
         public AActionNode(string pName = "") : base(pName) { }
         protected abstract TickResult Do(Blackboard pWorldContext, Blackboard pMemory);
@@ -28,7 +28,11 @@ namespace StatelessBehaviorTree.Core.Node.Leaf.Abstract
         /// <returns></returns>
         public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickHook? pTickHook = null)
         {
-            return Do(pWorldContext, pMemory);
+            pTickHook?.OnTickStart(this);
+            TickResult lResult = Do(pWorldContext, pMemory);
+            pTickHook?.OnTickEnd(this, lResult);
+
+            return lResult;
         }
     }
 

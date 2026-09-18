@@ -12,7 +12,7 @@ namespace StatelessBehaviorTree.Core.Node.Leaf.Abstract
     /// <summary>
     /// Base class for condition node
     /// </summary>
-    public abstract class AConditionNode : ANode
+    public abstract class AConditionNode : ARuntimeNode
     {
         public AConditionNode(string pName = "") : base(pName) { }
 
@@ -29,7 +29,11 @@ namespace StatelessBehaviorTree.Core.Node.Leaf.Abstract
         {
             bool lConditionMet = Evaluate(pWorldContext, pMemory);
 
-            return lConditionMet ? new TickResult(NodeStatus.SUCCESS, null, pMemory) : new TickResult(NodeStatus.FAILURE, null, pMemory);
+            pTickHook?.OnTickStart(this);
+            TickResult lResult = lConditionMet ? new TickResult(NodeStatus.SUCCESS, null, pMemory) : new TickResult(NodeStatus.FAILURE, null, pMemory);
+            pTickHook?.OnTickEnd(this, lResult);
+
+            return lResult;
         }
     }
 }

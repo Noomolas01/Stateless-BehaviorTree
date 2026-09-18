@@ -9,16 +9,16 @@ using StatelessBehaviorTree.Core.Tree.Results;
 
 namespace StatelessBehaviorTree.Core.Node.Decorator.Abstract
 {
-    internal abstract class ADecorator : ANode
+    internal abstract class ADecorator : ARuntimeNode
     {
-        protected ANode? child;
+        protected ARuntimeNode? child;
 
-        public void Init(ANode pChild)
+        public void Init(ARuntimeNode pChild)
         {
             child = pChild;
         }
 
-        protected abstract TickResult Decorate(ANode pNode, Blackboard pWorldContext, Blackboard pMemory);
+        protected abstract TickResult Decorate(ARuntimeNode pNode, Blackboard pWorldContext, Blackboard pMemory);
 
         public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickHook? pTickObserver = null)
         {

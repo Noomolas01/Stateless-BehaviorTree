@@ -1,6 +1,8 @@
 ﻿using StatelessBehaviorTree.Core.Tree.Blackboard;
 using StatelessBehaviorTree.Core.Tree.Results;
 using Spectre.Console;
+using StatelessBehaviorTree.Core.Tree;
+using StatelessBehaviorTree.Core.Tree.Interfaces;
 
 namespace StatelessBehaviorTree.Demo.Fake.Components
 {
@@ -8,10 +10,11 @@ namespace StatelessBehaviorTree.Demo.Fake.Components
     {
         private float _ElapsedTime = 0f;
         private float _timeBetweenTick;
-        private Core.Tree.BehaviorTree? _tree;
 
         public Blackboard? memory;
-        public Action<IAIDecision>? decisionEmitter;
+        private BehaviorTree? _tree;
+        public Action<IAIDecision>? decisionEmitted;
+        private ITickHook? _tickHook = null;
 
         private readonly Entity _owner;
 
@@ -23,11 +26,12 @@ namespace StatelessBehaviorTree.Demo.Fake.Components
             _owner = pOwner;
         }
 
-        public void Init(Core.Tree.BehaviorTree? pTree, float pTimeBetweenTickInSec, Blackboard? pMemory)
+        public void Init(BehaviorTree? pTree, float pTimeBetweenTickInSec, Blackboard? pMemory, ITickHook? pTickHook = null)
         {
             ArgumentNullException.ThrowIfNull(pTree);
             ArgumentNullException.ThrowIfNull(pMemory);
 
+            _tickHook = pTickHook;
             _tree = pTree;
             _timeBetweenTick = pTimeBetweenTickInSec;
             memory = pMemory;
@@ -39,11 +43,11 @@ namespace StatelessBehaviorTree.Demo.Fake.Components
 
             if (_ElapsedTime == 0 && !_tickedAtStart)
             {
-                IAIDecision? lDecision = _tree.Tick(null!, memory).decision;
+                IAIDecision? lDecision = _tree.Tick(null!, memory, _tickHook).decision;
 
                 _tickCount++;
                 if (lDecision != null)
-                    decisionEmitter?.Invoke(lDecision);
+                    decisionEmitted?.Invoke(lDecision);
                 _tickedAtStart = true;
 
                 AnsiConsole.Write(new Markup($"[IndianRed_1]Tick n°{_tickCount}[/]\n"));
@@ -56,11 +60,11 @@ namespace StatelessBehaviorTree.Demo.Fake.Components
 
             if (_ElapsedTime >= _timeBetweenTick)
             {
-                IAIDecision? lDecision = _tree.Tick(null!, memory).decision;
+                IAIDecision? lDecision = _tree.Tick(null!, memory, _tickHook).decision;
                 _tickCount++;
 
                 if (lDecision != null)
-                    decisionEmitter?.Invoke(lDecision);
+                    decisionEmitted?.Invoke(lDecision);
 
                 _ElapsedTime = 0f;
             }

@@ -8,15 +8,15 @@ using System.Collections.Generic;
 
 namespace StatelessBehaviorTree.Debug
 {
-    public class DebugTree : BehaviorTree, ITickHook
+    public class TreeDebugger : ITickHook
     {
-        public readonly Dictionary<ANode, DebugNode> debugNodeByRuntimeNode = new Dictionary<ANode, DebugNode>();
+        public readonly Dictionary<ARuntimeNode, DebugNode> debugNodeByRuntimeNode = new Dictionary<ARuntimeNode, DebugNode>();
         public readonly DebugNode root;
         public readonly BehaviorTree runtimeTree;
         public readonly Blackboard memory;
 
 
-        public DebugTree(BehaviorTree pTree, Blackboard pBlackboard)
+        public TreeDebugger(BehaviorTree pTree, Blackboard pBlackboard)
         {
             root = new DebugNode(pTree.Root!);
             debugNodeByRuntimeNode.Add(pTree.Root!, root);
@@ -26,17 +26,12 @@ namespace StatelessBehaviorTree.Debug
 
         }
 
-        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickHook? pTickOberver = null)
+        public void OnTickStart(ARuntimeNode pRuntimeNode)
         {
-            return runtimeTree.Tick(pWorldContext, pMemory, this);
+            debugNodeByRuntimeNode[pRuntimeNode].result = new TickResult(NodeStatus.INACTIVE, null, memory);
         }
 
-        public void OnTickStart(ANode pNode)
-        {
-            debugNodeByRuntimeNode[pNode].result = new TickResult(NodeStatus.INACTIVE, null, memory);
-        }
-
-        public void OnTickEnd(ANode pNode, TickResult pResult)
+        public void OnTickEnd(ARuntimeNode pNode, TickResult pResult)
         {
             debugNodeByRuntimeNode[pNode].result = pResult;
         }

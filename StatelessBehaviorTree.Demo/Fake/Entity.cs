@@ -22,8 +22,8 @@ namespace StatelessBehaviorTree.Demo.Fake
 
             this.Memory.Set("id", id);
 
-            aiComponent.decisionEmitter += _movementComponent.OnDecision;
-            aiComponent.decisionEmitter += combatComponent.OnDecision;
+            aiComponent.decisionEmitted += _movementComponent.OnDecision;
+            aiComponent.decisionEmitted += combatComponent.OnDecision;
         }
 
         public void SetMemory(Blackboard pMemory)

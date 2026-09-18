@@ -60,9 +60,8 @@ BT lSimpleCombatTree = new BT.Builder()
 
 
 Entity lAgent_A = new("A");
-DebugTree lDebug = new(lSimpleCombatTree, lAgent_A.Memory);
-
-lAgent_A.aiComponent.Init(lDebug, TIME_BETWEEN_TICK_IN_SEC, lAgent_A.Memory);
+TreeDebugger lDebug = new(lSimpleCombatTree, lAgent_A.Memory);
+lAgent_A.aiComponent.Init(lSimpleCombatTree, TIME_BETWEEN_TICK_IN_SEC, lAgent_A.Memory, lDebug);
 
 Stopwatch lStopwatch = new();
 lStopwatch.Start();

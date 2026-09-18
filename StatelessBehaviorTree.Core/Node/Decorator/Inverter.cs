@@ -13,7 +13,7 @@ namespace StatelessBehaviorTree.Core.Node.Decorator
     internal class Inverter : ADecorator
     {
  
-        protected override TickResult Decorate(ANode pNode, Blackboard pWorldContext, Blackboard pMemory)
+        protected override TickResult Decorate(ARuntimeNode pNode, Blackboard pWorldContext, Blackboard pMemory)
         {
             TickResult lChildTickResult = child!.Tick(pWorldContext, pMemory);
 

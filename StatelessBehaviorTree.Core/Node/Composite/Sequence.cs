@@ -23,11 +23,11 @@ namespace StatelessBehaviorTree.Core.Node.Composite
             
             for (int i = lData.lastChildrenIndex; i < Children.Count; i++)
             {
-                ANode lCurrentChild = Children[i];
+                ARuntimeNode lCurrentChild = Children[i];
 
-                pTickHook?.OnTickStart(lCurrentChild);
+               // pTickHook?.OnTickStart(lCurrentChild);
                 TickResult lCurrentChildResult = lCurrentChild.Tick(pWorldContext, pMemory, pTickHook);
-                pTickHook?.OnTickEnd(lCurrentChild, lCurrentChildResult);
+               // pTickHook?.OnTickEnd(lCurrentChild, lCurrentChildResult);
 
                 if (lCurrentChildResult.status == NodeStatus.FAILURE)
                 {

@@ -11,14 +11,14 @@ namespace StatelessBehaviorTree.Core.Node.Composite.Abstract
     /// <summary>
     /// Base class for nodes that process multiple children node
     /// </summary>
-    public abstract class AComposite : ANode
+    public abstract class AComposite : ARuntimeNode
     {
         protected readonly ConditionalWeakTable<Blackboard, CompositeData> dataByBlackboard = new ConditionalWeakTable<Blackboard, CompositeData>();
-        public List<ANode> Children { get; private set; } = new List<ANode>();
+        public List<ARuntimeNode> Children { get; private set; } = new List<ARuntimeNode>();
         public AComposite(string pName = "") : base(pName) { }
 
         public abstract TickResult ProcessChildren(Blackboard pWorldContext, Blackboard pMemory, ITickHook? pTickObserver = null);
-        public void Add(ANode pNode)
+        public void Add(ARuntimeNode pNode)
         {
             if (pNode == null)
             {
@@ -34,9 +34,14 @@ namespace StatelessBehaviorTree.Core.Node.Composite.Abstract
             Children.Add(pNode);
         }
 
-        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickHook? pTickOberver = null)
+        public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickHook? pTickHook = null)
         {
-            return ProcessChildren(pWorldContext, pMemory, pTickOberver);
+            pTickHook?.OnTickStart(this);
+            TickResult lResult = ProcessChildren(pWorldContext, pMemory, pTickHook);
+            pTickHook?.OnTickEnd(this, lResult);
+
+            return lResult;
+            
         }
     }
 }
