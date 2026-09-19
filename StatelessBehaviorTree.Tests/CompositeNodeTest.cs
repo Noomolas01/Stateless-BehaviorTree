@@ -5,6 +5,7 @@
 using StatelessBehaviorTree.Core.Node.Composite;
 using StatelessBehaviorTree.Core.Node.Leaf.Debug;
 using StatelessBehaviorTree.Core.Tree.Blackboard;
+using StatelessBehaviorTree.Core.Tree.Data;
 using StatelessBehaviorTree.Core.Tree.Results;
 using System.Text;
 

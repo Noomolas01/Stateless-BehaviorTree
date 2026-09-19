@@ -1,4 +1,4 @@
-﻿using StatelessBehaviorTree.Core.Tree.Blackboard;
+﻿using StatelessBehaviorTree.Core.Tree.Data;
 using StatelessBehaviorTree.Demo.Fake.Components;
 using System.Text;
 
