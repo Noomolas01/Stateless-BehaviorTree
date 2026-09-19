@@ -2,7 +2,7 @@
 // Author: Muhammad H. Fayette Mikano
 // ========================================================
 
-using BB = StatelessBehaviorTree.Core.Tree.Blackboard.Blackboard;
+using BB = StatelessBehaviorTree.Core.Tree.Data.Blackboard;
 namespace StatelessBehaviorTree.Core.Tree.Results
 {
     public readonly struct TickResult

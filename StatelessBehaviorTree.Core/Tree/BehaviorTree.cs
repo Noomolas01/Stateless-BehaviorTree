@@ -7,31 +7,27 @@ using StatelessBehaviorTree.Core.Node.Composite;
 using StatelessBehaviorTree.Core.Node.Composite.Abstract;
 using StatelessBehaviorTree.Core.Node.Decorator.Abstract;
 using StatelessBehaviorTree.Core.Node.Leaf.Abstract;
-using StatelessBehaviorTree.Core.Tree.Blackboard;
 using StatelessBehaviorTree.Core.Tree.Interfaces;
 using StatelessBehaviorTree.Core.Tree.Results;
 using System;
 using System.Collections.Generic;
-using BB = StatelessBehaviorTree.Core.Tree.Blackboard.Blackboard;
+using BB = StatelessBehaviorTree.Core.Tree.Data.Blackboard;
 
 namespace StatelessBehaviorTree.Core.Tree
 {
-    public class BehaviorTree : ARuntimeNode
+    public class BehaviorTree
     {
         public AComposite? Root { get; private set; }
-        private ITickHook _tickHook;
-
+        private ITickHook? _tickHook = null;
 
 
         protected BehaviorTree() 
         {
-
         }
-        public override TickResult Tick(BB pWorldContext, BB pMemory, ITickHook? pTickOberver = null)
+
+        public TickResult Tick(BB pWorldContext, BB pMemory)
         {
-            pTickOberver?.OnTickStart(Root!);
-            TickResult lResult = Root!.Tick(pWorldContext, pMemory, pTickOberver);
-            pTickOberver?.OnTickEnd(Root!, lResult);
+            TickResult lResult = Root!.Tick(pWorldContext, pMemory, _tickHook);
             return lResult;
         }
 
@@ -65,14 +61,16 @@ namespace StatelessBehaviorTree.Core.Tree
 
             public BehaviorTree.Builder Selector(string pName = "")
             {
-                Selector lNewSelector = new Selector(pName);
+                Selector lNewSelector;
 
                 if (_tree.Root == null)
                 {
+                    lNewSelector = new Selector(pName, true);
                     _tree.Root = lNewSelector;
                     return this;
                 }
 
+                lNewSelector = new Selector(pName);
                 AComposite lParent = GetParent();
                 lParent.Add(lNewSelector);
                 _composites.Push(lNewSelector);
@@ -82,13 +80,17 @@ namespace StatelessBehaviorTree.Core.Tree
 
             public BehaviorTree.Builder Sequence(string pName = "")
             {
-                Sequence lNewSequence = new Sequence(pName);
+                Sequence lNewSequence;
                 
                 if (_tree.Root == null)
                 {
+                    lNewSequence = new Sequence(pName, true);
                     _tree.Root = lNewSequence;
                     return this;
                 }
+
+                lNewSequence = new Sequence(pName);
+
                 AComposite lParent = GetParent();
                 lParent.Add(lNewSequence);
                 _composites.Push(lNewSequence);
@@ -166,8 +168,10 @@ namespace StatelessBehaviorTree.Core.Tree
                 return lParent ??= _tree.Root!;
             }
 
-            public BehaviorTree Build()
+            public BehaviorTree Build(ITickHook? pTickHook = null)
             {
+                _tree._tickHook = pTickHook;
+                _tree._tickHook?.Init(_tree.Root!);
                 return _tree;
             }
 

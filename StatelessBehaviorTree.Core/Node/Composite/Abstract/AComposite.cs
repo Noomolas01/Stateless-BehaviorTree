@@ -1,5 +1,5 @@
 ﻿using StatelessBehaviorTree.Core.Node.Abstract;
-using StatelessBehaviorTree.Core.Tree.Blackboard;
+using StatelessBehaviorTree.Core.Tree.Data;
 using StatelessBehaviorTree.Core.Tree.Interfaces;
 using StatelessBehaviorTree.Core.Tree.Results;
 using System;
@@ -15,7 +15,12 @@ namespace StatelessBehaviorTree.Core.Node.Composite.Abstract
     {
         protected readonly ConditionalWeakTable<Blackboard, CompositeData> dataByBlackboard = new ConditionalWeakTable<Blackboard, CompositeData>();
         public List<ARuntimeNode> Children { get; private set; } = new List<ARuntimeNode>();
-        public AComposite(string pName = "") : base(pName) { }
+
+        public readonly bool isRoot;
+        public AComposite(string pName = "", bool pIsRoot = false) : base(pName) 
+        {
+            isRoot = pIsRoot;
+        }
 
         public abstract TickResult ProcessChildren(Blackboard pWorldContext, Blackboard pMemory, ITickHook? pTickObserver = null);
         public void Add(ARuntimeNode pNode)
@@ -36,7 +41,7 @@ namespace StatelessBehaviorTree.Core.Node.Composite.Abstract
 
         public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickHook? pTickHook = null)
         {
-            pTickHook?.OnTickStart(this);
+            pTickHook?.OnTickStart(this, pMemory);
             TickResult lResult = ProcessChildren(pWorldContext, pMemory, pTickHook);
             pTickHook?.OnTickEnd(this, lResult);
 

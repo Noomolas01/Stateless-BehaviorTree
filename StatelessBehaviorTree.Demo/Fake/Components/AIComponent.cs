@@ -1,8 +1,8 @@
-﻿using StatelessBehaviorTree.Core.Tree.Blackboard;
-using StatelessBehaviorTree.Core.Tree.Results;
+﻿using StatelessBehaviorTree.Core.Tree.Results;
 using Spectre.Console;
 using StatelessBehaviorTree.Core.Tree;
 using StatelessBehaviorTree.Core.Tree.Interfaces;
+using StatelessBehaviorTree.Core.Tree.Data;
 
 namespace StatelessBehaviorTree.Demo.Fake.Components
 {
@@ -14,7 +14,6 @@ namespace StatelessBehaviorTree.Demo.Fake.Components
         public Blackboard? memory;
         private BehaviorTree? _tree;
         public Action<IAIDecision>? decisionEmitted;
-        private ITickHook? _tickHook = null;
 
         private readonly Entity _owner;
 
@@ -26,12 +25,11 @@ namespace StatelessBehaviorTree.Demo.Fake.Components
             _owner = pOwner;
         }
 
-        public void Init(BehaviorTree? pTree, float pTimeBetweenTickInSec, Blackboard? pMemory, ITickHook? pTickHook = null)
+        public void Init(BehaviorTree? pTree, float pTimeBetweenTickInSec, Blackboard? pMemory)
         {
             ArgumentNullException.ThrowIfNull(pTree);
             ArgumentNullException.ThrowIfNull(pMemory);
 
-            _tickHook = pTickHook;
             _tree = pTree;
             _timeBetweenTick = pTimeBetweenTickInSec;
             memory = pMemory;
@@ -43,7 +41,7 @@ namespace StatelessBehaviorTree.Demo.Fake.Components
 
             if (_ElapsedTime == 0 && !_tickedAtStart)
             {
-                IAIDecision? lDecision = _tree.Tick(null!, memory, _tickHook).decision;
+                IAIDecision? lDecision = _tree.Tick(null!, memory).decision;
 
                 _tickCount++;
                 if (lDecision != null)
@@ -60,7 +58,7 @@ namespace StatelessBehaviorTree.Demo.Fake.Components
 
             if (_ElapsedTime >= _timeBetweenTick)
             {
-                IAIDecision? lDecision = _tree.Tick(null!, memory, _tickHook).decision;
+                IAIDecision? lDecision = _tree.Tick(null!, memory).decision;
                 _tickCount++;
 
                 if (lDecision != null)

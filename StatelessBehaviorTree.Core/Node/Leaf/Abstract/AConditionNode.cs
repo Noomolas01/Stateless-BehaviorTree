@@ -3,7 +3,7 @@
 // ========================================================
 
 using StatelessBehaviorTree.Core.Node.Abstract;
-using StatelessBehaviorTree.Core.Tree.Blackboard;
+using StatelessBehaviorTree.Core.Tree.Data;
 using StatelessBehaviorTree.Core.Tree.Interfaces;
 using StatelessBehaviorTree.Core.Tree.Results;
 
@@ -27,9 +27,8 @@ namespace StatelessBehaviorTree.Core.Node.Leaf.Abstract
         /// <returns></returns>
         public override TickResult Tick(Blackboard pWorldContext, Blackboard pMemory, ITickHook? pTickHook = null)
         {
+            pTickHook?.OnTickStart(this, pMemory);
             bool lConditionMet = Evaluate(pWorldContext, pMemory);
-
-            pTickHook?.OnTickStart(this);
             TickResult lResult = lConditionMet ? new TickResult(NodeStatus.SUCCESS, null, pMemory) : new TickResult(NodeStatus.FAILURE, null, pMemory);
             pTickHook?.OnTickEnd(this, lResult);
 

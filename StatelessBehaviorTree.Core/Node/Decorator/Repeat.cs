@@ -4,7 +4,7 @@
 
 using StatelessBehaviorTree.Core.Node.Abstract;
 using StatelessBehaviorTree.Core.Node.Decorator.Abstract;
-using StatelessBehaviorTree.Core.Tree.Blackboard;
+using StatelessBehaviorTree.Core.Tree.Data;
 using StatelessBehaviorTree.Core.Tree.Results;
 
 namespace StatelessBehaviorTree.Core.Node.Decorator

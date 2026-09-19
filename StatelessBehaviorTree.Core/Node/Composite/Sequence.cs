@@ -4,7 +4,7 @@
 
 using StatelessBehaviorTree.Core.Node.Abstract;
 using StatelessBehaviorTree.Core.Node.Composite.Abstract;
-using StatelessBehaviorTree.Core.Tree.Blackboard;
+using StatelessBehaviorTree.Core.Tree.Data;
 using StatelessBehaviorTree.Core.Tree.Interfaces;
 using StatelessBehaviorTree.Core.Tree.Results;
 
@@ -15,7 +15,7 @@ namespace StatelessBehaviorTree.Core.Node.Composite
     /// </summary>
     public class Sequence : AComposite
     {
-        public Sequence(string pName = "") : base(pName) { }
+        public Sequence(string pName = "", bool pIsRoot = false) : base(pName, pIsRoot) { }
 
         public override TickResult ProcessChildren(Blackboard pWorldContext, Blackboard pMemory, ITickHook? pTickHook = null)
         {
@@ -25,9 +25,7 @@ namespace StatelessBehaviorTree.Core.Node.Composite
             {
                 ARuntimeNode lCurrentChild = Children[i];
 
-               // pTickHook?.OnTickStart(lCurrentChild);
                 TickResult lCurrentChildResult = lCurrentChild.Tick(pWorldContext, pMemory, pTickHook);
-               // pTickHook?.OnTickEnd(lCurrentChild, lCurrentChildResult);
 
                 if (lCurrentChildResult.status == NodeStatus.FAILURE)
                 {

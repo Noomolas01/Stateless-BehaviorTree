@@ -2,11 +2,11 @@
 // Author: Muhammad H. Fayette Mikano
 // ========================================================
 
-using StatelessBehaviorTree.Core.Tree.Blackboard;
 using StatelessBehaviorTree.Core.Tree.Results;
 using StatelessBehaviorTree.Core.Node.Composite.Abstract;
 using StatelessBehaviorTree.Core.Tree.Interfaces;
 using StatelessBehaviorTree.Core.Node.Abstract;
+using StatelessBehaviorTree.Core.Tree.Data;
 
 namespace StatelessBehaviorTree.Core.Node.Composite
 {
@@ -15,7 +15,7 @@ namespace StatelessBehaviorTree.Core.Node.Composite
     /// </summary>
     public class Selector : AComposite
     {
-        public Selector(string pName = "") : base(pName)
+        public Selector(string pName = "", bool pIsRoot = false) : base(pName, pIsRoot)
         {
         }
 

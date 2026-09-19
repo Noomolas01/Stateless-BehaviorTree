@@ -13,6 +13,8 @@ namespace StatelessBehaviorTree.Debug
         public IReadOnlyList<DebugNode>? children = null;
         public TickResult result;
 
+        public bool isActive;
+
         public DebugNode(ARuntimeNode pRuntimeNode)
         {
             id = pRuntimeNode.name;

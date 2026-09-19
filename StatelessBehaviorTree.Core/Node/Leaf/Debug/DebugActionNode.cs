@@ -3,7 +3,7 @@
 // ========================================================
 
 using StatelessBehaviorTree.Core.Node.Leaf.Abstract;
-using StatelessBehaviorTree.Core.Tree.Blackboard;
+using StatelessBehaviorTree.Core.Tree.Data;
 using StatelessBehaviorTree.Core.Tree.Results;
 using System.Text;
 
